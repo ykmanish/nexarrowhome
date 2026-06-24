@@ -1,4 +1,5 @@
-import NexarrowApp, { articleRoute } from "@/components/NexarrowApp";
+import NexarrowApp from "@/components/NexarrowApp";
+import { articleRoute } from "@/lib/routes";
 
 export default async function InsightDetail({ params }) {
   const { slug } = await params;
