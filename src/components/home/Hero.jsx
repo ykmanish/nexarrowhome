@@ -2,7 +2,6 @@ import { Check } from "lucide-react";
 import { paths } from "@/lib/routes";
 import EuropeMap from "@/components/home/EuropeMap";
 import TallinnClock from "@/components/home/TallinnClock";
-import { EUROPE } from "@/components/home/europe-dots";
 import { Button, TextLink } from "@/components/site/ui";
 
 function MaskLine({ children, delay = 0 }) {
@@ -29,30 +28,23 @@ function EstonianFlag() {
   );
 }
 
-/** Tallinn's place on the map, as fractions of its width and height. */
-const HOME_X = (EUROPE.home[0] + 0.5) / EUROPE.cols;
-const HOME_Y = (EUROPE.home[1] + 0.5) / EUROPE.rows;
-const MAP_RATIO = EUROPE.rows / EUROPE.cols;
-const FOCUS = `radial-gradient(ellipse 80% 85% at ${HOME_X * 100}% ${HOME_Y * 100}%, #000 42%, transparent 100%)`;
-
 /** Grounded in how we already work — see content/company.js. */
 const PROOF = ["EU-registered company", "Milestone-based delivery", "Documented decisions", "Remote-first"];
 
 /**
- * A stage inset from the page edges, white in the light theme and near-black
- * in the dark one, with European blue as its accent. The map is placed by Tallinn rather
- * than by its own corner: --tx/--ty say where on the stage Tallinn should sit
- * and --mw how wide the map is, and the offsets fall out of those. A radial
- * mask centred on Tallinn fades the rest of the continent into the dark.
+ * Full-bleed first screen: white in the light theme, near-black in the dark
+ * one, with European blue as its accent. The dot field fills the whole hero;
+ * --map-tx/--map-ty say where Tallinn sits, as fractions of its width and
+ * height, and both the canvas and the Tallinn label read them.
  */
 export default function Hero() {
   return (
-    <section className="px-2 pb-2 sm:px-3 sm:pb-3">
-      <div className="relative isolate flex min-h-[calc(100svh-84px)] flex-col overflow-hidden rounded-[28px] bg-[var(--hero-bg)] text-ink ring-1 ring-line sm:rounded-[36px] lg:min-h-[max(640px,calc(100svh-88px))]">
+    <section>
+      <div className="relative isolate flex min-h-[calc(100svh-76px)] flex-col overflow-hidden bg-[var(--hero-bg)] text-ink lg:min-h-[max(620px,calc(100svh-76px))]">
         {/* Light */}
         <div
           aria-hidden="true"
-          className="drift pointer-events-none absolute -right-[12%] -top-[30%] -z-10 aspect-square w-[80vw] max-w-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.13),transparent)] dark:bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.2),transparent)]"
+          className="drift pointer-events-none absolute -right-[12%] -top-[30%] -z-10 aspect-square w-[80vw] max-w-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.1),transparent)] dark:bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.2),transparent)]"
         />
         <div
           aria-hidden="true"
@@ -60,21 +52,11 @@ export default function Hero() {
         />
 
         {/* Map */}
-        <div
-          className="pointer-events-none absolute -z-10 [--mw:max(820px,190vw)] [--tx:78%] [--ty:16%] sm:[--mw:max(980px,120vw)] lg:[--mw:min(1240px,84vw)] lg:[--tx:71%] lg:[--ty:22%]"
-          style={{
-            width: "var(--mw)",
-            aspectRatio: `${EUROPE.cols} / ${EUROPE.rows}`,
-            left: `calc(var(--tx) - var(--mw) * ${HOME_X.toFixed(4)})`,
-            top: `calc(var(--ty) - var(--mw) * ${(MAP_RATIO * HOME_Y).toFixed(4)})`,
-            maskImage: FOCUS,
-            WebkitMaskImage: FOCUS,
-          }}
-        >
+        <div className="pointer-events-none absolute inset-0 -z-10 [--map-tx:0.8] [--map-ty:0.15] sm:[--map-tx:0.76] lg:[--map-tx:0.71] lg:[--map-ty:0.22]">
           <EuropeMap className="absolute inset-0 size-full" />
           <p
             className="absolute hidden translate-x-6 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-line bg-paper/70 px-3 py-1.5 text-[12px] text-ink-soft backdrop-blur-md md:flex"
-            style={{ left: `${HOME_X * 100}%`, top: `${HOME_Y * 100}%` }}
+            style={{ left: "calc(var(--map-tx) * 100%)", top: "calc(var(--map-ty) * 100%)" }}
           >
             Tallinn, Estonia
             <span className="text-muted">·</span>
