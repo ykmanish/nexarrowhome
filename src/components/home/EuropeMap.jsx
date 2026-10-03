@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { EUROPE } from "./europe-dots";
 
-const LIME = "207, 242, 127";
 /** CSS pixels around the pointer in which dots light up. */
 const REACH = 170;
 /** Where the arcs leave the map, in grid units: west, south and east. */
@@ -32,8 +31,10 @@ function quad(a, c, b, t) {
  * The dotted map behind the hero, drawn on a canvas. The land is painted once
  * per size into an offscreen layer; each frame adds only what moves: dots
  * lighting up around the pointer, rings pulsing out of Tallinn and three
- * arcs carrying work off the map. With reduced motion it draws one still
- * frame, and it stops drawing whenever it is scrolled out of view.
+ * arcs carrying work off the map. Colours come from the theme's CSS
+ * variables (--map-dot, --eu-rgb) and are re-read when the theme flips. With
+ * reduced motion it draws one still frame, and it stops drawing whenever it
+ * is scrolled out of view.
  */
 export default function EuropeMap({ className = "" }) {
   const canvasRef = useRef(null);
@@ -50,6 +51,17 @@ export default function EuropeMap({ className = "" }) {
     let cell = 1;
     let frame = 0;
     let visible = true;
+    let ink = { dot: "13, 13, 13", dotAlpha: 0.13, accent: "0, 51, 153" };
+
+    const readInk = () => {
+      const css = getComputedStyle(canvas);
+      const read = (name) => css.getPropertyValue(name).trim();
+      ink = {
+        dot: read("--map-dot") || ink.dot,
+        dotAlpha: parseFloat(read("--map-dot-alpha")) || ink.dotAlpha,
+        accent: read("--eu-rgb") || ink.accent,
+      };
+    };
 
     const home = () => [(EUROPE.home[0] + 0.5) * cell, (EUROPE.home[1] + 0.5) * cell];
 
@@ -67,7 +79,7 @@ export default function EuropeMap({ className = "" }) {
       base.width = canvas.width;
       base.height = canvas.height;
       const b = base.getContext("2d");
-      b.fillStyle = "rgba(255, 255, 255, 0.2)";
+      b.fillStyle = `rgba(${ink.dot}, ${ink.dotAlpha})`;
       b.beginPath();
       const r = cell * 0.2;
       for (const [c, rw] of DOTS) {
@@ -81,7 +93,7 @@ export default function EuropeMap({ className = "" }) {
       // The arcs' faint dashed paths never move, so they live here too.
       b.setLineDash([2 * dpr, 6 * dpr]);
       b.lineWidth = dpr;
-      b.strokeStyle = `rgba(${LIME}, 0.22)`;
+      b.strokeStyle = `rgba(${ink.accent}, 0.3)`;
       for (const [a, c, e] of arcs()) {
         b.beginPath();
         b.moveTo(a[0], a[1]);
@@ -119,7 +131,7 @@ export default function EuropeMap({ className = "" }) {
           const d = Math.hypot(dx, dy);
           if (d >= reach) continue;
           const k = (1 - d / reach) ** 2 * pointer.on;
-          ctx.fillStyle = `rgba(${LIME}, ${0.2 + k * 0.8})`;
+          ctx.fillStyle = `rgba(${ink.accent}, ${0.2 + k * 0.8})`;
           ctx.beginPath();
           ctx.arc(x, y, r * (1 + k * 0.9), 0, Math.PI * 2);
           ctx.fill();
@@ -136,7 +148,7 @@ export default function EuropeMap({ className = "" }) {
         for (let s = 0; s < steps; s++) {
           const p0 = quad(a, c, e, tail + ((head - tail) * s) / steps);
           const p1 = quad(a, c, e, tail + ((head - tail) * (s + 1)) / steps);
-          ctx.strokeStyle = `rgba(${LIME}, ${((s + 1) / steps) * 0.9})`;
+          ctx.strokeStyle = `rgba(${ink.accent}, ${((s + 1) / steps) * 0.9})`;
           ctx.lineWidth = 1.6 * dpr;
           ctx.beginPath();
           ctx.moveTo(p0[0], p0[1]);
@@ -148,21 +160,21 @@ export default function EuropeMap({ className = "" }) {
       // Tallinn: a glow, three rings walking outwards, and the dot itself.
       const [hx, hy] = home();
       const glow = ctx.createRadialGradient(hx, hy, 0, hx, hy, cell * 6);
-      glow.addColorStop(0, `rgba(${LIME}, 0.4)`);
-      glow.addColorStop(1, `rgba(${LIME}, 0)`);
+      glow.addColorStop(0, `rgba(${ink.accent}, 0.32)`);
+      glow.addColorStop(1, `rgba(${ink.accent}, 0)`);
       ctx.fillStyle = glow;
       ctx.fillRect(hx - cell * 6, hy - cell * 6, cell * 12, cell * 12);
       if (!still) {
         for (let k = 0; k < 3; k++) {
           const p = (t / 2600 + k / 3) % 1;
-          ctx.strokeStyle = `rgba(${LIME}, ${(1 - p) * 0.6})`;
+          ctx.strokeStyle = `rgba(${ink.accent}, ${(1 - p) * 0.6})`;
           ctx.lineWidth = 1.2 * dpr;
           ctx.beginPath();
           ctx.arc(hx, hy, cell * (0.9 + p * 7), 0, Math.PI * 2);
           ctx.stroke();
         }
       }
-      ctx.fillStyle = `rgb(${LIME})`;
+      ctx.fillStyle = `rgb(${ink.accent})`;
       ctx.beginPath();
       ctx.arc(hx, hy, cell * 0.55, 0, Math.PI * 2);
       ctx.fill();
@@ -189,9 +201,23 @@ export default function EuropeMap({ className = "" }) {
 
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
+    readInk();
     resize();
 
-    if (still) return () => ro.disconnect();
+    // The theme toggle swaps a class on <html>; repaint in the new colours.
+    const mo = new MutationObserver(() => {
+      readInk();
+      paintBase();
+      if (still) draw(0);
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    if (still) {
+      return () => {
+        ro.disconnect();
+        mo.disconnect();
+      };
+    }
 
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -204,6 +230,7 @@ export default function EuropeMap({ className = "" }) {
     return () => {
       cancelAnimationFrame(frame);
       ro.disconnect();
+      mo.disconnect();
       io.disconnect();
       window.removeEventListener("pointermove", onMove);
       document.documentElement.removeEventListener("pointerleave", onLeave);

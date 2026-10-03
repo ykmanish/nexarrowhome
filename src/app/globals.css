@@ -26,6 +26,14 @@
   --night: #2e2e2e;
   --night-2: #3a3a3a;
   --ok: #3ccf6e;
+
+  /* European blue for the hero, plus the colours its map canvas reads. */
+  --eu: #003399;
+  --eu-rgb: 0, 51, 153;
+  --hero-bg: #ffffff;
+  --hero-veil: 255, 255, 255;
+  --map-dot: 13, 13, 13;
+  --map-dot-alpha: 0.13;
 }
 
 .dark {
@@ -40,6 +48,13 @@
   --stone: #2b2d2f;
   --night: #1f1f1e;
   --night-2: #2c2c2b;
+
+  --eu: #8aa4ff;
+  --eu-rgb: 138, 164, 255;
+  --hero-bg: #0b0c0b;
+  --hero-veil: 11, 12, 11;
+  --map-dot: 255, 255, 255;
+  --map-dot-alpha: 0.2;
 }
 
 @theme inline {
@@ -57,6 +72,7 @@
   --color-night: var(--night);
   --color-night-2: var(--night-2);
   --color-ok: var(--ok);
+  --color-eu: var(--eu);
 
   /* Manrope (satre) for running text; Aeonik (regular) for headings. The
      display stack falls through to Manrope, so the punctuation Aeonik's trial

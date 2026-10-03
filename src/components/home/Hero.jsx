@@ -20,7 +20,7 @@ function EstonianFlag() {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex h-[13px] w-5 shrink-0 flex-col overflow-hidden rounded-[3px] ring-1 ring-white/25"
+      className="inline-flex h-[13px] w-5 shrink-0 flex-col overflow-hidden rounded-[3px] ring-1 ring-line-strong"
     >
       <span className="flex-1 bg-[#0072ce]" />
       <span className="flex-1 bg-[#0d0d0d]" />
@@ -39,7 +39,8 @@ const FOCUS = `radial-gradient(ellipse 80% 85% at ${HOME_X * 100}% ${HOME_Y * 10
 const PROOF = ["EU-registered company", "Milestone-based delivery", "Documented decisions", "Remote-first"];
 
 /**
- * A dark stage inset from the page edges. The map is placed by Tallinn rather
+ * A stage inset from the page edges, white in the light theme and near-black
+ * in the dark one, with European blue as its accent. The map is placed by Tallinn rather
  * than by its own corner: --tx/--ty say where on the stage Tallinn should sit
  * and --mw how wide the map is, and the offsets fall out of those. A radial
  * mask centred on Tallinn fades the rest of the continent into the dark.
@@ -47,15 +48,15 @@ const PROOF = ["EU-registered company", "Milestone-based delivery", "Documented 
 export default function Hero() {
   return (
     <section className="px-2 pb-2 sm:px-3 sm:pb-3">
-      <div className="relative isolate flex min-h-[calc(100svh-84px)] flex-col overflow-hidden rounded-[28px] bg-[#0b0c0b] text-white ring-1 ring-white/5 sm:rounded-[36px] lg:min-h-[max(640px,calc(100svh-88px))]">
+      <div className="relative isolate flex min-h-[calc(100svh-84px)] flex-col overflow-hidden rounded-[28px] bg-[var(--hero-bg)] text-ink ring-1 ring-line sm:rounded-[36px] lg:min-h-[max(640px,calc(100svh-88px))]">
         {/* Light */}
         <div
           aria-hidden="true"
-          className="drift pointer-events-none absolute -right-[12%] -top-[30%] -z-10 aspect-square w-[80vw] max-w-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(207,242,127,.2),transparent)]"
+          className="drift pointer-events-none absolute -right-[12%] -top-[30%] -z-10 aspect-square w-[80vw] max-w-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.13),transparent)] dark:bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.2),transparent)]"
         />
         <div
           aria-hidden="true"
-          className="drift pointer-events-none absolute -bottom-[45%] -left-[18%] -z-10 aspect-square w-[70vw] max-w-[1100px] rounded-full bg-[radial-gradient(closest-side,rgba(70,104,255,.2),transparent)] [animation-delay:-9s]"
+          className="drift pointer-events-none absolute -bottom-[45%] -left-[18%] -z-10 aspect-square w-[70vw] max-w-[1100px] rounded-full bg-[radial-gradient(closest-side,rgba(207,242,127,.32),transparent)] [animation-delay:-9s] dark:bg-[radial-gradient(closest-side,rgba(207,242,127,.1),transparent)]"
         />
 
         {/* Map */}
@@ -72,26 +73,26 @@ export default function Hero() {
         >
           <EuropeMap className="absolute inset-0 size-full" />
           <p
-            className="absolute hidden translate-x-6 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-white/[.06] px-3 py-1.5 text-[12px] text-white/80 backdrop-blur-md md:flex"
+            className="absolute hidden translate-x-6 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-line bg-paper/70 px-3 py-1.5 text-[12px] text-ink-soft backdrop-blur-md md:flex"
             style={{ left: `${HOME_X * 100}%`, top: `${HOME_Y * 100}%` }}
           >
             Tallinn, Estonia
-            <span className="text-white/35">·</span>
-            <TallinnClock className="text-white" />
+            <span className="text-muted">·</span>
+            <TallinnClock className="text-ink" />
           </p>
         </div>
 
         {/* Keeps the headline readable where it crosses the map. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_36%_at_50%_64%,rgba(11,12,11,.7),transparent_80%)]"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_36%_at_50%_64%,rgba(var(--hero-veil),.75),transparent_80%)]"
         />
-        <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 -z-10" />
+        <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 -z-10 hidden dark:block" />
 
         <div className="gutter flex flex-1 flex-col items-center justify-end pb-14 pt-36 text-center sm:pt-44 lg:pb-[7vh] lg:pt-28">
           <p
             data-anim="fade"
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[.04] py-1.5 pl-2.5 pr-3.5 text-[13px] text-white/75 backdrop-blur-md"
+            className="inline-flex items-center gap-2.5 rounded-full border border-line bg-paper/60 py-1.5 pl-2.5 pr-3.5 text-[13px] text-ink-soft backdrop-blur-md"
           >
             <EstonianFlag />
             Software studio in Tallinn, Estonia
@@ -101,14 +102,14 @@ export default function Hero() {
             <MaskLine delay={0.08}>Software that works,</MaskLine>
             <MaskLine delay={0.16}>
               built in{" "}
-              <span className="font-serif text-[1.12em] italic leading-none tracking-[-0.01em] text-lime">Europe</span>.
+              <span className="font-serif text-[1.12em] italic leading-none tracking-[-0.01em] text-eu">Europe</span>.
             </MaskLine>
           </h1>
 
           <p
             data-anim="rise"
             data-anim-delay="0.3"
-            className="mt-7 max-w-[54ch] text-balance text-[15px] leading-relaxed text-white/60 md:text-[17px]"
+            className="mt-7 max-w-[54ch] text-balance text-[15px] leading-relaxed text-ink-soft md:text-[17px]"
           >
             We design, build and run custom software, SaaS platforms, AI workflows and cloud infrastructure for teams
             that need the thing to actually work.
@@ -118,19 +119,17 @@ export default function Hero() {
             <Button href={paths.contact} variant="lime">
               Start a project
             </Button>
-            <TextLink href={paths.services} tone="night">
-              See what we build
-            </TextLink>
+            <TextLink href={paths.services}>See what we build</TextLink>
           </div>
         </div>
 
         {/* Trust bar */}
-        <div data-anim="fade" data-anim-delay="0.5" className="border-t border-white/10">
-          <div className="gutter flex flex-wrap items-center justify-center gap-x-8 gap-y-3 py-5 text-[13px] text-white/60 lg:justify-between">
+        <div data-anim="fade" data-anim-delay="0.5" className="border-t border-line">
+          <div className="gutter flex flex-wrap items-center justify-center gap-x-8 gap-y-3 py-5 text-[13px] text-ink-soft lg:justify-between">
             <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5">
               {PROOF.map((item) => (
                 <li key={item} className="flex items-center gap-2">
-                  <span className="grid size-4 place-items-center rounded-full bg-lime text-lime-ink">
+                  <span className="grid size-4 place-items-center rounded-full bg-eu text-white dark:text-[#0b0c0b]">
                     <Check size={10} strokeWidth={3} />
                   </span>
                   {item}
@@ -138,9 +137,9 @@ export default function Hero() {
               ))}
             </ul>
             <p className="flex items-center gap-2">
-              <span className="pulse-dot size-1.5 rounded-full bg-lime" />
+              <span className="pulse-dot size-1.5 rounded-full bg-eu" />
               Studio time in Tallinn
-              <TallinnClock className="text-white" />
+              <TallinnClock className="text-ink" />
             </p>
           </div>
         </div>
