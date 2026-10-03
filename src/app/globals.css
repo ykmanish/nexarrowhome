@@ -26,11 +26,6 @@
   --night: #2e2e2e;
   --night-2: #3a3a3a;
   --ok: #3ccf6e;
-
-  /* Hero collage: a Baltic-dusk set of pastels — periwinkle, lilac, blush. */
-  --tile-blue: linear-gradient(165deg, #e4e8ff 0%, #c9d1fb 100%);
-  --tile-dusk: linear-gradient(155deg, #dfe2fb 0%, #e8d9f3 38%, #f4d3de 70%, #f7cfc8 100%);
-  --tile-blush: linear-gradient(115deg, #fbe6df 0%, #f6d5dc 60%, #f1d2e6 100%);
 }
 
 .dark {
@@ -45,10 +40,6 @@
   --stone: #2b2d2f;
   --night: #1f1f1e;
   --night-2: #2c2c2b;
-
-  --tile-blue: linear-gradient(165deg, #1f2335 0%, #262c4a 100%);
-  --tile-dusk: linear-gradient(155deg, #212437 0%, #2b2438 40%, #3a2633 75%, #3d2a2b 100%);
-  --tile-blush: linear-gradient(115deg, #33262a 0%, #34232c 60%, #2e2334 100%);
 }
 
 @theme inline {
@@ -200,6 +191,17 @@ html.lenis body {
   }
 }
 
+/* Slow wander for the hero's light, so the dark never sits perfectly still. */
+@keyframes na-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-4%, 6%, 0) scale(1.08);
+  }
+}
+
 .marquee-track {
   animation: na-marquee var(--marquee-duration, 40s) linear infinite;
 }
@@ -219,6 +221,17 @@ html.lenis body {
   animation: na-pulse 2s ease-in-out infinite;
 }
 
+.drift {
+  animation: na-drift 18s ease-in-out infinite;
+}
+
+/* Film grain over the dark hero: fractal noise, tiled, blended in lightly. */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
 .fade-x {
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
@@ -227,7 +240,8 @@ html.lenis body {
   .marquee-track,
   .spin-slow,
   .float,
-  .pulse-dot {
+  .pulse-dot,
+  .drift {
     animation: none;
   }
 }
