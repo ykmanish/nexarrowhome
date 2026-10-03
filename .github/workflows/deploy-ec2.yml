@@ -89,11 +89,8 @@ jobs:
             ln -sfn "$RELEASE_DIR" "$APP_DIR/current"
             cd "$APP_DIR/current"
 
-            if pm2 describe "$APP_NAME" >/dev/null 2>&1; then
-              pm2 reload "$APP_NAME" --update-env
-            else
-              pm2 start npm --name "$APP_NAME" -- start
-            fi
+            pm2 delete "$APP_NAME" >/dev/null 2>&1 || true
+            pm2 start npm --name "$APP_NAME" --cwd "$APP_DIR/current" -- start
 
             pm2 save
             rm -f "$ARCHIVE"
