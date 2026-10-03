@@ -7,8 +7,8 @@ import { cx } from "./ui";
 
 /**
  * Disclosure list in two dressings:
- *   rows  — hairline-separated, a code before each title (expertise lists)
- *   cards — rounded tiles that fill when open (FAQ)
+ *   rows  — hairline-separated, an optional code before each title
+ *   cards — bordered square tiles that fill when open
  *
  * `items` are { title, code?, body } where body may be any server-rendered node.
  */
@@ -35,7 +35,7 @@ export default function Accordion({ items, variant = "rows", defaultOpen = 0, cl
             className={cx(
               "transition-colors duration-300",
               cards
-                ? cx("rounded-2xl border", isOpen ? "border-transparent bg-mist" : "border-line")
+                ? cx("border", isOpen ? "border-transparent bg-mist" : "border-line")
                 : "border-b border-line",
             )}
           >
@@ -63,12 +63,8 @@ export default function Accordion({ items, variant = "rows", defaultOpen = 0, cl
                 </span>
                 <span
                   className={cx(
-                    "grid size-9 shrink-0 place-items-center rounded-full transition-all duration-300",
-                    isOpen
-                      ? "rotate-45 bg-ink text-paper"
-                      : cards
-                        ? "bg-lime text-lime-ink"
-                        : "border border-line-strong text-ink group-hover:border-ink",
+                    "grid size-9 shrink-0 place-items-center rounded-md transition-all duration-300",
+                    isOpen ? "rotate-45 bg-eu text-eu-ink" : "border border-line-strong text-ink group-hover:border-ink",
                   )}
                   aria-hidden="true"
                 >
@@ -81,7 +77,7 @@ export default function Accordion({ items, variant = "rows", defaultOpen = 0, cl
                 <div
                   className={cx(
                     "text-[15px] leading-relaxed text-ink-soft",
-                    cards ? "px-5 pb-6 md:px-6" : "pb-8 md:pl-[84px]",
+                    cards ? "px-5 pb-6 md:px-6" : cx("pb-8", item.code && "md:pl-[84px]"),
                   )}
                 >
                   {item.body}

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { company } from "@/content/company";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
-import { Button, Heading, Label, Logo } from "./ui";
+import { FrameLines, NIGHT_ROW_LINE } from "./frame";
+import { Button, Heading, Label, Logo, cx } from "./ui";
 
 const COLUMNS = [
   {
@@ -31,84 +32,96 @@ const COLUMNS = [
   },
 ];
 
+/** Grid row on the frame; cells padded 24px from 1280px up. */
+const ROW = "grid xl:grid-cols-[var(--frame-cols)] xl:*:px-6";
+
+/**
+ * The night band that closes every page, on the same column frame as the
+ * hero: the call to action across the top row, the company and link columns
+ * under it, then the wordmark and the legal line.
+ */
 export default function Footer() {
   return (
-    <footer className="gutter relative overflow-hidden bg-night pb-8 pt-20 text-white lg:pt-28">
-      <Label tone="night">Contact</Label>
-      <Heading lead="Got a project in mind?" tail="Let’s build it properly." tone="night" size="page" className="mt-6" />
+    <footer className="gutter relative overflow-hidden bg-night text-white">
+      <div className="relative xl:-mx-6">
+        <FrameLines className="bg-white/10" />
 
-      <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
-        <Button href={`mailto:${company.email}`} external variant="lime">
-          {company.email}
-        </Button>
-        <div className="flex items-center gap-2.5">
-          <Link
-            href={paths.contact}
-            className="grid size-11 place-items-center rounded-full border border-white/15 text-white transition-colors hover:border-white/50"
-            aria-label="Contact page"
-          >
-            <ArrowUpRight size={17} strokeWidth={1.7} />
-          </Link>
-          <a
-            href={`mailto:${company.email}`}
-            className="grid size-11 place-items-center rounded-full border border-white/15 text-white transition-colors hover:border-white/50"
-            aria-label={`Email ${company.email}`}
-          >
-            <Mail size={16} strokeWidth={1.7} />
-          </a>
-        </div>
-      </div>
-
-      <div className="mt-20 grid gap-12 border-t border-white/10 pt-14 md:grid-cols-[1.3fr_repeat(3,1fr)] lg:mt-24">
-        <div>
-          <Logo onDark />
-          <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-white/55">
-            Software, SaaS platforms, AI solutions and cloud infrastructure, built in Tallinn for businesses
-            worldwide.
-          </p>
-          <div className="mt-6 flex items-center gap-3 text-[12.5px] text-white/45">
-            <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[3px]" />
-            <span>Registered in the {company.region}</span>
+        <div className={cx(ROW, "gap-8 pb-16 pt-20 xl:gap-0 xl:py-0")}>
+          <div className="xl:py-20">
+            <Label tone="night">Contact</Label>
+          </div>
+          <div className="xl:col-span-2 xl:py-20">
+            <Heading lead="Got a project in mind?" tail="Let’s build it properly." tone="night" size="page" className="xl:-mt-1.5" />
+          </div>
+          <div className="flex flex-wrap items-center gap-5 xl:flex-col xl:items-start xl:justify-end xl:py-20">
+            <Button href={paths.contact} variant="lime">
+              Start a project
+            </Button>
+            <a href={`mailto:${company.email}`} className="text-[14px] text-white/70 transition-colors hover:text-white">
+              {company.email}
+            </a>
           </div>
         </div>
 
-        {/* Link groups sit side by side on phones rather than stacking into a scroll. */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:contents">
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <h2 className="text-[12px] uppercase tracking-[0.18em] text-white/40">{col.title}</h2>
-              <ul className="mt-5 space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="text-[14.5px] text-white/75 transition-colors hover:text-white">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+        <div className={cx(ROW, NIGHT_ROW_LINE, "gap-12 py-14 xl:gap-0 xl:py-0")}>
+          <div className="xl:py-14">
+            <Logo onDark />
+            <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-white/55">
+              Software, SaaS platforms, AI solutions and cloud infrastructure, built in Tallinn for businesses
+              worldwide.
+            </p>
+            <div className="mt-6 flex items-center gap-3 text-[12.5px] text-white/45">
+              <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[2px]" />
+              <span>Registered in the {company.region}</span>
             </div>
-          ))}
+          </div>
+
+          {/* Link groups sit side by side on phones rather than stacking into a scroll. */}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 xl:contents">
+            {COLUMNS.map((col) => (
+              <div key={col.title} className="xl:px-6 xl:py-14">
+                <h2 className="flex items-center gap-2.5 text-[12px] uppercase tracking-[0.18em] text-white/45">
+                  <span aria-hidden="true" className="size-1.5 bg-[#8aa4ff]" />
+                  {col.title}
+                </h2>
+                <ul className="mt-5 space-y-3">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="text-[14.5px] text-white/75 transition-colors hover:text-white">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Sized in container units: the set word is 5.1× its font size, so
-          19.4cqw spans the footer edge to edge at any width. */}
-      <div className="@container mt-16">
-        <p
-          aria-hidden="true"
-          className="pointer-events-none select-none whitespace-nowrap text-center font-display text-[19.4cqw] uppercase leading-[0.8] tracking-[-0.04em] text-white/[0.06]"
+        {/* Sized in container units: the set word is 5.1× its font size, so
+            19.4cqw spans the footer edge to edge at any width. */}
+        <div className={cx("@container pt-10", NIGHT_ROW_LINE)}>
+          <p
+            aria-hidden="true"
+            className="pointer-events-none select-none whitespace-nowrap text-center font-display text-[19.4cqw] uppercase leading-[0.8] tracking-[-0.04em] text-white/[0.06]"
+          >
+            Nexarrow
+          </p>
+        </div>
+
+        <div
+          className={cx(
+            "flex flex-col-reverse gap-4 py-6 text-[12.5px] text-white/45 md:flex-row md:items-center md:justify-between xl:px-6",
+            NIGHT_ROW_LINE,
+          )}
         >
-          Nexarrow
-        </p>
-      </div>
-
-      <div className="mt-8 flex flex-col-reverse gap-4 border-t border-white/10 pt-6 text-[12.5px] text-white/45 md:flex-row md:items-center md:justify-between">
-        <p>
-          © {new Date().getFullYear()} {company.name} · Registry {company.registry} · VAT {company.vat}
-        </p>
-        <a href="#top" className="inline-flex items-center gap-1.5 transition-colors hover:text-white">
-          Back to top <ArrowUp size={13} strokeWidth={1.8} />
-        </a>
+          <p>
+            © {new Date().getFullYear()} {company.name} · Registry {company.registry} · VAT {company.vat}
+          </p>
+          <a href="#top" className="inline-flex items-center gap-1.5 transition-colors hover:text-white">
+            Back to top <ArrowUp size={13} strokeWidth={1.8} />
+          </a>
+        </div>
       </div>
     </footer>
   );

@@ -1,9 +1,9 @@
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
 import Accordion from "@/components/site/Accordion";
-import { Button, Chip, Heading, Label, Section, TextLink } from "@/components/site/ui";
+import { Button, Chip, Frame, Section, SectionHead, TextLink } from "@/components/site/ui";
 
-/** Services as a coded disclosure list beside a sticky two-tone heading. */
+/** Services as a coded disclosure list, set on the frame under a section head. */
 export default function Expertise({ id = "expertise", tone = "paper" }) {
   const items = services.map((s) => ({
     code: s.code,
@@ -27,24 +27,22 @@ export default function Expertise({ id = "expertise", tone = "paper" }) {
 
   return (
     <Section id={id} tone={tone}>
-      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <Label>Expertise</Label>
-          <Heading lead="Four disciplines," tail="one team." className="mt-6" />
-          <p data-anim="rise" className="mt-6 max-w-sm text-[15px] leading-relaxed text-muted">
-            Strategy, build, AI and cloud are run by the same people, so decisions in one layer never quietly break
-            another. Open one to see what is inside.
-          </p>
-          <div data-anim="rise" className="mt-8">
-            <Button href={paths.services} variant="outline">
-              All services
-            </Button>
-          </div>
-        </div>
-        <div data-anim="rise">
+      <SectionHead
+        label="Expertise"
+        lead="Four disciplines,"
+        tail="one team."
+        intro="Strategy, build, AI and cloud are run by the same people, so decisions in one layer never quietly break another."
+        action={
+          <Button href={paths.services} variant="outline">
+            All services
+          </Button>
+        }
+      />
+      <Frame className="mt-14">
+        <div data-anim="rise" className="xl:col-span-3 xl:col-start-2">
           <Accordion items={items} />
         </div>
-      </div>
+      </Frame>
     </Section>
   );
 }

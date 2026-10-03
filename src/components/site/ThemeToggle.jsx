@@ -28,7 +28,7 @@ export default function ThemeToggle({ className = "" }) {
       onClick={toggle}
       aria-label="Toggle light and dark theme"
       className={cx(
-        "grid size-10 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink",
+        "grid size-10 shrink-0 place-items-center rounded-md border border-line text-ink transition-colors hover:border-ink",
         className,
       )}
     >

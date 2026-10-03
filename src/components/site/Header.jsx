@@ -67,6 +67,8 @@ export default function Header() {
     };
   }, [sheet]);
 
+  // Every page opens on the sky, so until the page scrolls the header is
+  // transparent and sits in the same column frame (--frame-cols) as the hero.
   const solid = scrolled || panel;
 
   return (
@@ -79,67 +81,75 @@ export default function Header() {
         }}
         className={cx(
           "sticky top-0 z-50 transition-[background-color,box-shadow] duration-500",
-          solid ? "bg-paper/85 shadow-[0_1px_0_var(--line)] backdrop-blur-md" : "bg-paper",
+          solid ? "bg-paper/85 shadow-[0_1px_0_var(--line)] backdrop-blur-md" : "bg-transparent",
         )}
       >
-        <div className="gutter flex h-[76px] items-center justify-between gap-6">
-          <Link href={paths.home} aria-label={`${company.short} home`} className="shrink-0">
-            <Logo />
-          </Link>
+        <div className="gutter">
+          <div
+            className="flex h-[76px] items-center justify-between gap-6 xl:relative xl:-mx-6 xl:grid xl:grid-cols-[var(--frame-cols)] xl:gap-0 xl:*:px-6"
+          >
+            <Link href={paths.home} aria-label={`${company.short} home`} className="shrink-0">
+              <Logo />
+            </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
-            {NAV.map((item) => {
-              const active = isWithin(pathname, item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onMouseEnter={() => setPanel(Boolean(item.panel))}
-                  onFocus={() => setPanel(Boolean(item.panel))}
-                  aria-expanded={item.panel ? panel : undefined}
-                  aria-current={active ? "page" : undefined}
-                  className={cx(
-                    "relative flex items-center gap-1 py-1 text-[13.5px] transition-colors",
-                    active ? "text-ink" : "text-ink-soft hover:text-ink",
-                  )}
-                >
-                  {item.label}
-                  {item.panel && (
-                    <ChevronDown
-                      size={13}
-                      strokeWidth={1.8}
-                      className={cx("transition-transform duration-300", panel && "rotate-180")}
-                    />
-                  )}
-                  <span
-                    className={cx(
-                      "absolute inset-x-0 -bottom-0.5 h-px origin-left bg-ink transition-transform duration-300",
-                      active ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="flex shrink-0 items-center gap-2.5">
-            {/* Wrapped rather than overridden: a `hidden` class on the control
-                itself would fight its own display utility. */}
-            <span className="hidden sm:block">
-              <ThemeToggle />
-            </span>
-            <span className="hidden sm:block">
-              <Button href={paths.contact}>Start a project</Button>
-            </span>
-            <button
-              type="button"
-              onClick={() => setSheet(true)}
-              aria-label="Open menu"
-              aria-expanded={sheet}
-              className="grid size-10 place-items-center rounded-full border border-line text-ink lg:hidden"
+            {/* Centred on the page itself, over the merged middle cell of the frame. */}
+            <nav
+              aria-label="Primary"
+              className="hidden items-center gap-8 lg:flex xl:absolute xl:left-1/2 xl:top-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2"
             >
-              <Menu size={17} strokeWidth={1.8} />
-            </button>
+              {NAV.map((item) => {
+                const active = isWithin(pathname, item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onMouseEnter={() => setPanel(Boolean(item.panel))}
+                    onFocus={() => setPanel(Boolean(item.panel))}
+                    aria-expanded={item.panel ? panel : undefined}
+                    aria-current={active ? "page" : undefined}
+                    className={cx(
+                      "relative flex items-center gap-1 py-1 text-[13.5px] transition-colors",
+                      active ? "text-ink" : "text-ink-soft hover:text-ink",
+                    )}
+                  >
+                    {item.label}
+                    {item.panel && (
+                      <ChevronDown
+                        size={13}
+                        strokeWidth={1.8}
+                        className={cx("transition-transform duration-300", panel && "rotate-180")}
+                      />
+                    )}
+                    <span
+                      className={cx(
+                        "absolute inset-x-0 -bottom-0.5 h-px origin-left bg-ink transition-transform duration-300",
+                        active ? "scale-x-100" : "scale-x-0",
+                      )}
+                    />
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="flex shrink-0 items-center justify-end gap-2.5 xl:col-start-4">
+              {/* Wrapped rather than overridden: a `hidden` class on the control
+                  itself would fight its own display utility. */}
+              <span className="hidden sm:block">
+                <ThemeToggle />
+              </span>
+              <span className="hidden sm:block">
+                <Button href={paths.contact}>Start a project</Button>
+              </span>
+              <button
+                type="button"
+                onClick={() => setSheet(true)}
+                aria-label="Open menu"
+                aria-expanded={sheet}
+                className="grid size-10 place-items-center rounded-md border border-line text-ink lg:hidden"
+              >
+                <Menu size={17} strokeWidth={1.8} />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -150,13 +160,13 @@ export default function Header() {
             panel ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0",
           )}
         >
-          <div className="grid grid-cols-[0.9fr_2fr] gap-8 rounded-[24px] border border-line bg-paper p-8 shadow-[0_30px_80px_-40px_rgba(13,13,13,.45)]">
+          <div className="grid grid-cols-[0.9fr_2fr] gap-8 rounded-md border border-line bg-paper p-8 shadow-[0_30px_80px_-40px_rgba(13,13,13,.45)]">
             <div className="flex flex-col justify-between">
               <div>
                 <Label>Services</Label>
                 <p className="mt-5 font-display text-[30px] leading-[1.02] tracking-[-0.02em]">
                   Four disciplines,
-                  <span className="block text-muted">one team.</span>
+                  <span className="block font-serif text-[1.08em] italic text-eu">one team.</span>
                 </p>
                 <p className="mt-4 max-w-xs text-[13.5px] leading-relaxed text-muted">
                   Strategy, build, AI and cloud under one roof, so decisions in one layer never quietly break another.
@@ -172,21 +182,21 @@ export default function Header() {
                 <li key={s.slug}>
                   <Link
                     href={paths.service(s.slug)}
-                    className="group flex h-full flex-col justify-between gap-6 rounded-2xl bg-mist p-5 transition-colors duration-300 hover:bg-lime"
+                    className="group flex h-full flex-col justify-between gap-6 rounded-md bg-mist p-5 transition-colors duration-300 hover:bg-eu"
                   >
                     <span className="flex items-center justify-between">
-                      <span className="text-[11px] uppercase tracking-[0.14em] text-muted group-hover:text-lime-ink/60">
+                      <span className="text-[11px] uppercase tracking-[0.14em] text-muted group-hover:text-eu-ink/65">
                         {s.code}
                       </span>
-                      <span className="grid size-8 place-items-center rounded-full bg-paper text-ink transition-transform duration-300 group-hover:rotate-45 group-hover:bg-lime-ink group-hover:text-lime">
+                      <span className="grid size-8 place-items-center rounded-md bg-paper text-ink transition-transform duration-300 group-hover:rotate-45">
                         <ArrowUpRight size={14} strokeWidth={1.8} />
                       </span>
                     </span>
                     <span>
-                      <span className="block font-display text-[21px] leading-tight tracking-[-0.02em] text-ink group-hover:text-lime-ink">
+                      <span className="block font-display text-[21px] leading-tight tracking-[-0.02em] text-ink group-hover:text-eu-ink">
                         {s.name}
                       </span>
-                      <span className="mt-1 block text-[13px] text-muted group-hover:text-lime-ink/65">{s.short}</span>
+                      <span className="mt-1 block text-[13px] text-muted group-hover:text-eu-ink/70">{s.short}</span>
                     </span>
                   </Link>
                 </li>
@@ -213,7 +223,7 @@ export default function Header() {
             type="button"
             onClick={() => setSheet(false)}
             aria-label="Close menu"
-            className="grid size-10 place-items-center rounded-full border border-line text-ink"
+            className="grid size-10 place-items-center rounded-md border border-line text-ink"
           >
             <X size={17} strokeWidth={1.8} />
           </button>
@@ -248,7 +258,7 @@ export default function Header() {
                       <li key={s.slug}>
                         <Link
                           href={paths.service(s.slug)}
-                          className="block rounded-xl bg-mist px-3 py-2.5 text-[13px] text-ink-soft"
+                          className="block rounded-md bg-mist px-3 py-2.5 text-[13px] text-ink-soft"
                         >
                           {s.name}
                         </Link>
@@ -261,7 +271,7 @@ export default function Header() {
           </nav>
 
           <div className="mt-auto space-y-4 pt-10">
-            <Button href={paths.contact} variant="lime" className="w-full justify-between">
+            <Button href={paths.contact} variant="eu" className="w-full justify-between">
               Start a project
             </Button>
             <div className="flex items-center justify-between gap-4">

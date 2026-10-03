@@ -38,13 +38,9 @@ export default function HomePage() {
       <Expertise />
       <DeliveryTrail />
       <Work />
-      <div className="border-t border-line">
-        <Engagement />
-      </div>
+      <Engagement />
       <InsightsPreview />
-      <div className="border-t border-line">
-        <FAQ />
-      </div>
+      <FAQ />
     </>
   );
 }

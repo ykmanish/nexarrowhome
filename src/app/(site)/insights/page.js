@@ -1,5 +1,6 @@
 import Link from "next/link";
-import PageHero from "@/components/sections/PageHero";
+import { ArrowUpRight } from "lucide-react";
+import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import InsightCard from "@/components/sections/InsightCard";
 import { CoverArt } from "@/components/site/visuals";
 import { Chip, Section, TextLink } from "@/components/site/ui";
@@ -25,28 +26,24 @@ export default function InsightsPage() {
         lead="Writing around"
         tail="the work."
         intro="Notes on product, engineering, AI and infrastructure decisions, written from delivery experience rather than theory."
-        meta={
-          <>
-            <span className="mr-2 text-[12.5px] text-muted">Topics</span>
-            {tags.map((t) => (
-              <Chip key={t} tone="soft">
-                {t}
-              </Chip>
-            ))}
-          </>
-        }
+        aside={<HeroFigure value={String(insights.length).padStart(2, "0")} caption="Articles written from delivery work" />}
+        meta={tags.map((t) => (
+          <Chip key={t} tone="paper">
+            {t}
+          </Chip>
+        ))}
       />
 
-      <Section className="pt-0 lg:pt-0">
+      <Section>
         <Link
           href={paths.article(lead.slug)}
           data-anim="rise"
-          className="group grid overflow-hidden rounded-[28px] border border-line transition-colors duration-300 hover:border-ink lg:grid-cols-2"
+          className="group grid border border-line transition-colors duration-300 hover:border-ink lg:grid-cols-2"
         >
           <CoverArt type={lead.hero} className="aspect-[16/11] lg:aspect-auto lg:min-h-[440px]" />
           <div className="flex flex-col p-7 md:p-10 lg:p-12">
             <div className="flex flex-wrap items-center gap-2">
-              <Chip tone="lime">Latest</Chip>
+              <Chip tone="eu">Latest</Chip>
               <Chip>{lead.tag}</Chip>
               <Chip tone="soft">
                 {lead.date} · {lead.read} read
@@ -57,8 +54,9 @@ export default function InsightsPage() {
             </h2>
             <p className="mt-5 max-w-lg text-[15.5px] leading-relaxed text-muted">{lead.excerpt}</p>
             <div className="mt-auto pt-10">
-              <span className="inline-flex items-center gap-1.5 border-b border-ink/25 pb-0.5 text-[14px] group-hover:border-ink">
-                Read article
+              <span className="inline-flex items-center gap-1.5 text-[14px]">
+                <span className="border-b border-ink/25 pb-0.5 group-hover:border-ink">Read article</span>
+                <ArrowUpRight size={15} strokeWidth={1.8} className="transition-transform duration-300 group-hover:rotate-45" />
               </span>
             </div>
           </div>
@@ -70,7 +68,7 @@ export default function InsightsPage() {
           ))}
         </div>
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-16 flex justify-center border-t border-line pt-10">
           <TextLink href={paths.contact}>Have a problem we should write about? Tell us</TextLink>
         </div>
       </Section>

@@ -50,30 +50,30 @@ export default async function ApplyPage({ params }) {
         intro="Send your resume and relevant profile links to our hiring email for review."
       />
 
-      <Section className="pt-0 lg:pt-0">
-        <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-          <article data-anim="rise" className="relative flex min-h-[420px] flex-col overflow-hidden rounded-[28px] bg-lime p-7 text-lime-ink md:p-12">
-            <span className="grid size-12 place-items-center rounded-full bg-lime-ink text-lime">
+      <Section>
+        <div className="grid gap-px border border-line bg-line lg:grid-cols-[1.3fr_0.7fr]">
+          <article data-anim="rise" className="relative flex min-h-[420px] flex-col overflow-hidden bg-eu p-7 text-eu-ink md:p-12">
+            <span className="grid size-12 place-items-center rounded-md bg-lime text-lime-ink">
               <Mail size={19} strokeWidth={1.7} />
             </span>
-            <p className="mt-12 text-[11.5px] uppercase tracking-[0.18em] text-lime-ink/60">Careers email</p>
+            <p className="mt-12 text-[11.5px] uppercase tracking-[0.18em] text-eu-ink/60">Careers email</p>
             <p className="mt-3 font-display text-[clamp(1.8rem,3vw,2.6rem)] leading-tight tracking-[-0.02em]">Send your resume to</p>
             <a href={mailto} className="mt-2 break-all font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-tight tracking-[-0.02em] underline decoration-1 underline-offset-[6px]">
               {company.email}
             </a>
-            <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-lime-ink/70">
+            <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-eu-ink/75">
               Include the role title in the subject, your resume, portfolio or GitHub links, and a short note about
               your most relevant experience.
             </p>
             <div className="mt-auto pt-10">
-              <Button href={mailto} external variant="ink" className="!bg-[#0d0d0d] !text-white">
+              <Button href={mailto} external variant="lime">
                 Open email draft
               </Button>
             </div>
           </article>
 
-          <div className="grid gap-4">
-            <div data-anim="rise" className="rounded-3xl border border-line p-7">
+          <div className="grid gap-px bg-line">
+            <div data-anim="rise" className="bg-paper p-7">
               <p className="text-[11.5px] uppercase tracking-[0.18em] text-muted">Role details</p>
               <dl className="mt-5 space-y-3 text-[14px]">
                 {[
@@ -89,7 +89,7 @@ export default async function ApplyPage({ params }) {
                 ))}
               </dl>
             </div>
-            <div data-anim="rise" className="rounded-3xl bg-mist p-7">
+            <div data-anim="rise" className="bg-mist p-7">
               <p className="text-[11.5px] uppercase tracking-[0.18em] text-muted">What to include</p>
               <ul className="mt-5 space-y-3">
                 {INCLUDE.map((t) => (

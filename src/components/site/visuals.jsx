@@ -16,7 +16,7 @@ export function Window({ title, children, className = "", tone = "paper" }) {
   return (
     <div
       className={cx(
-        "overflow-hidden rounded-2xl border shadow-[0_24px_60px_-28px_rgba(13,13,13,.45)]",
+        "overflow-hidden rounded-xl border shadow-[0_24px_60px_-28px_rgba(13,13,13,.45)]",
         night ? "border-white/10 bg-[#1a1a1a] text-white" : "border-line bg-paper text-ink",
         className,
       )}
@@ -37,7 +37,7 @@ export function Glass({ children, className = "" }) {
   return (
     <div
       className={cx(
-        "rounded-2xl border border-white/60 bg-white/75 p-3 text-[11px] text-[#0d0d0d] shadow-[0_14px_40px_-16px_rgba(13,13,13,.45)] backdrop-blur-md",
+        "rounded-xl border border-white/60 bg-white/75 p-3 text-[11px] text-[#0d0d0d] shadow-[0_14px_40px_-16px_rgba(13,13,13,.45)] backdrop-blur-md",
         "dark:border-white/10 dark:bg-[#141414]/75 dark:text-white",
         className,
       )}

@@ -65,12 +65,20 @@ const SECTION_TONES = {
   lime: "bg-lime text-lime-ink",
 };
 
-/** Standard page band. Horizontal padding matches the header, so every edge lines up. */
+/**
+ * Standard page band. Horizontal padding matches the header, so every edge
+ * lines up, and each band opens on a full-width hairline like the hero's rows.
+ */
 export function Section({ id, tone = "paper", className = "", children, ...rest }) {
   return (
     <section
       id={id}
-      className={cx(SECTION_TONES[tone], "gutter scroll-mt-24 py-20 lg:py-28", className)}
+      className={cx(
+        SECTION_TONES[tone],
+        "gutter scroll-mt-24 border-t py-20 lg:py-28",
+        tone === "night" ? "border-white/10" : "border-line",
+        className,
+      )}
       {...rest}
     >
       {children}
@@ -78,14 +86,58 @@ export function Section({ id, tone = "paper", className = "", children, ...rest 
   );
 }
 
+/**
+ * The site's column frame (--frame-cols) inside a gutter. From 1280px up it
+ * reaches 24px past the gutter and pads each cell by 24px, so cell content
+ * still sits on the gutter edge. Children pick columns with col-start/span.
+ */
+export function Frame({ as: Tag = "div", className = "", children, ...rest }) {
+  return (
+    <Tag className={cx("xl:-mx-6 xl:grid xl:grid-cols-[var(--frame-cols)] xl:*:px-6", className)} {...rest}>
+      {children}
+    </Tag>
+  );
+}
+
+/**
+ * Section opening on the frame: the label under the logo column with a
+ * hairline after it, the heading across the next two columns, and the intro
+ * and action in the last one, set on the baseline.
+ */
+export function SectionHead({ label, lead, tail, intro, action, tone = "default", as, size, className = "" }) {
+  const night = tone === "night";
+  return (
+    <Frame className={cx("grid gap-6 xl:gap-0", className)}>
+      <div data-anim="fade" className={cx("xl:border-r", night ? "border-white/10" : "border-line")}>
+        <Label tone={tone}>{label}</Label>
+      </div>
+      <div className="xl:col-span-2">
+        <Heading as={as} lead={lead} tail={tail} tone={tone} size={size} className="xl:-mt-1.5" />
+      </div>
+      {(intro || action) && (
+        <div className="flex flex-col gap-6 xl:justify-end">
+          {intro && (
+            <p data-anim="rise" className={cx("max-w-sm text-[14.5px] leading-relaxed", night ? "text-white/55" : "text-muted")}>
+              {intro}
+            </p>
+          )}
+          {action && <div data-anim="fade">{action}</div>}
+        </div>
+      )}
+    </Frame>
+  );
+}
+
 /* ─────────────────────────── type ─────────────────────────── */
 
-/** Section label, set like a bracketed reference: ( ABOUT ). */
+/** Section label: a small square of European blue, then the name in capitals. */
 export function Label({ children, tone = "default", className = "" }) {
-  const color = tone === "night" ? "text-white/45" : tone === "lime" ? "text-lime-ink/60" : "text-muted";
+  const color = tone === "night" ? "text-white/55" : tone === "lime" ? "text-lime-ink/60" : "text-muted";
+  const mark = tone === "night" ? "bg-[#8aa4ff]" : tone === "lime" ? "bg-lime-ink" : "bg-eu";
   return (
-    <p className={cx("text-[12px] uppercase tracking-[0.2em]", color, className)}>
-      ( {children} )
+    <p className={cx("flex items-center gap-2.5 text-[12px] uppercase tracking-[0.18em]", color, className)}>
+      <span aria-hidden="true" className={cx("size-1.5 shrink-0", mark)} />
+      {children}
     </p>
   );
 }
@@ -98,15 +150,19 @@ const HEADING_SIZES = {
 };
 
 const HEADING_TONES = {
-  default: ["text-ink", "text-muted"],
-  soft: ["text-ink", "text-ink-soft"],
-  night: ["text-white", "text-white/45"],
-  lime: ["text-lime-ink", "text-lime-ink/50"],
+  default: ["text-ink", "text-eu"],
+  soft: ["text-ink", "text-eu"],
+  night: ["text-white", "text-[#8aa4ff]"],
+  lime: ["text-lime-ink", "text-lime-ink/60"],
 };
 
+/** The serif italic the second line is set in, sized up to sit level with the sans. */
+const SERIF_TAIL = "font-serif italic text-[1.08em] tracking-[-0.01em]";
+
 /**
- * Two-tone display heading: the first line in ink, the second dropped back to
- * grey. Each line is masked and slides up into place.
+ * Two-part display heading: the first line in ink, the second in European
+ * blue serif italic, the hero's "Europe" carried through the site. Each line
+ * is masked and slides up into place.
  */
 export function Heading({
   as: Tag = "h2",
@@ -120,7 +176,7 @@ export function Heading({
   const [leadColor, tailColor] = HEADING_TONES[tone] || HEADING_TONES.default;
   const lines = [
     [lead, leadColor],
-    [tail, tailColor],
+    [tail, cx(tailColor, SERIF_TAIL)],
   ].filter(([text]) => text);
 
   return (
@@ -136,9 +192,10 @@ export function Heading({
   );
 }
 
-/** Large statement paragraph: an ink sentence that trails off into grey. */
+/** Large statement paragraph: an ink sentence that trails off into a softer serif italic. */
 export function Statement({ lead, tail, tone = "default", className = "" }) {
-  const [leadColor, tailColor] = HEADING_TONES[tone] || HEADING_TONES.default;
+  const [leadColor] = HEADING_TONES[tone] || HEADING_TONES.default;
+  const tailColor = tone === "night" ? "text-white/55" : "text-ink-soft";
   return (
     <p
       data-anim="rise"
@@ -147,7 +204,8 @@ export function Statement({ lead, tail, tone = "default", className = "" }) {
         className,
       )}
     >
-      <span className={leadColor}>{lead}</span> {tail && <span className={tailColor}>{tail}</span>}
+      <span className={leadColor}>{lead}</span>{" "}
+      {tail && <span className={cx("font-serif italic tracking-[-0.005em]", tailColor)}>{tail}</span>}
     </p>
   );
 }
@@ -155,19 +213,18 @@ export function Statement({ lead, tail, tone = "default", className = "" }) {
 /* ─────────────────────────── actions ─────────────────────────── */
 
 const BUTTON_TONES = {
-  ink: ["bg-ink text-paper hover:bg-ink-soft", "bg-lime text-lime-ink"],
-  lime: [
-    "bg-lime text-lime-ink shadow-[0_10px_28px_-12px_var(--lime-deep)] hover:bg-lime-deep",
-    "bg-lime-ink text-lime",
-  ],
-  outline: ["border border-line-strong text-ink hover:border-ink", "bg-ink text-paper"],
-  white: ["bg-white text-[#0d0d0d] hover:bg-white/90", "bg-[#0d0d0d] text-lime"],
-  ghost: ["border border-white/20 text-white hover:border-white/50", "bg-lime text-lime-ink"],
+  eu: "bg-eu text-eu-ink hover:bg-eu-deep",
+  ink: "bg-ink text-paper hover:bg-ink-soft",
+  lime: "bg-lime text-lime-ink hover:bg-lime-deep",
+  outline: "border border-line-strong text-ink hover:border-ink",
+  white: "bg-white text-[#0d0d0d] hover:bg-white/85",
+  ghost: "border border-white/25 text-white hover:border-white/60",
 };
 
 /**
- * Pill button. With `arrow`, a round badge sits at the trailing edge and turns
- * on hover — the one repeated gesture behind every call to action.
+ * Square-cornered button, like the hero's call to action. With `arrow`, a
+ * trailing arrow turns on hover: the one repeated gesture behind every call
+ * to action.
  */
 export function Button({
   href,
@@ -178,25 +235,20 @@ export function Button({
   className = "",
   ...rest
 }) {
-  const [shell, badge] = BUTTON_TONES[variant] || BUTTON_TONES.ink;
   const classes = cx(
-    "group inline-flex items-center gap-3 rounded-full text-[14px] transition-colors duration-300",
-    arrow ? "py-1.5 pl-6 pr-1.5" : "px-7 py-3.5",
-    shell,
+    "group inline-flex items-center gap-3 rounded-md px-6 py-3.5 text-[14px] transition-colors duration-300",
+    BUTTON_TONES[variant] || BUTTON_TONES.ink,
     className,
   );
   const content = (
     <>
       <span className="whitespace-nowrap">{children}</span>
       {arrow && (
-        <span
-          className={cx(
-            "grid size-9 shrink-0 place-items-center rounded-full transition-transform duration-300 group-hover:rotate-45",
-            badge,
-          )}
-        >
-          <ArrowUpRight size={16} strokeWidth={1.8} />
-        </span>
+        <ArrowUpRight
+          size={16}
+          strokeWidth={1.8}
+          className="shrink-0 transition-transform duration-300 group-hover:rotate-45"
+        />
       )}
     </>
   );
@@ -242,6 +294,7 @@ const CHIP_TONES = {
   soft: "bg-mist text-ink-soft",
   paper: "bg-paper text-ink",
   lime: "bg-lime text-lime-ink",
+  eu: "bg-eu text-eu-ink",
   night: "border border-white/15 text-white/70",
   ink: "bg-ink text-paper",
 };
@@ -250,7 +303,7 @@ export function Chip({ children, tone = "outline", className = "" }) {
   return (
     <span
       className={cx(
-        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[12px] leading-5",
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-[4px] px-2.5 py-1 text-[12px] leading-5",
         CHIP_TONES[tone] || CHIP_TONES.outline,
         className,
       )}

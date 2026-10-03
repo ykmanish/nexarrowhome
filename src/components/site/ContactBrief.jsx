@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { cx } from "./ui";
 
 const field =
-  "w-full rounded-2xl border border-line bg-paper px-4 py-3.5 text-[15px] text-ink placeholder:text-muted transition-colors focus:border-ink focus:outline-none";
+  "w-full rounded-md border border-line bg-paper px-4 py-3.5 text-[15px] text-ink placeholder:text-muted transition-colors focus:border-eu focus:outline-none";
 
 /**
  * Project brief that composes a pre-filled email in the visitor's own mail
@@ -64,8 +64,8 @@ ${name}`, org && `Company: ${org}`, reply && `Reply to: ${reply}`, topic && `Ser
               />
               <span
                 className={cx(
-                  "inline-flex rounded-full border px-4 py-2 text-[13.5px] transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink",
-                  topic === t ? "border-ink bg-ink text-paper" : "border-line bg-paper text-ink-soft hover:border-ink",
+                  "inline-flex rounded-md border px-4 py-2 text-[13.5px] transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink",
+                  topic === t ? "border-eu bg-eu text-eu-ink" : "border-line bg-paper text-ink-soft hover:border-ink",
                 )}
               >
                 {t}
@@ -89,12 +89,10 @@ ${name}`, org && `Company: ${org}`, reply && `Reply to: ${reply}`, topic && `Ser
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="group inline-flex w-fit items-center gap-3 rounded-full bg-lime py-1.5 pl-6 pr-1.5 text-[14px] text-lime-ink shadow-[0_10px_28px_-12px_var(--lime-deep)] transition-colors hover:bg-lime-deep"
+          className="group inline-flex w-fit items-center gap-3 rounded-md bg-eu px-6 py-3.5 text-[14px] text-eu-ink transition-colors duration-300 hover:bg-eu-deep"
         >
           Open email draft
-          <span className="grid size-9 place-items-center rounded-full bg-lime-ink text-lime transition-transform duration-300 group-hover:rotate-45">
-            <ArrowUpRight size={16} strokeWidth={1.8} />
-          </span>
+          <ArrowUpRight size={16} strokeWidth={1.8} className="transition-transform duration-300 group-hover:rotate-45" />
         </button>
         <p className="max-w-xs text-[12.5px] leading-relaxed text-muted">
           Opens a pre-filled draft in your email app. Nothing is sent or stored by this page.

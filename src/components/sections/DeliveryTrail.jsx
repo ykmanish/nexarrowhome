@@ -1,5 +1,5 @@
 import { deliveryPath } from "@/content/company";
-import { Chip, Dot, Heading, Label } from "@/components/site/ui";
+import { Chip, SectionHead } from "@/components/site/ui";
 
 /**
  * The delivery path as a trail of steps. On desktop the section pins and the
@@ -19,44 +19,39 @@ export default function DeliveryTrail({
     <div>
       <section
         data-hscroll
-        className="overflow-hidden bg-mist py-20 text-ink lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-16"
+        className="overflow-hidden border-t border-line bg-mist py-20 text-ink lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-16"
       >
         <div className="gutter lg:pt-[76px]">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
-            <div>
-              <Label>{label}</Label>
-              <Heading lead={lead} tail={tail} className="mt-6" />
-            </div>
-            <p data-anim="rise" className="max-w-sm text-[14.5px] leading-relaxed text-muted">
-              {intro}
-            </p>
-          </div>
+          <SectionHead label={label} lead={lead} tail={tail} intro={intro} />
         </div>
 
         <div
           data-hscroll-viewport
           className="gutter mt-12 snap-x snap-mandatory overflow-x-auto scroll-px-5 [scrollbar-width:none] md:scroll-px-10 lg:mt-14"
         >
-          <ol data-hscroll-track className="flex w-max gap-4 pr-5 md:pr-10 lg:pr-0">
+          <ol data-hscroll-track className="flex w-max gap-px bg-line pr-5 md:pr-10 lg:pr-0">
             {steps.map((step, i) => {
               const last = i === steps.length - 1;
               return (
-                <li key={step.title} data-hscroll-step className="trail-step w-[78vw] max-w-[330px] snap-start sm:w-[320px]">
-                  <div className="relative mb-5 h-px bg-line-strong" aria-hidden="true">
-                    <span className="trail-fill absolute inset-0 origin-left bg-ink" />
-                    <span className="trail-dot absolute -top-[3px] left-0 size-[7px] rounded-full" />
+                <li key={step.title} data-hscroll-step className="trail-step w-[78vw] max-w-[330px] snap-start bg-mist sm:w-[320px]">
+                  <div className="relative mb-5 h-0.5 bg-line-strong" aria-hidden="true">
+                    <span className="trail-fill absolute inset-0 origin-left bg-eu" />
+                    <span className="trail-dot absolute -top-[3px] left-0 size-2" />
                   </div>
-                  <article className="flex min-h-[250px] flex-col rounded-[22px] bg-paper p-6 md:p-7">
+                  <article className="flex min-h-[260px] flex-col bg-paper p-6 md:p-7">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-[11.5px] text-muted">Step {String(i + 1).padStart(2, "0")}</span>
+                      <span className="text-[11.5px] uppercase tracking-[0.16em] text-muted">Step</span>
                       <Chip>{step.artifact}</Chip>
                     </div>
-                    <h3 className="mt-auto pt-12 font-display text-[26px] leading-tight tracking-[-0.02em]">{step.title}</h3>
+                    <span className="mt-auto pt-10 font-display text-[44px] leading-none tracking-[-0.03em] text-eu">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-3 font-display text-[26px] leading-tight tracking-[-0.02em]">{step.title}</h3>
                     <p className="mt-2.5 text-[14px] leading-relaxed text-muted">{step.copy}</p>
                     {last && (
                       <div className="mt-5">
-                        <Chip tone="lime">
-                          <Dot className="bg-lime-ink" /> Live &amp; supported
+                        <Chip tone="eu">
+                          <span aria-hidden="true" className="pulse-dot size-1.5 bg-lime" /> Live &amp; supported
                         </Chip>
                       </div>
                     )}

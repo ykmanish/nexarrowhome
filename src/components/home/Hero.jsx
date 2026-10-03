@@ -1,8 +1,12 @@
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { deliveryPath } from "@/content/company";
+import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
-import EuropeMap from "@/components/home/EuropeMap";
 import TallinnClock from "@/components/home/TallinnClock";
-import { Button, TextLink } from "@/components/site/ui";
+import { FrameLines, ROW_LINE, SkyBackdrop } from "@/components/site/frame";
+import { DashboardVisual, DeployCard, FlowVisual } from "@/components/site/visuals";
+import { Button, TextLink, cx } from "@/components/site/ui";
 
 function MaskLine({ children, delay = 0 }) {
   return (
@@ -19,7 +23,7 @@ function EstonianFlag() {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex h-[13px] w-5 shrink-0 flex-col overflow-hidden rounded-[3px] ring-1 ring-line-strong"
+      className="inline-flex h-[13px] w-5 shrink-0 flex-col overflow-hidden rounded-[3px] ring-1 ring-black/10"
     >
       <span className="flex-1 bg-[#0072ce]" />
       <span className="flex-1 bg-[#0d0d0d]" />
@@ -28,101 +32,158 @@ function EstonianFlag() {
   );
 }
 
-/** Grounded in how we already work — see content/company.js. */
-const PROOF = ["EU-registered company", "Milestone-based delivery", "Documented decisions", "Remote-first"];
+/** One disc per discipline: the team in miniature. */
+const DISCS = [
+  { label: "WEB", className: "bg-[#0d0d0d] text-lime" },
+  { label: "SaaS", className: "bg-white text-[#0d0d0d]" },
+  { label: "AI", className: "bg-eu text-eu-ink" },
+  { label: "OPS", className: "bg-lime text-lime-ink" },
+];
+
+const pad = (n) => String(n).padStart(2, "0");
 
 /**
- * Full-bleed first screen: white in the light theme, near-black in the dark
- * one, with European blue as its accent. The dot field fills the whole hero;
- * --map-tx/--map-ty say where Tallinn sits, as fractions of its width and
- * height, and both the canvas and the Tallinn label read them.
+ * The sky photograph runs under the header, and from 1280px up a hairline
+ * frame divides both into the same four columns (--frame-cols, shared with
+ * the header and every section head): logo over the figures, nav over the
+ * headline, studio time over the product, actions over the proof. The frame
+ * sits 24px outside the page gutter and every cell is padded 24px, so content
+ * still lines up with every other page. Below 1280px it is a plain stack.
  */
 export default function Hero() {
   return (
-    <section>
-      <div className="relative isolate flex min-h-[calc(100svh-76px)] flex-col overflow-hidden bg-[var(--hero-bg)] text-ink lg:min-h-[max(620px,calc(100svh-76px))]">
-        {/* Light */}
-        <div
-          aria-hidden="true"
-          className="drift pointer-events-none absolute -right-[12%] -top-[30%] -z-10 aspect-square w-[80vw] max-w-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.1),transparent)] dark:bg-[radial-gradient(closest-side,rgba(var(--eu-rgb),.2),transparent)]"
-        />
-        <div
-          aria-hidden="true"
-          className="drift pointer-events-none absolute -bottom-[45%] -left-[18%] -z-10 aspect-square w-[70vw] max-w-[1100px] rounded-full bg-[radial-gradient(closest-side,rgba(207,242,127,.32),transparent)] [animation-delay:-9s] dark:bg-[radial-gradient(closest-side,rgba(207,242,127,.1),transparent)]"
-        />
+    <section className="relative isolate -mt-[76px] overflow-hidden">
+      <SkyBackdrop />
 
-        {/* Map */}
-        <div className="pointer-events-none absolute inset-0 -z-10 [--map-tx:0.8] [--map-ty:0.15] sm:[--map-tx:0.76] lg:[--map-tx:0.71] lg:[--map-ty:0.22]">
-          <EuropeMap className="absolute inset-0 size-full" />
-          <p
-            className="absolute hidden translate-x-6 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-line bg-paper/70 px-3 py-1.5 text-[12px] text-ink-soft backdrop-blur-md md:flex"
-            style={{ left: "calc(var(--map-tx) * 100%)", top: "calc(var(--map-ty) * 100%)" }}
-          >
-            Tallinn, Estonia
-            <span className="text-muted">·</span>
-            <TallinnClock className="text-ink" />
-          </p>
-        </div>
+      <div className="gutter">
+        <div className="relative flex min-h-svh flex-col pt-[76px] xl:-mx-6 xl:min-h-[max(760px,100svh)]">
+          <FrameLines underNav />
 
-        {/* Keeps the headline readable where it crosses the map. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_36%_at_50%_64%,rgba(var(--hero-veil),.75),transparent_80%)]"
-        />
-        <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 -z-10 hidden dark:block" />
+          {/* Main row */}
+          <div className="flex flex-1 flex-col gap-14 py-12 xl:grid xl:grid-cols-[var(--frame-cols)] xl:gap-0 xl:py-0">
+            <div className="xl:col-start-2 xl:row-start-1 xl:flex xl:flex-col xl:justify-center xl:px-6 xl:py-6">
+              <p
+                data-anim="fade"
+                className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/80 bg-white/55 py-1.5 pl-2.5 pr-3.5 text-[13px] text-ink-soft backdrop-blur-md dark:border-white/10 dark:bg-white/5"
+              >
+                <EstonianFlag />
+                Software studio in Tallinn, Estonia
+              </p>
+              <h1 className="mt-5 font-display text-[clamp(2.75rem,10vw,4.75rem)] leading-[0.95] tracking-[-0.035em] xl:text-[min(4.6vw,4.4rem)]">
+                <MaskLine delay={0.05}>Software</MaskLine>
+                <MaskLine delay={0.12}>that works,</MaskLine>
+                <MaskLine delay={0.19}>
+                  built in{" "}
+                  <span className="font-serif text-[1.12em] italic leading-none tracking-[-0.01em] text-eu">Europe</span>.
+                </MaskLine>
+              </h1>
+              <p data-anim="rise" data-anim-delay="0.28" className="mt-5 max-w-[42ch] text-[15px] leading-relaxed text-ink-soft">
+                We design, build and run custom software, SaaS platforms, AI workflows and cloud infrastructure for teams
+                that need the thing to actually work.
+              </p>
+              <div data-anim="rise" data-anim-delay="0.34" className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <Button href={paths.contact} variant="eu" className="py-4">
+                  Start a project
+                </Button>
+                <TextLink href={paths.services}>See what we build</TextLink>
+              </div>
+            </div>
 
-        <div className="gutter flex flex-1 flex-col items-center justify-end pb-14 pt-36 text-center sm:pt-44 lg:pb-[7vh] lg:pt-28">
-          <p
-            data-anim="fade"
-            className="inline-flex items-center gap-2.5 rounded-full border border-line bg-paper/60 py-1.5 pl-2.5 pr-3.5 text-[13px] text-ink-soft backdrop-blur-md"
-          >
-            <EstonianFlag />
-            Software studio in Tallinn, Estonia
-          </p>
+            {/* The product, over the open sky of the two right-hand columns. */}
+            <div
+              data-anim="scale"
+              data-anim-delay="0.15"
+              className="relative mx-auto w-full max-w-[460px] xl:col-span-2 xl:col-start-3 xl:row-start-1 xl:flex xl:max-w-none xl:items-center xl:justify-center xl:px-12"
+            >
+              <div className="relative w-full max-w-[440px]">
+                <DashboardVisual className="shadow-[0_40px_90px_-35px_rgba(0,40,110,.5)]" />
+                <DeployCard className="float absolute -left-12 -top-10 hidden sm:block" />
+              </div>
+            </div>
 
-          <h1 className="mt-7 font-display text-[clamp(2.6rem,8.2vw,7.6rem)] leading-[0.92] tracking-[-0.035em]">
-            <MaskLine delay={0.08}>Software that works,</MaskLine>
-            <MaskLine delay={0.16}>
-              built in{" "}
-              <span className="font-serif text-[1.12em] italic leading-none tracking-[-0.01em] text-eu">Europe</span>.
-            </MaskLine>
-          </h1>
-
-          <p
-            data-anim="rise"
-            data-anim-delay="0.3"
-            className="mt-7 max-w-[54ch] text-balance text-[15px] leading-relaxed text-ink-soft md:text-[17px]"
-          >
-            We design, build and run custom software, SaaS platforms, AI workflows and cloud infrastructure for teams
-            that need the thing to actually work.
-          </p>
-
-          <div data-anim="rise" data-anim-delay="0.38" className="mt-9 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
-            <Button href={paths.contact} variant="lime">
-              Start a project
-            </Button>
-            <TextLink href={paths.services}>See what we build</TextLink>
-          </div>
-        </div>
-
-        {/* Trust bar */}
-        <div data-anim="fade" data-anim-delay="0.5" className="border-t border-line">
-          <div className="gutter flex flex-wrap items-center justify-center gap-x-8 gap-y-3 py-5 text-[13px] text-ink-soft lg:justify-between">
-            <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5">
-              {PROOF.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span className="grid size-4 place-items-center rounded-full bg-eu text-white dark:text-[#0b0c0b]">
-                    <Check size={10} strokeWidth={3} />
+            <div className="xl:col-start-1 xl:row-start-1 xl:flex xl:flex-col xl:justify-center xl:px-6 xl:pb-10">
+              <p className="font-display text-[56px] leading-none tracking-[-0.03em]">{pad(services.length)}</p>
+              <p className="mt-2 text-[13.5px] leading-snug text-ink-soft">
+                Service lines,
+                <br />
+                one team
+              </p>
+              <div className="mt-5 flex">
+                {DISCS.map((d, i) => (
+                  <span
+                    key={d.label}
+                    className={cx(
+                      "grid size-11 place-items-center rounded-full border-2 border-white text-[9.5px] tracking-wide dark:border-[#15161a]",
+                      i > 0 && "-ml-2.5",
+                      d.className,
+                    )}
+                  >
+                    {d.label}
                   </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="flex items-center gap-2">
-              <span className="pulse-dot size-1.5 rounded-full bg-eu" />
-              Studio time in Tallinn
-              <TallinnClock className="text-ink" />
-            </p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom row */}
+          <div
+            className={cx(
+              "grid gap-3 pb-6 sm:grid-cols-2 xl:h-[clamp(210px,28svh,260px)] xl:grid-cols-[var(--frame-cols)] xl:gap-0 xl:pb-0",
+              ROW_LINE,
+            )}
+          >
+            <div
+              data-anim="rise"
+              data-anim-delay="0.4"
+              className="flex min-h-[170px] flex-col justify-between bg-[#0d0d0d] p-6 text-white xl:min-h-0"
+            >
+              <p className="self-end font-display text-[clamp(2.75rem,3.6vw,3.5rem)] leading-none tracking-[-0.03em] text-lime">
+                {pad(deliveryPath.length)}
+              </p>
+              <p className="text-[12.5px] uppercase leading-snug tracking-[0.08em] text-white/80">
+                Stages from first
+                <br />
+                call to production
+              </p>
+            </div>
+
+            <Link
+              href={paths.services}
+              data-anim="rise"
+              data-anim-delay="0.46"
+              className="group relative flex min-h-[230px] overflow-hidden bg-mist p-6 xl:min-h-0"
+            >
+              <div className="relative z-10 flex flex-col justify-between gap-6 pr-16 sm:max-w-[52%] sm:pr-0">
+                <p className="font-display text-[clamp(1.55rem,2vw,2rem)] leading-[1.05] tracking-[-0.02em] text-ink">
+                  One team for software, SaaS, AI and cloud.
+                </p>
+                <p className="flex items-center gap-2 text-[12.5px] text-ink-soft">
+                  <span className="size-1.5 rounded-full bg-eu" />
+                  Tallinn
+                  <TallinnClock className="text-ink" />
+                </p>
+              </div>
+              <span className="absolute right-6 top-6 z-10 flex flex-col items-center gap-1.5 text-[11.5px] text-ink-soft">
+                <span className="grid size-11 place-items-center rounded-full bg-[#0d0d0d] text-white transition-transform duration-300 group-hover:rotate-45 dark:bg-white dark:text-[#0d0d0d]">
+                  <ArrowUpRight size={16} strokeWidth={1.8} />
+                </span>
+                Services
+              </span>
+              <div className="absolute right-6 top-[44%] hidden w-[44%] min-w-[220px] transition-transform duration-500 group-hover:-translate-y-2 sm:block">
+                <FlowVisual />
+              </div>
+            </Link>
+
+            <div className="flex flex-col justify-end gap-3 py-2 sm:col-span-2 xl:col-span-1 xl:col-start-4 xl:p-6">
+              <EstonianFlag />
+              <p className="text-[12.5px] uppercase leading-snug tracking-[0.08em] text-ink">
+                Registered in the EU.
+                <br />
+                Building for teams
+                <br />
+                worldwide.
+              </p>
+            </div>
           </div>
         </div>
       </div>
