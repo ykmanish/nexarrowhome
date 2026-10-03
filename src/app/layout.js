@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Instrument_Serif } from "next/font/google";
 import { company } from "@/content/company";
 import "./globals.css";
 
@@ -21,6 +22,18 @@ const regular = localFont({
   weight: "400",
   display: "swap",
   adjustFontFallback: false,
+});
+
+/**
+ * Editorial accents — Instrument Serif, regular and its true italic. Used
+ * sparingly: a word in the hero headline and the hero's story cards.
+ */
+const serif = Instrument_Serif({
+  subsets: ["latin", "latin-ext"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+  display: "swap",
 });
 
 export const metadata = {
@@ -60,7 +73,7 @@ const BOOT = `(function(){try{var d=document.documentElement;if(location.pathnam
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${satre.variable} ${regular.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${satre.variable} ${regular.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       </head>
