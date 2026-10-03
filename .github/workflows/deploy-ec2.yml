@@ -14,6 +14,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      NODE_VERSION: 22
+      APP_NAME: nexarrow
+      APP_DIR: /var/www/nexarrow
+      DEPLOY_DIR: /home/ubuntu/nexarrow-deploy
+      EC2_HOST: ${{ secrets.EC2_HOST || '16.178.46.66' }}
+      EC2_USER: ${{ secrets.EC2_USER || 'ubuntu' }}
+      EC2_PORT: ${{ secrets.EC2_PORT || 22 }}
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
       - name: Install dependencies
@@ -32,7 +41,7 @@ jobs:
 
       - name: Create deployment archive
         run: |
-          rm -rf .next/cache
+          rm -rf .next/cache nexarrow-release.tgz
           tar -czf nexarrow-release.tgz \
             .next \
             public \
@@ -43,27 +52,49 @@ jobs:
       - name: Upload release to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: ${{ secrets.EC2_PORT || 22 }}
+          port: ${{ env.EC2_PORT }}
           source: nexarrow-release.tgz
-          target: /home/ubuntu/nexarrow-deploy
+          target: ${{ env.DEPLOY_DIR }}
 
       - name: Activate release on EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: ${{ secrets.EC2_PORT || 22 }}
+          port: ${{ env.EC2_PORT }}
           script: |
-            set -e
-            APP_DIR=/var/www/nexarrow
-            sudo mkdir -p "$APP_DIR"
-            sudo chown -R "$USER":"$USER" "$APP_DIR" /home/ubuntu/nexarrow-deploy
-            tar -xzf /home/ubuntu/nexarrow-deploy/nexarrow-release.tgz -C "$APP_DIR"
-            cd "$APP_DIR"
+            set -euo pipefail
+
+            APP_NAME="nexarrow"
+            APP_DIR="/var/www/nexarrow"
+            DEPLOY_DIR="/home/ubuntu/nexarrow-deploy"
+            RELEASES_DIR="$APP_DIR/releases"
+            RELEASE_DIR="$RELEASES_DIR/$(date +%Y%m%d%H%M%S)-${{ github.sha }}"
+            ARCHIVE="$DEPLOY_DIR/nexarrow-release.tgz"
+
+            sudo mkdir -p "$RELEASES_DIR" "$DEPLOY_DIR"
+            sudo chown -R "$USER":"$USER" "$APP_DIR" "$DEPLOY_DIR"
+
+            test -f "$ARCHIVE"
+            mkdir -p "$RELEASE_DIR"
+            tar -xzf "$ARCHIVE" -C "$RELEASE_DIR"
+
+            cd "$RELEASE_DIR"
             npm ci --omit=dev
-            pm2 start npm --name nexarrow -- start || pm2 restart nexarrow
+
+            ln -sfn "$RELEASE_DIR" "$APP_DIR/current"
+            cd "$APP_DIR/current"
+
+            if pm2 describe "$APP_NAME" >/dev/null 2>&1; then
+              pm2 reload "$APP_NAME" --update-env
+            else
+              pm2 start npm --name "$APP_NAME" -- start
+            fi
+
             pm2 save
+            rm -f "$ARCHIVE"
+            find "$RELEASES_DIR" -mindepth 1 -maxdepth 1 -type d | sort -r | tail -n +6 | xargs -r rm -rf
