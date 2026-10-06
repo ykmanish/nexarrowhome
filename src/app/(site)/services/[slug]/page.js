@@ -5,7 +5,9 @@ import PageHero from "@/components/sections/PageHero";
 import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Frame, Label, Section, SectionHead, cx } from "@/components/site/ui";
 import { getService, services } from "@/content/services";
+import { pageMeta } from "@/lib/meta";
 import { paths } from "@/lib/routes";
+import BookCall from "@/components/site/BookCall";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -15,11 +17,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const s = getService(slug);
   if (!s) return {};
-  return {
-    title: s.name,
-    description: s.subtitle,
-    alternates: { canonical: paths.service(s.slug) },
-  };
+  return pageMeta({ title: s.name, description: s.subtitle, path: paths.service(s.slug) });
 }
 
 export default async function ServiceDetailPage({ params }) {
@@ -39,9 +37,7 @@ export default async function ServiceDetailPage({ params }) {
         intro={s.subtitle}
         actions={
           <>
-            <Button href={paths.contact} variant="eu">
-              Discuss this service
-            </Button>
+            <BookCall>Discuss this service</BookCall>
             <Button href={paths.services} variant="outline" arrow={false}>
               All services
             </Button>
@@ -156,9 +152,7 @@ export default async function ServiceDetailPage({ params }) {
             <p className="mt-6 text-[13px] text-white/45">{s.name} engagement</p>
           </div>
           <div className="flex flex-wrap gap-3 xl:flex-col xl:items-start xl:justify-end">
-            <Button href={paths.contact} variant="lime">
-              Start a project
-            </Button>
+            <BookCall variant="lime">Book a call</BookCall>
             <Button href={paths.insights} variant="ghost">
               Related insights
             </Button>

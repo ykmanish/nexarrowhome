@@ -39,19 +39,19 @@ const serif = Instrument_Serif({
 export const metadata = {
   metadataBase: new URL(company.url),
   title: {
-    default: "Nexarrow | Software, SaaS, AI & Cloud studio in Tallinn",
+    default: "Nexarrow | Custom software and AI automation for growing teams",
     template: "%s | Nexarrow",
   },
   description:
-    "Nexarrow builds custom software, SaaS platforms, AI-powered products and cloud infrastructure for startups and growing businesses worldwide.",
+    "Nexarrow OÜ is an EU-registered software company building custom software and AI automation for growing teams. Fixed prices, weekly demos, and you own the code. Engineering led from India.",
   openGraph: {
     type: "website",
     siteName: "Nexarrow",
     locale: "en_GB",
     url: company.url,
-    title: "Nexarrow | Software, SaaS, AI & Cloud studio",
+    title: "Nexarrow | Custom software and AI automation for growing teams",
     description:
-      "Custom software, SaaS platforms, AI solutions and cloud infrastructure, built in Tallinn for businesses worldwide.",
+      "EU-registered software company. Fixed prices, weekly demos, and you own the code. Engineering led from India.",
   },
   twitter: { card: "summary_large_image" },
   icons: { icon: "/favicon.ico" },

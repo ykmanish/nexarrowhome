@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { deliveryPath } from "@/content/company";
+import { company, deliveryPath, founder } from "@/content/company";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
-import TallinnClock from "@/components/home/TallinnClock";
+import BookCall from "@/components/site/BookCall";
 import { FrameLines, ROW_LINE, SkyBackdrop } from "@/components/site/frame";
 import { DashboardVisual, DeployCard, FlowVisual } from "@/components/site/visuals";
-import { Button, TextLink, cx } from "@/components/site/ui";
+import { TextLink, cx } from "@/components/site/ui";
 
 function MaskLine({ children, delay = 0 }) {
   return (
@@ -46,7 +46,7 @@ const pad = (n) => String(n).padStart(2, "0");
  * The sky photograph runs under the header, and from 1280px up a hairline
  * frame divides both into the same four columns (--frame-cols, shared with
  * the header and every section head): logo over the figures, nav over the
- * headline, studio time over the product, actions over the proof. The frame
+ * headline and the product, actions over the proof. The frame
  * sits 24px outside the page gutter and every cell is padded 24px, so content
  * still lines up with every other page. Below 1280px it is a plain stack.
  */
@@ -67,25 +67,28 @@ export default function Hero() {
                 className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/80 bg-white/55 py-1.5 pl-2.5 pr-3.5 text-[13px] text-ink-soft backdrop-blur-md dark:border-white/10 dark:bg-white/5"
               >
                 <EstonianFlag />
-                Software studio in Tallinn, Estonia
+                EU-registered software company
               </p>
-              <h1 className="mt-5 font-display text-[clamp(2.75rem,10vw,4.75rem)] leading-[0.95] tracking-[-0.035em] xl:text-[min(4.6vw,4.4rem)]">
-                <MaskLine delay={0.05}>Software</MaskLine>
-                <MaskLine delay={0.12}>that works,</MaskLine>
+              {/* One buyer, one result: the message the client plan leads with. */}
+              <h1 className="mt-5 font-display text-[clamp(2.6rem,9.4vw,4.5rem)] leading-[0.95] tracking-[-0.035em] xl:text-[min(4.2vw,4.1rem)]">
+                <MaskLine delay={0.05}>Custom software</MaskLine>
+                <MaskLine delay={0.12}>and AI automation</MaskLine>
                 <MaskLine delay={0.19}>
-                  built in{" "}
-                  <span className="font-serif text-[1.12em] italic leading-none tracking-[-0.01em] text-eu">Europe</span>.
+                  for{" "}
+                  <span className="font-serif text-[1.12em] italic leading-none tracking-[-0.01em] text-eu">
+                    growing teams
+                  </span>
+                  .
                 </MaskLine>
               </h1>
-              <p data-anim="rise" data-anim-delay="0.28" className="mt-5 max-w-[42ch] text-[15px] leading-relaxed text-ink-soft">
-                We design, build and run custom software, SaaS platforms, AI workflows and cloud infrastructure for teams
-                that need the thing to actually work.
+              <p data-anim="rise" data-anim-delay="0.28" className="mt-5 max-w-[44ch] text-[15px] leading-relaxed text-ink-soft">
+                Fixed prices, weekly demos, and you own the code. Contracts and invoices from our EU company; engineering
+                led from {company.engineering}
+                {founder.name ? ` by ${founder.name}` : ""}.
               </p>
               <div data-anim="rise" data-anim-delay="0.34" className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <Button href={paths.contact} variant="eu" className="py-4">
-                  Start a project
-                </Button>
-                <TextLink href={paths.services}>See what we build</TextLink>
+                <BookCall className="py-4" />
+                <TextLink href={paths.work}>See our work</TextLink>
               </div>
             </div>
 
@@ -158,9 +161,8 @@ export default function Hero() {
                   One team for software, SaaS, AI and cloud.
                 </p>
                 <p className="flex items-center gap-2 text-[12.5px] text-ink-soft">
-                  <span className="size-1.5 rounded-full bg-eu" />
-                  Tallinn
-                  <TallinnClock className="text-ink" />
+                  <span className="pulse-dot size-1.5 rounded-full bg-eu" />
+                  We reply {company.reply}
                 </p>
               </div>
               <span className="absolute right-6 top-6 z-10 flex flex-col items-center gap-1.5 text-[11.5px] text-ink-soft">
@@ -177,11 +179,13 @@ export default function Hero() {
             <div className="flex flex-col justify-end gap-3 py-2 sm:col-span-2 xl:col-span-1 xl:col-start-4 xl:p-6">
               <EstonianFlag />
               <p className="text-[12.5px] uppercase leading-snug tracking-[0.08em] text-ink">
-                Registered in the EU.
+                Registered in Tallinn,
                 <br />
-                Building for teams
+                Estonia (EU).
                 <br />
-                worldwide.
+                Engineering led
+                <br />
+                from {company.engineering}.
               </p>
             </div>
           </div>

@@ -86,6 +86,13 @@ jobs:
             cd "$RELEASE_DIR"
             npm ci --omit=dev
 
+            # Server-only settings (e.g. RESEND_API_KEY for the contact form)
+            # live outside the releases, so every deploy picks them up.
+            # Create $APP_DIR/shared/.env.production once on the server.
+            if [ -f "$APP_DIR/shared/.env.production" ]; then
+              ln -sfn "$APP_DIR/shared/.env.production" "$RELEASE_DIR/.env.production"
+            fi
+
             ln -sfn "$RELEASE_DIR" "$APP_DIR/current"
             cd "$APP_DIR/current"
 

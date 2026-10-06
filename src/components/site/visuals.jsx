@@ -5,7 +5,8 @@ import { cx } from "./ui";
 /**
  * Generated illustrations. There is no client photography to show, so every
  * card gets a small, honest mock of the kind of interface we build. All data
- * in here is illustrative — labels and shapes, not reported results.
+ * in here is illustrative — labels and shapes, not reported results — and
+ * every window says so in its title bar ("Example interface").
  */
 
 /* ─────────────────────────── shells ─────────────────────────── */
@@ -22,10 +23,18 @@ export function Window({ title, children, className = "", tone = "paper" }) {
       )}
     >
       <div className={cx("flex items-center gap-1.5 border-b px-3.5 py-2.5", night ? "border-white/10" : "border-line")}>
-        <span className="size-2 rounded-full bg-[#ff6b5e]" />
-        <span className="size-2 rounded-full bg-[#ffc23d]" />
-        <span className="size-2 rounded-full bg-[#3ccf6e]" />
-        {title && <span className={cx("ml-2 text-[10.5px]", night ? "text-white/45" : "text-muted")}>{title}</span>}
+        <span className="size-2 shrink-0 rounded-full bg-[#ff6b5e]" />
+        <span className="size-2 shrink-0 rounded-full bg-[#ffc23d]" />
+        <span className="size-2 shrink-0 rounded-full bg-[#3ccf6e]" />
+        {title && <span className={cx("ml-2 min-w-0 truncate text-[10.5px]", night ? "text-white/45" : "text-muted")}>{title}</span>}
+        <span
+          className={cx(
+            "ml-auto shrink-0 whitespace-nowrap rounded-[3px] border px-1.5 py-px text-[8.5px] uppercase tracking-[0.12em]",
+            night ? "border-white/15 text-white/45" : "border-line text-muted",
+          )}
+        >
+          Example interface
+        </span>
       </div>
       {children}
     </div>

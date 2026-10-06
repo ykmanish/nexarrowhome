@@ -8,15 +8,16 @@ import { company } from "@/content/company";
 import { services } from "@/content/services";
 import { isWithin, paths } from "@/lib/routes";
 import { getLenis } from "@/lib/motion";
+import BookCall from "./BookCall";
 import ThemeToggle from "./ThemeToggle";
-import { Button, Label, Logo, cx } from "./ui";
+import { Label, Logo, cx } from "./ui";
 
 const NAV = [
   { href: paths.services, label: "Services", panel: true },
+  { href: paths.work, label: "Work" },
   { href: paths.approach, label: "Approach" },
   { href: paths.about, label: "About" },
   { href: paths.insights, label: "Insights" },
-  { href: paths.careers, label: "Careers" },
 ];
 
 const MOBILE_NAV = [...NAV, { href: paths.contact, label: "Contact" }];
@@ -138,7 +139,7 @@ export default function Header() {
                 <ThemeToggle />
               </span>
               <span className="hidden sm:block">
-                <Button href={paths.contact}>Start a project</Button>
+                <BookCall variant="ink" />
               </span>
               <button
                 type="button"
@@ -271,9 +272,7 @@ export default function Header() {
           </nav>
 
           <div className="mt-auto space-y-4 pt-10">
-            <Button href={paths.contact} variant="eu" className="w-full justify-between">
-              Start a project
-            </Button>
+            <BookCall className="w-full justify-between" />
             <div className="flex items-center justify-between gap-4">
               <a href={`mailto:${company.email}`} className="text-[14px] text-ink-soft">
                 {company.email}

@@ -1,4 +1,3 @@
-import { jobs } from "@/content/careers";
 import { company } from "@/content/company";
 import { insights } from "@/content/insights";
 import { services } from "@/content/services";
@@ -11,13 +10,13 @@ export default function sitemap() {
     [paths.approach, 0.7],
     [paths.about, 0.7],
     [paths.insights, 0.7],
-    [paths.careers, 0.6],
+    [paths.work, 0.8],
+    [paths.partners, 0.5],
     [paths.contact, 0.8],
     [paths.privacy, 0.2],
     [paths.terms, 0.2],
     ...services.map((s) => [paths.service(s.slug), 0.8]),
     ...insights.map((a) => [paths.article(a.slug), 0.5]),
-    ...jobs.map((j) => [paths.job(j.slug), 0.5]),
   ];
 
   return pages.map(([path, priority]) => ({ url: `${company.url}${path}`, priority }));

@@ -17,6 +17,9 @@ const nextConfig = {
     return [
       { source: "/company", destination: "/about#company", permanent: true },
       { source: "/awards", destination: "/about#capabilities", permanent: true },
+      // The open roles became a partner network for freelancers and agencies.
+      { source: "/careers", destination: "/partners", permanent: true },
+      { source: "/careers/:path*", destination: "/partners", permanent: true },
     ];
   },
 };

@@ -2,10 +2,12 @@ import { notFound } from "next/navigation";
 import PageHero from "@/components/sections/PageHero";
 import InsightCard from "@/components/sections/InsightCard";
 import { CoverArt } from "@/components/site/visuals";
-import { Button, Chip, Section, SectionHead } from "@/components/site/ui";
+import { Chip, Section, SectionHead } from "@/components/site/ui";
 import { company } from "@/content/company";
 import { getInsight, insights } from "@/content/insights";
+import { pageMeta } from "@/lib/meta";
 import { paths } from "@/lib/routes";
+import BookCall from "@/components/site/BookCall";
 
 export function generateStaticParams() {
   return insights.map((a) => ({ slug: a.slug }));
@@ -15,12 +17,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const a = getInsight(slug);
   if (!a) return {};
-  return {
-    title: a.title,
-    description: a.excerpt,
-    alternates: { canonical: paths.article(a.slug) },
-    openGraph: { type: "article", title: a.title, description: a.excerpt },
-  };
+  return pageMeta({ title: a.title, description: a.excerpt, path: paths.article(a.slug), type: "article" });
 }
 
 export default async function ArticlePage({ params }) {
@@ -86,9 +83,9 @@ export default async function ArticlePage({ params }) {
               <p className="mt-2.5 text-[13.5px] leading-relaxed text-eu-ink/75">
                 The next useful step is usually discovery, workflow mapping or technical scoping.
               </p>
-              <Button href={paths.contact} variant="lime" className="mt-6">
-                Discuss a project
-              </Button>
+              <BookCall variant="lime" className="mt-6">
+                Book a call
+              </BookCall>
             </div>
           </aside>
         </div>

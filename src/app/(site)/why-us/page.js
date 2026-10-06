@@ -2,16 +2,19 @@ import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import DeliveryTrail from "@/components/sections/DeliveryTrail";
 import Engagement from "@/components/sections/Engagement";
 import FAQ from "@/components/sections/FAQ";
-import { Button, Section, SectionHead } from "@/components/site/ui";
+import Safeguards from "@/components/sections/Safeguards";
+import { Section, SectionHead } from "@/components/site/ui";
 import { faqs, manifesto, problems } from "@/content/company";
 import { paths } from "@/lib/routes";
+import { pageMeta } from "@/lib/meta";
+import BookCall from "@/components/site/BookCall";
 
-export const metadata = {
+export const metadata = pageMeta({
   title: "Approach",
   description:
     "How Nexarrow works: ten principles behind every build, a six-stage delivery path, and engagement models that fit your stage.",
-  alternates: { canonical: paths.approach },
-};
+  path: paths.approach,
+});
 
 export default function ApproachPage() {
   return (
@@ -22,11 +25,7 @@ export default function ApproachPage() {
         lead="How we work,"
         tail="and why it works."
         intro="The working beliefs and delivery habits that shape scoping, architecture and delivery decisions on every engagement."
-        actions={
-          <Button href={paths.contact} variant="eu">
-            Start a project
-          </Button>
-        }
+        actions={<BookCall>Book a call</BookCall>}
         aside={<HeroFigure value={String(manifesto.length).padStart(2, "0")} caption="Principles behind every build" />}
       />
 
@@ -68,6 +67,7 @@ export default function ApproachPage() {
       </Section>
 
       <DeliveryTrail />
+      <Safeguards />
       <Engagement />
       <FAQ limit={faqs.length} />
     </>

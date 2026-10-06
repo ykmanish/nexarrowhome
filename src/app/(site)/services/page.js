@@ -6,13 +6,15 @@ import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Section, cx } from "@/components/site/ui";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
+import { pageMeta } from "@/lib/meta";
+import BookCall from "@/components/site/BookCall";
 
-export const metadata = {
+export const metadata = pageMeta({
   title: "Services",
   description:
     "Software development, SaaS platforms, cloud infrastructure and AI solutions: four service lines delivered end to end by one team.",
-  alternates: { canonical: paths.services },
-};
+  path: paths.services,
+});
 
 export default function ServicesPage() {
   return (
@@ -23,11 +25,7 @@ export default function ServicesPage() {
         lead="What we build"
         tail="and how we run it."
         intro="Four focused service lines covering the full path from product discovery to production operations, all run by the same team."
-        actions={
-          <Button href={paths.contact} variant="eu">
-            Start a project
-          </Button>
-        }
+        actions={<BookCall>Book a call</BookCall>}
         aside={<HeroFigure value={String(services.length).padStart(2, "0")} caption="Service lines, run by one team" />}
         meta={services.map((s) => (
           <Chip key={s.slug} tone="paper">

@@ -2,16 +2,20 @@ import Image from "next/image";
 import { Building2 } from "lucide-react";
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import Expertise from "@/components/sections/Expertise";
+import Founder from "@/components/sections/Founder";
 import { CodeVisual, FlowVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Frame, Label, Section, SectionHead, Statement, cx } from "@/components/site/ui";
 import { capabilities, company, companyFacts, principles } from "@/content/company";
+import BookCall from "@/components/site/BookCall";
 import { paths } from "@/lib/routes";
+import { pageMeta } from "@/lib/meta";
 
-export const metadata = {
+export const metadata = pageMeta({
   title: "About",
-  description: `${company.name} is a software company in ${company.city} building custom software, SaaS platforms, AI solutions and cloud infrastructure for businesses worldwide.`,
-  alternates: { canonical: paths.about },
-};
+  description:
+    `${company.name} is a software company registered in ${company.city} (EU), with engineering led from ${company.engineering}. Custom software and AI automation for growing teams.`,
+  path: paths.about,
+});
 
 export default function AboutPage() {
   const [entity, ...facts] = companyFacts;
@@ -23,13 +27,9 @@ export default function AboutPage() {
         label="About"
         lead="A software company"
         tail="built for real execution."
-        intro={`${company.name} is based in ${company.city}. We help businesses turn ideas, workflows and operational challenges into dependable digital products.`}
-        actions={
-          <Button href={paths.contact} variant="eu">
-            Work with us
-          </Button>
-        }
-        aside={<HeroFigure value="EU" caption={`An Estonian company in ${company.city}, working worldwide`} />}
+        intro={`${company.name} is registered in ${company.city} (EU), with engineering led from ${company.engineering}. We help growing teams turn workflows and operational problems into dependable software.`}
+        actions={<BookCall>Book a call</BookCall>}
+        aside={<HeroFigure value="EU" caption={`Registered in ${company.city}; engineering led from ${company.engineering}`} />}
       />
 
       {/* Story */}
@@ -77,6 +77,8 @@ export default function AboutPage() {
           </figure>
         </Frame>
       </Section>
+
+      <Founder />
 
       {/* Principles */}
       <Section tone="mist" id="principles">
@@ -137,7 +139,12 @@ export default function AboutPage() {
           label="Company"
           lead="An Estonian company,"
           tail="working worldwide."
-          intro="Operating from Tallinn gives us an EU legal and tax footing while we deliver remotely to clients in any market."
+          intro={`Registration in Estonia gives you an EU contract, EU invoicing and a company anyone can look up. Engineering is led from ${company.engineering} and delivered remotely.`}
+          action={
+            <Button href={company.registerUrl} external variant="ghost" target="_blank" rel="noopener noreferrer">
+              Verify in the e-Business Register
+            </Button>
+          }
         />
 
         <div className="mt-14 grid gap-px border border-white/10 bg-white/10 lg:grid-cols-[1fr_1.4fr]">

@@ -6,13 +6,14 @@ import { CoverArt } from "@/components/site/visuals";
 import { Chip, Section, TextLink } from "@/components/site/ui";
 import { insights } from "@/content/insights";
 import { paths } from "@/lib/routes";
+import { pageMeta } from "@/lib/meta";
 
-export const metadata = {
+export const metadata = pageMeta({
   title: "Insights",
   description:
     "Notes on product, engineering, AI and infrastructure decisions, written from delivery experience rather than theory.",
-  alternates: { canonical: paths.insights },
-};
+  path: paths.insights,
+});
 
 export default function InsightsPage() {
   const [lead, ...rest] = insights;

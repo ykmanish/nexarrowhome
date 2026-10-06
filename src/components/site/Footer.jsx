@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { company } from "@/content/company";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
+import BookCall from "./BookCall";
 import { FrameLines, NIGHT_ROW_LINE } from "./frame";
-import { Button, Heading, Label, Logo, cx } from "./ui";
+import { Heading, Label, Logo, cx } from "./ui";
 
 const COLUMNS = [
   {
@@ -16,8 +17,9 @@ const COLUMNS = [
     title: "Company",
     links: [
       { href: paths.about, label: "About" },
+      { href: paths.work, label: "Case studies" },
       { href: paths.approach, label: "Approach" },
-      { href: paths.careers, label: "Careers" },
+      { href: paths.partners, label: "Partner network" },
       { href: paths.contact, label: "Contact" },
     ],
   },
@@ -25,12 +27,19 @@ const COLUMNS = [
     title: "Resources",
     links: [
       { href: paths.insights, label: "Insights" },
-      { href: paths.services, label: "All services" },
+      { href: `${paths.services}#pricing`, label: "Offers & prices" },
       { href: paths.privacy, label: "Privacy Policy" },
       { href: paths.terms, label: "Terms & Conditions" },
     ],
   },
 ];
+
+/** Where anyone can check the company is real; empty links are left out. */
+const VERIFY = [
+  { href: company.registerUrl, label: "e-Business Register" },
+  { href: company.linkedin, label: "LinkedIn" },
+  { href: company.github, label: "GitHub" },
+].filter((v) => v.href);
 
 /** Grid row on the frame; cells padded 24px from 1280px up. */
 const ROW = "grid xl:grid-cols-[var(--frame-cols)] xl:*:px-6";
@@ -54,9 +63,7 @@ export default function Footer() {
             <Heading lead="Got a project in mind?" tail="Let’s build it properly." tone="night" size="page" className="xl:-mt-1.5" />
           </div>
           <div className="flex flex-wrap items-center gap-5 xl:flex-col xl:items-start xl:justify-end xl:py-20">
-            <Button href={paths.contact} variant="lime">
-              Start a project
-            </Button>
+            <BookCall variant="lime" />
             <a href={`mailto:${company.email}`} className="text-[14px] text-white/70 transition-colors hover:text-white">
               {company.email}
             </a>
@@ -67,12 +74,30 @@ export default function Footer() {
           <div className="xl:py-14">
             <Logo onDark />
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-white/55">
-              Software, SaaS platforms, AI solutions and cloud infrastructure, built in Tallinn for businesses
-              worldwide.
+              Custom software and AI automation for growing teams. Registered in {company.city} (EU); engineering
+              led from {company.engineering}.
             </p>
             <div className="mt-6 flex items-center gap-3 text-[12.5px] text-white/45">
               <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[2px]" />
               <span>Registered in the {company.region}</span>
+            </div>
+            <div className="mt-6">
+              <p className="text-[11.5px] uppercase tracking-[0.18em] text-white/40">Verify us</p>
+              <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                {VERIFY.map((v) => (
+                  <li key={v.label}>
+                    <a
+                      href={v.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1 text-[13.5px] text-white/75 transition-colors hover:text-white"
+                    >
+                      {v.label}
+                      <ArrowUpRight size={13} strokeWidth={1.8} className="transition-transform duration-300 group-hover:rotate-45" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
