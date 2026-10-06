@@ -28,6 +28,14 @@ export const company = {
   linkedin: "",
   /** e.g. "https://github.com/nexarrow". */
   github: "",
+  /** A UK number in international format, e.g. "+44 20 1234 5678". */
+  phone: "",
+  /** Review profiles; each shows under "Verify us" once it has a link. */
+  profiles: {
+    clutch: "",
+    goodfirms: "",
+    trustpilot: "",
+  },
 };
 
 /**
@@ -55,6 +63,34 @@ export const trustPoints = [
   { label: "Progress", value: "Weekly demos" },
   { label: "Payment", value: "Milestone payments" },
   { label: "Response", value: `Reply ${company.reply}` },
+];
+
+/**
+ * Working with UK and EU clients from an EU company with engineering in
+ * India: the questions a cautious buyer asks, answered as commitments. Keep
+ * every line true; change it here if how you work changes.
+ */
+export const crossBorder = [
+  {
+    title: "UK and EU GDPR",
+    copy: "We work under EU GDPR, and under UK GDPR for UK clients. A data processing agreement is signed before we handle personal data, and transfers to India are covered by Standard Contractual Clauses or the UK Addendum.",
+  },
+  {
+    title: "Data where it must stay",
+    copy: "Hosting in the region your data needs: London (AWS eu-west-2 or Azure UK South) for UK data, Frankfurt or Stockholm for EU data.",
+  },
+  {
+    title: "Your working day",
+    copy: "India is 4½ to 5½ hours ahead of the UK, so what you raise in your morning is usually worked on the same day. Calls and demos are booked in your business hours.",
+  },
+  {
+    title: "One point of contact",
+    copy: "The founder runs every engagement directly. Scope, progress and questions go to the same person, from the first call to handover.",
+  },
+  {
+    title: "Pounds, euros or dollars",
+    copy: "Quotes and invoices in GBP, EUR or USD from our EU company, paid by bank transfer against agreed milestones.",
+  },
 ];
 
 /** "How we keep you safe": one doubt each, removed before it comes up. */
@@ -234,8 +270,10 @@ export const faqs = [
   ["What does Nexarrow do?", "Nexarrow builds custom software, SaaS platforms, AI-powered products, cloud infrastructure, APIs, admin dashboards and workflow-driven business systems tailored to real operational needs."],
   ["How much does a project cost?", "Every project is quoted after a short call, as a fixed price for an agreed scope. Most start with a small paid audit or pilot, credited in full if you continue."],
   ["Where is Nexarrow based?", `${company.name} is registered in ${company.city}, in the EU, and you contract and invoice with that company. Engineering is led from ${company.engineering}, and we work remotely with clients worldwide.`],
+  ["How do time zones work with an India-led team?", "India is 4½ to 5½ hours ahead of the UK and 3½ to 4½ hours ahead of central Europe, so requests raised in your morning are usually worked on the same day. Calls and demos are booked in your business hours."],
+  ["Do you work under UK GDPR?", "Yes. For UK clients we work under UK GDPR, and under EU GDPR for EU clients. We sign a data processing agreement before handling personal data, and any transfer to India is covered by the UK Addendum or EU Standard Contractual Clauses. Data can be hosted in London or the EU when it must stay there."],
   ["Who owns the code?", "You do. Work lives in your own repository from day one, and you own 100% of the code once it is paid for."],
-  ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones. Support is paid monthly in advance."],
+  ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones, by bank transfer, in GBP, EUR or USD. Support is paid monthly in advance."],
   ["Who do you work with?", "Startups, SMEs, agencies, product teams and growing businesses that need dependable software execution or technical delivery support."],
   ["Can you work with our existing team?", "Yes. We can work as an extension of your in-house team, support founders directly, or take ownership of a specific product stream or feature set."],
   ["Do you handle deployment and infrastructure?", "Yes. CI/CD pipelines, cloud setup, environment management, observability and post-launch support, depending on the engagement."],

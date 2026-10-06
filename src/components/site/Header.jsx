@@ -8,9 +8,8 @@ import { company } from "@/content/company";
 import { services } from "@/content/services";
 import { isWithin, paths } from "@/lib/routes";
 import { getLenis } from "@/lib/motion";
-import BookCall from "./BookCall";
 import ThemeToggle from "./ThemeToggle";
-import { Label, Logo, cx } from "./ui";
+import { Button, Label, Logo, cx } from "./ui";
 
 const NAV = [
   { href: paths.services, label: "Services", panel: true },
@@ -138,8 +137,11 @@ export default function Header() {
               <span className="hidden sm:block">
                 <ThemeToggle />
               </span>
+              {/* The header's call goes to the booking banner on the contact page. */}
               <span className="hidden sm:block">
-                <BookCall variant="ink" />
+                <Button href={`${paths.contact}#book`} variant="ink">
+                  Book a call
+                </Button>
               </span>
               <button
                 type="button"
@@ -272,7 +274,9 @@ export default function Header() {
           </nav>
 
           <div className="mt-auto space-y-4 pt-10">
-            <BookCall className="w-full justify-between" />
+            <Button href={`${paths.contact}#book`} variant="eu" className="w-full justify-between">
+              Book a call
+            </Button>
             <div className="flex items-center justify-between gap-4">
               <a href={`mailto:${company.email}`} className="text-[14px] text-ink-soft">
                 {company.email}

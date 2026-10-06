@@ -51,7 +51,8 @@ export const privacyPolicy = {
         {
           h: "International transfers",
           p: [
-            "Where personal data is transferred outside the European Economic Area, we will do so only where a lawful transfer mechanism applies, such as an adequacy decision or appropriate safeguards including Standard Contractual Clauses."
+            "Where personal data is transferred outside the European Economic Area, we will do so only where a lawful transfer mechanism applies, such as an adequacy decision or appropriate safeguards including Standard Contractual Clauses.",
+            "Where personal data is subject to UK data protection law and is transferred outside the United Kingdom, we rely on UK adequacy regulations, the International Data Transfer Agreement, or the UK Addendum to the Standard Contractual Clauses, as applicable."
           ]
         },
         {
@@ -66,7 +67,8 @@ export const privacyPolicy = {
           p: [
             "Under the GDPR, data subjects may have rights including access, rectification, erasure, restriction, objection, and data portability, subject to applicable legal limits.",
             "Where processing is based on consent, consent may be withdrawn at any time without affecting prior lawful processing.",
-            "Data subjects also have the right to lodge a complaint with a competent supervisory authority."
+            "Data subjects also have the right to lodge a complaint with a competent supervisory authority.",
+            "If you are in the United Kingdom, equivalent rights apply under the UK GDPR and the Data Protection Act 2018, and you may complain to the Information Commissioner's Office (ICO)."
           ]
         },
         {

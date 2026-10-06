@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import Audiences from "@/components/sections/Audiences";
 import CaseStudies from "@/components/sections/CaseStudies";
 import ContactSection from "@/components/sections/ContactSection";
+import CrossBorder from "@/components/sections/CrossBorder";
 import DeliveryTrail from "@/components/sections/DeliveryTrail";
 import Expertise from "@/components/sections/Expertise";
 import FAQ from "@/components/sections/FAQ";
@@ -36,7 +37,8 @@ const organization = {
 /**
  * Ordered to build trust fast: one clear message, checkable facts, the core
  * claim (four disciplines, one team), proof, who it is for, the process,
- * the safeguards, then questions and a way to start.
+ * the safeguards, how working across borders works, then questions and a
+ * way to start.
  */
 export default function HomePage() {
   return (
@@ -49,6 +51,7 @@ export default function HomePage() {
       <Audiences />
       <DeliveryTrail />
       <Safeguards />
+      <CrossBorder />
       <FAQ />
       <ContactSection />
     </>

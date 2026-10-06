@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Building2 } from "lucide-react";
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
+import CrossBorder from "@/components/sections/CrossBorder";
 import Expertise from "@/components/sections/Expertise";
 import { CodeVisual, FlowVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Frame, Label, Section, SectionHead, Statement, cx } from "@/components/site/ui";
@@ -172,6 +173,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      <CrossBorder />
     </>
   );
 }

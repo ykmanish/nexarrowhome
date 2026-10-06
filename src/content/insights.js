@@ -85,7 +85,7 @@ export const insights = [
       {
         h: "Integration matters more than theatrics",
         p: [
-          "Useful AI is often quiet. It drafts, summarizes, recommends, routes, or retrieves in ways that save time without demanding attention.",
+          "Useful AI is often quiet. It drafts, summarises, recommends, routes, or retrieves in ways that save time without demanding attention.",
           "The best implementations reduce repetitive effort while still preserving review, control, and accountability where needed.",
           "That is why AI should be treated as part of product design and systems architecture, not only as a surface-level feature."
         ],
@@ -165,7 +165,7 @@ export const insights = [
       {
         h: "System thinking matters early",
         p: [
-          "Maintainability comes from choices made before the product is crowded with edge cases: component discipline, route structure, data modeling, permissions, and clear feature boundaries.",
+          "Maintainability comes from choices made before the product is crowded with edge cases: component discipline, route structure, data modelling, permissions, and clear feature boundaries.",
           "That does not mean over-engineering. It means creating enough order so the product can absorb growth without becoming confusing to build or operate.",
           "A well-structured SaaS system makes future features easier, not riskier."
         ],
@@ -175,7 +175,7 @@ export const insights = [
         p: [
           "Consistent UI patterns, reusable states, predictable navigation, and aligned backend conventions all reduce product entropy.",
           "This helps users learn the product faster and helps teams ship improvements with less hesitation.",
-          "The result is not only cleaner code. It is a more durable product organization."
+          "The result is not only cleaner code. It is a more durable product organisation."
         ],
       },
     ],
@@ -194,7 +194,7 @@ export const insights = [
     read: "4 min",
     title: "Why internal tools often deserve better engineering than they receive.",
     excerpt:
-      "Internal systems influence speed, accuracy, approvals, reporting, and coordination more directly than many businesses realize.",
+      "Internal systems influence speed, accuracy, approvals, reporting, and coordination more directly than many businesses realise.",
     accent: "ice",
     hero: "nodes",
     content: [

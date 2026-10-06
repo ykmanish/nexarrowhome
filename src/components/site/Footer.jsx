@@ -39,6 +39,9 @@ const VERIFY = [
   { href: company.registerUrl, label: "e-Business Register" },
   { href: company.linkedin, label: "LinkedIn" },
   { href: company.github, label: "GitHub" },
+  { href: company.profiles.clutch, label: "Clutch" },
+  { href: company.profiles.goodfirms, label: "GoodFirms" },
+  { href: company.profiles.trustpilot, label: "Trustpilot" },
 ].filter((v) => v.href);
 
 function GroupTitle({ children }) {

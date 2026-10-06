@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
+import CalendlyBanner from "@/components/sections/CalendlyBanner";
 import ContactSection from "@/components/sections/ContactSection";
 import FAQ from "@/components/sections/FAQ";
 import { Section, SectionHead } from "@/components/site/ui";
@@ -32,7 +33,8 @@ export default function ContactPage() {
         aside={<HeroFigure value="24h" caption="Every enquiry answered within 24 hours" />}
       />
 
-      <ContactSection head={false} />
+      <CalendlyBanner />
+      <ContactSection id="brief" head={false} booking={false} />
 
       <Section>
         <SectionHead label="What happens next" lead="Three steps," tail="all written down." />
@@ -54,6 +56,7 @@ export default function ContactPage() {
               <span className="block">Registry code {company.registry}</span>
               <span className="block">VAT {company.vat}</span>
               <span className="block">Engineering led from {company.engineering}</span>
+              {company.phone && <span className="block">{company.phone}</span>}
             </address>
             <div className="mt-5 flex items-center gap-3 text-[12.5px] text-muted">
               <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[2px]" />
