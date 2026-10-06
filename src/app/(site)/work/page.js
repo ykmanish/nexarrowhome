@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
-import { ConceptTag } from "@/components/sections/CaseStudies";
+import { ClientTag } from "@/components/sections/CaseStudies";
 import ContactSection from "@/components/sections/ContactSection";
 import BookCall from "@/components/site/BookCall";
 import { ServiceVisual, Sky } from "@/components/site/visuals";
@@ -12,24 +12,24 @@ import { pageMeta } from "@/lib/meta";
 import { paths } from "@/lib/routes";
 
 export const metadata = pageMeta({
-  title: "Case studies",
+  title: "Playbooks",
   description:
     "Approval workflows, an AI front-desk assistant, a SaaS MVP, a logistics portal and agency cloud releases: how Nexarrow approaches each, chapter by chapter.",
   path: paths.work,
 });
 
-/** The case study index: one row per story, figure and picture beside it. */
+/** The playbook index: one row per story, figure and picture beside it. */
 export default function WorkPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: "Case studies" }]}
-        label="Our work"
-        lead="Case studies"
-        tail="told start to finish."
+        crumbs={[{ label: "Playbooks" }]}
+        label="Playbooks"
+        lead="How we solve"
+        tail="common problems."
         intro="Five common problems, each followed from the first conversation to life after launch: the situation, the approach, what gets built, and how it ships week by week."
         actions={<BookCall>Book a call</BookCall>}
-        aside={<HeroFigure value={String(caseStudies.length).padStart(2, "0")} caption="In-depth stories, concept work clearly labelled" />}
+        aside={<HeroFigure value={String(caseStudies.length).padStart(2, "0")} caption="Playbooks, from first call to life after launch" />}
       />
 
       <Section>
@@ -44,7 +44,7 @@ export default function WorkPage() {
                   <span className="font-display text-[40px] leading-none tracking-[-0.03em] text-eu">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <ConceptTag concept={cs.concept} />
+                  <ClientTag concept={cs.concept} />
                 </div>
 
                 <div className="flex flex-col xl:py-10">

@@ -1,14 +1,13 @@
 /**
- * Case studies, each with its own page under /work, told as a story: the
+ * Playbooks, each with its own page under /work, told as a story: the
  * situation, the problem, how we would approach it, what we would build, how
  * it would ship, the outcome we design for, and what happens after launch.
  *
- * Until client projects can be shown (with permission), these are concept
- * projects: realistic scenarios built from problems that are common in each
- * kind of business, showing how we would approach them. Every one is labelled
- * as concept work on the site, and its figures are design goals, not reported
- * results. When a real project is ready, add it with `concept: false` and
- * measured figures.
+ * A playbook (`concept: true`) describes how a typical engagement runs for a
+ * common problem, with a typical client and design-goal figures; the site
+ * presents it as a playbook, never as past work. A real client project, once
+ * it can be shown with permission, goes in with `concept: false`, the actual
+ * client and measured figures, and is tagged "Client project".
  *
  * `visual` names the illustration in components/site/visuals.jsx; `photo` is
  * an optional stock photograph (Unsplash or Pexels licence; the credit is

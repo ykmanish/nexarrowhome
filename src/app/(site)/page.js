@@ -7,6 +7,7 @@ import DeliveryTrail from "@/components/sections/DeliveryTrail";
 import Expertise from "@/components/sections/Expertise";
 import FAQ from "@/components/sections/FAQ";
 import Safeguards from "@/components/sections/Safeguards";
+import Testimonials from "@/components/sections/Testimonials";
 import TrustStrip from "@/components/sections/TrustStrip";
 import { company, founder } from "@/content/company";
 
@@ -49,6 +50,7 @@ export default function HomePage() {
       <Expertise />
       <CaseStudies />
       <Audiences />
+      <Testimonials />
       <DeliveryTrail />
       <Safeguards />
       <CrossBorder />

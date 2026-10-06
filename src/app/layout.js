@@ -43,7 +43,7 @@ export const metadata = {
     template: "%s | Nexarrow",
   },
   description:
-    "Nexarrow OÜ is an EU-registered software company building custom software and AI automation for growing teams. Fixed prices, weekly demos, and you own the code. Engineering led from India.",
+    "Nexarrow OÜ is an EU-registered software company building custom software and AI automation for growing teams. Fixed prices, weekly demos, and you own the code.",
   openGraph: {
     type: "website",
     siteName: "Nexarrow",
@@ -51,7 +51,7 @@ export const metadata = {
     url: company.url,
     title: "Nexarrow | Custom software and AI automation for growing teams",
     description:
-      "EU-registered software company. Fixed prices, weekly demos, and you own the code. Engineering led from India.",
+      "EU-registered software company. Fixed prices, weekly demos, and you own the code.",
   },
   twitter: { card: "summary_large_image" },
   icons: { icon: "/favicon.ico" },

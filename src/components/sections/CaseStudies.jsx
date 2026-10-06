@@ -5,28 +5,28 @@ import { paths } from "@/lib/routes";
 import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Button, Section, SectionHead } from "@/components/site/ui";
 
-/** The "Concept" tag every concept project carries, so nobody mistakes it for client work. */
-export function ConceptTag({ concept, className = "" }) {
-  if (!concept) return null;
+/** Marks a real, shown-with-permission client project among the playbooks. */
+export function ClientTag({ concept, className = "" }) {
+  if (concept) return null;
   return (
-    <span className={`bg-ink px-3 py-1.5 text-[10.5px] uppercase tracking-[0.16em] text-paper ${className}`}>
-      Concept project
+    <span className={`bg-lime px-3 py-1.5 text-[10.5px] uppercase tracking-[0.16em] text-lime-ink ${className}`}>
+      Client project
     </span>
   );
 }
 
-/** The first three case studies as cards for the home page, each with its headline figure. */
+/** The first three playbooks as cards for the home page, each with the figure it designs for. */
 export default function CaseStudies() {
   return (
     <Section id="work">
       <SectionHead
-        label="Case studies"
-        lead="Proof,"
-        tail="not promises."
-        intro="Common problems, followed from the first conversation to life after launch: what we found, what we built and how it shipped."
+        label="Playbooks"
+        lead="Problems we solve,"
+        tail="start to finish."
+        intro="How a typical engagement runs for common problems: the situation, the approach, what gets built and how it ships, week by week."
         action={
           <Button href={paths.work} variant="outline">
-            All {caseStudies.length} case studies
+            All {caseStudies.length} playbooks
           </Button>
         }
       />
@@ -40,7 +40,7 @@ export default function CaseStudies() {
             className="group flex flex-col bg-paper transition-colors duration-300 hover:bg-mist"
           >
             <Sky className="aspect-[4/3]" sizes="(min-width: 1024px) 33vw, 100vw">
-              <ConceptTag concept={cs.concept} className="absolute left-0 top-0 z-10" />
+              <ClientTag concept={cs.concept} className="absolute left-0 top-0 z-10" />
               <div className="absolute inset-x-6 top-12 transition-transform duration-500 group-hover:-translate-y-2">
                 <ServiceVisual name={cs.visual} />
               </div>

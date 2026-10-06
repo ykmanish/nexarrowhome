@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
-import { company } from "@/content/company";
+import { certifications, company, founder } from "@/content/company";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
 import BookCall from "./BookCall";
@@ -17,7 +17,7 @@ const COLUMNS = [
     title: "Company",
     links: [
       { href: paths.about, label: "About" },
-      { href: paths.work, label: "Case studies" },
+      { href: paths.work, label: "Playbooks" },
       { href: paths.approach, label: "Approach" },
       { href: paths.partners, label: "Partner network" },
       { href: paths.contact, label: "Contact" },
@@ -38,10 +38,12 @@ const COLUMNS = [
 const VERIFY = [
   { href: company.registerUrl, label: "e-Business Register" },
   { href: company.linkedin, label: "LinkedIn" },
+  { href: founder.linkedin, label: "Founder on LinkedIn" },
   { href: company.github, label: "GitHub" },
   { href: company.profiles.clutch, label: "Clutch" },
   { href: company.profiles.goodfirms, label: "GoodFirms" },
   { href: company.profiles.trustpilot, label: "Trustpilot" },
+  ...certifications.map((c) => ({ href: c.href, label: c.name })),
 ].filter((v) => v.href);
 
 function GroupTitle({ children }) {
@@ -106,8 +108,8 @@ export default function Footer() {
           <div className="sm:col-span-2 xl:col-span-1 xl:py-14">
             <Logo onDark />
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-white/55">
-              Custom software and AI automation for growing teams. Registered in {company.city} (EU); engineering
-              led from {company.engineering}.
+              Custom software and AI automation for growing teams. Registered in {company.city} (EU), working with
+              clients worldwide.
             </p>
             <div className="mt-6 flex items-center gap-3 text-[12.5px] text-white/45">
               <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[2px]" />

@@ -13,7 +13,7 @@ import { Button, Label, Logo, cx } from "./ui";
 
 const NAV = [
   { href: paths.services, label: "Services", panel: true },
-  { href: paths.work, label: "Work" },
+  { href: paths.work, label: "Playbooks" },
   { href: paths.approach, label: "Approach" },
   { href: paths.about, label: "About" },
   { href: paths.insights, label: "Insights" },

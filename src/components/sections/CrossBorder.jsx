@@ -5,7 +5,7 @@ import { Section, SectionHead } from "@/components/site/ui";
 const ICONS = [Lock, Server, Clock, UserRound, Banknote];
 
 /**
- * For UK and EU buyers: an EU company with engineering in India, and how
+ * For UK and EU buyers: an EU-registered company working remotely, and how
  * data protection, hosting, time zones, contact and invoicing work as a
  * result. Plain cells; the facts do the persuading.
  */
@@ -16,7 +16,7 @@ export default function CrossBorder() {
         label="UK & EU clients"
         lead="Across borders,"
         tail="without the friction."
-        intro="Contract with an EU company, build with an engineering team in India, and keep your data and your working day where they belong."
+        intro="Contract with an EU company, work with one remote team, and keep your data and your working day where they belong."
       />
       <ul className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2 xl:grid-cols-5">
         {crossBorder.map((c, i) => {

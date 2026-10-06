@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
 const pad = (n) => String(n).padStart(2, "0");
 
 /**
- * One case study, told in chapters: the situation, the problem, the approach,
+ * One playbook, told in chapters: the situation, the problem, the approach,
  * what gets built, how it ships week by week, the outcome it is designed for,
  * and what happens after launch. Each chapter opens on the site's frame with
  * its number under the logo column.
@@ -40,7 +40,7 @@ export default async function CaseStudyPage({ params }) {
   const next = caseStudies[(index + 1) % caseStudies.length];
   const service = services.find((s) => s.slug === cs.service);
   const facts = [
-    ["Client", cs.client],
+    [cs.concept ? "Typical client" : "Client", cs.client],
     ["Engagement", cs.offer],
     ["Duration", cs.duration],
     ["Team", cs.team],
@@ -49,7 +49,7 @@ export default async function CaseStudyPage({ params }) {
   return (
     <>
       <PageHero
-        crumbs={[{ label: "Case studies", href: paths.work }, { label: cs.title }]}
+        crumbs={[{ label: "Playbooks", href: paths.work }, { label: cs.title }]}
         label={cs.sector}
         lead={cs.title}
         size="section"
@@ -58,7 +58,7 @@ export default async function CaseStudyPage({ params }) {
         aside={<HeroFigure value={cs.metric.value} caption={cs.metric.label} />}
         meta={
           <>
-            {cs.concept && <Chip tone="ink">Concept project</Chip>}
+            {!cs.concept && <Chip tone="lime">Client project</Chip>}
             <Chip tone="paper">{cs.duration}</Chip>
             <Chip tone="paper">{cs.offer}</Chip>
             {service && <Chip tone="paper">{service.name}</Chip>}
@@ -258,7 +258,7 @@ export default async function CaseStudyPage({ params }) {
         </Frame>
       </Section>
 
-      {/* Next case study */}
+      {/* Next playbook */}
       <Section tone="mist">
         <Link
           href={paths.caseStudy(next.slug)}
@@ -266,7 +266,7 @@ export default async function CaseStudyPage({ params }) {
         >
           <p className="flex items-center gap-2.5 text-[12px] uppercase tracking-[0.18em] text-muted">
             <span aria-hidden="true" className="size-1.5 bg-eu" />
-            Next case study
+            Next playbook
           </p>
           <div className="xl:col-span-2">
             <p className="text-[11.5px] uppercase tracking-[0.16em] text-muted">{next.sector}</p>

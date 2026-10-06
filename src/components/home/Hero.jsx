@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { company, deliveryPath, founder } from "@/content/company";
+import { company, deliveryPath } from "@/content/company";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
 import BookCall from "@/components/site/BookCall";
@@ -89,13 +89,11 @@ export default function Hero() {
                 </MaskLine>
               </h1>
               <p data-anim="rise" data-anim-delay="0.28" className="mt-5 max-w-[44ch] text-[15px] leading-relaxed text-ink-soft">
-                Fixed prices, weekly demos, and you own the code. Contracts and invoices from our EU company; engineering
-                led from {company.engineering}
-                {founder.name ? ` by ${founder.name}` : ""}.
+                Fixed prices, weekly demos, and you own the code. Contracts and invoices from our EU-registered company.
               </p>
               <div data-anim="rise" data-anim-delay="0.34" className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <BookCall className="py-4" />
-                <TextLink href={paths.work}>See our work</TextLink>
+                <TextLink href={paths.work}>See how we build</TextLink>
               </div>
             </div>
 
@@ -205,9 +203,9 @@ export default function Hero() {
                 <br />
                 Estonia (EU).
                 <br />
-                Engineering led
+                Working with teams
                 <br />
-                from {company.engineering}.
+                worldwide.
               </p>
             </div>
           </div>

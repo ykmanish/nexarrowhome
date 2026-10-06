@@ -13,7 +13,7 @@ import { pageMeta } from "@/lib/meta";
 export const metadata = pageMeta({
   title: "About",
   description:
-    `${company.name} is a software company registered in ${company.city} (EU), with engineering led from ${company.engineering}. Custom software and AI automation for growing teams.`,
+    `${company.name} is a software company registered in ${company.city} (EU), building custom software and AI automation for growing teams worldwide.`,
   path: paths.about,
 });
 
@@ -27,9 +27,9 @@ export default function AboutPage() {
         label="About"
         lead="A software company"
         tail="built for real execution."
-        intro={`${company.name} is registered in ${company.city} (EU), with engineering led from ${company.engineering}. We help growing teams turn workflows and operational problems into dependable software.`}
+        intro={`${company.name} is registered in ${company.city} (EU) and works remotely with clients worldwide. We help growing teams turn workflows and operational problems into dependable software.`}
         actions={<BookCall>Book a call</BookCall>}
-        aside={<HeroFigure value="EU" caption={`Registered in ${company.city}; engineering led from ${company.engineering}`} />}
+        aside={<HeroFigure value="EU" caption={`Registered in ${company.city}, working worldwide`} />}
       />
 
       {/* Story */}
@@ -139,7 +139,7 @@ export default function AboutPage() {
           label="Company"
           lead="An Estonian company,"
           tail="working worldwide."
-          intro={`Registration in Estonia gives you an EU contract, EU invoicing and a company anyone can look up. Engineering is led from ${company.engineering} and delivered remotely.`}
+          intro="Registration in Estonia gives you an EU contract, EU invoicing and a company anyone can look up. The work is delivered remotely, for clients anywhere."
           action={
             <Button href={company.registerUrl} external variant="ghost" target="_blank" rel="noopener noreferrer">
               Verify in the e-Business Register

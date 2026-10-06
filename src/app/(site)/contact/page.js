@@ -55,7 +55,6 @@ export default function ContactPage() {
               <span className="block">{company.address}</span>
               <span className="block">Registry code {company.registry}</span>
               <span className="block">VAT {company.vat}</span>
-              <span className="block">Engineering led from {company.engineering}</span>
               {company.phone && <span className="block">{company.phone}</span>}
             </address>
             <div className="mt-5 flex items-center gap-3 text-[12.5px] text-muted">
