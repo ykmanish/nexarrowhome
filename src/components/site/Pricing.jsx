@@ -1,40 +1,8 @@
 "use client";
 
-import { CURRENCIES, PRICES, pricingNote } from "@/content/pricing";
-import { setCurrency, useCurrency } from "@/lib/currency";
+import { PRICES, pricingNote } from "@/content/pricing";
+import { useCurrency } from "@/lib/currency";
 import { cx } from "./ui";
-
-/** Segmented control for the pricing currency. */
-export function CurrencySwitch({ tone = "default", className = "" }) {
-  const code = useCurrency();
-  const night = tone === "night";
-  return (
-    <div
-      role="group"
-      aria-label="Currency"
-      className={cx("inline-flex rounded-md border p-0.5", night ? "border-white/15" : "border-line", className)}
-    >
-      {CURRENCIES.map((c) => {
-        const on = c.code === code;
-        return (
-          <button
-            key={c.code}
-            type="button"
-            aria-pressed={on}
-            title={`${c.symbol} ${c.name}`}
-            onClick={() => setCurrency(c.code)}
-            className={cx(
-              "whitespace-nowrap rounded-[5px] px-2.5 py-1.5 text-[12.5px] tabular-nums transition-colors",
-              on ? "bg-eu text-eu-ink" : night ? "text-white/65 hover:text-white" : "text-ink-soft hover:text-ink",
-            )}
-          >
-            {c.code}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
 
 /**
  * A starting price and its unit, always on two lines so cards line up. Where

@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import PageHero from "@/components/sections/PageHero";
 import BookCall from "@/components/site/BookCall";
-import { CurrencySwitch, PriceTag } from "@/components/site/Pricing";
+import { PriceTag } from "@/components/site/Pricing";
 import { Button, Chip, Section, SectionHead, cx } from "@/components/site/ui";
 import { company, engagementTiers } from "@/content/company";
 import { pageMeta } from "@/lib/meta";
@@ -113,7 +113,6 @@ export default function PartnersPage() {
               <div className="mt-10">
                 <PriceTag price={whiteLabel.price} unit={whiteLabel.unit} tone="eu" />
               </div>
-              <CurrencySwitch tone="night" className="mt-8 border-eu-ink/20" />
             </div>
             <ul data-anim="rise" className="bg-night p-7 md:p-9">
               {[...whiteLabel.points, "Weekly demos and code in the repository you choose"].map((p) => (

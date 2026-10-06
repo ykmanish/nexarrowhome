@@ -1,14 +1,15 @@
 import { Check } from "lucide-react";
 import { engagementTiers } from "@/content/company";
 import BookCall from "@/components/site/BookCall";
-import { CurrencySwitch, PricePoint, PriceTag, PricingNote } from "@/components/site/Pricing";
+import { PricePoint, PriceTag, PricingNote } from "@/components/site/Pricing";
 import { Section, SectionHead, cx } from "@/components/site/ui";
 
 /**
- * The four offers with their starting prices, in the visitor's currency. The
- * first, the paid audit or pilot, is set in European blue: it is the small
- * first step we lead with. Every card keeps the same rhythm (tag, name,
- * price over unit, description, list, button) so the rows line up.
+ * The four offers with their starting prices, in the currency of the
+ * visitor's region (see lib/currency.js). The first, the paid audit or pilot,
+ * is set in European blue: it is the small first step we lead with. Every
+ * card keeps the same rhythm (tag, name, price over unit, description, list,
+ * button) so the rows line up.
  */
 export default function Engagement({ tone = "paper" }) {
   return (
@@ -18,7 +19,7 @@ export default function Engagement({ tone = "paper" }) {
         lead="Clear prices,"
         tail="a small first step."
         intro="Start with a paid audit or pilot. If you continue, its fee is credited to the project."
-        action={<CurrencySwitch />}
+        action={<BookCall variant="outline">Book a call</BookCall>}
       />
 
       <div className="mt-14 grid gap-px border border-line bg-line md:grid-cols-2 xl:grid-cols-4">

@@ -1,18 +1,15 @@
 import { useSyncExternalStore } from "react";
-import { CURRENCIES, DEFAULT_CURRENCY } from "@/content/pricing";
+import { DEFAULT_CURRENCY } from "@/content/pricing";
 
 /**
- * The visitor's pricing currency, shared by every price on the page. It comes
- * from a choice they made earlier (localStorage), otherwise from their time
- * zone: no location lookup, no request to a third party. Pages are static, so
- * the server renders euros and the browser swaps in the visitor's currency.
+ * The visitor's pricing currency, worked out from their time zone: India sees
+ * rupees, the UK pounds, the Americas dollars, everyone else euros. No
+ * location lookup and no request to a third party. Pages are static, so the
+ * server renders euros and the browser swaps in the visitor's currency.
  */
 
-const KEY = "nexarrow-currency";
-const CODES = CURRENCIES.map((c) => c.code);
 const UK_ZONES = ["Europe/London", "Europe/Belfast", "Europe/Guernsey", "Europe/Isle_of_Man", "Europe/Jersey"];
 
-const listeners = new Set();
 let current = null;
 
 function fromTimeZone() {
@@ -28,33 +25,13 @@ function fromTimeZone() {
   return DEFAULT_CURRENCY;
 }
 
+/** The time zone does not change during a visit, so it is read once. */
 function snapshot() {
-  if (current) return current;
-  let saved = null;
-  try {
-    saved = window.localStorage.getItem(KEY);
-  } catch {
-    // Storage can be blocked; the time zone still gives a sensible default.
-  }
-  current = CODES.includes(saved) ? saved : fromTimeZone();
+  current ??= fromTimeZone();
   return current;
 }
 
-function subscribe(onChange) {
-  listeners.add(onChange);
-  return () => listeners.delete(onChange);
-}
-
-export function setCurrency(code) {
-  if (!CODES.includes(code)) return;
-  current = code;
-  try {
-    window.localStorage.setItem(KEY, code);
-  } catch {
-    // Best effort: the choice still holds for this page view.
-  }
-  listeners.forEach((l) => l());
-}
+const subscribe = () => () => {};
 
 export function useCurrency() {
   return useSyncExternalStore(subscribe, snapshot, () => DEFAULT_CURRENCY);

@@ -1,6 +1,6 @@
 /**
- * Starting prices in each currency we quote in. Visitors see their own
- * currency (picked from their time zone, see lib/currency.js) and can switch.
+ * Starting prices in each currency we quote in. Visitors see the currency of
+ * their region, worked out from their time zone (see lib/currency.js).
  *
  * The euro prices come from the client plan. Dollar and pound prices are set
  * as round, local-looking numbers near the same value, not live conversions,
