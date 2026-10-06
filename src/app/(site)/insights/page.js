@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import InsightCard from "@/components/sections/InsightCard";
-import { CoverArt } from "@/components/site/visuals";
+import { Cover } from "@/components/site/visuals";
 import { Chip, Section, TextLink } from "@/components/site/ui";
 import { insights } from "@/content/insights";
 import { paths } from "@/lib/routes";
@@ -41,7 +41,14 @@ export default function InsightsPage() {
           data-anim="rise"
           className="group grid border border-line transition-colors duration-300 hover:border-ink lg:grid-cols-2"
         >
-          <CoverArt type={lead.hero} className="aspect-[16/11] lg:aspect-auto lg:min-h-[440px]" />
+          <Cover
+            photo={lead.photo}
+            art={lead.hero}
+            priority
+            className="aspect-[16/11] lg:aspect-auto lg:min-h-[440px]"
+            imgClassName="transition-transform duration-700 group-hover:scale-[1.03]"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
           <div className="flex flex-col p-7 md:p-10 lg:p-12">
             <div className="flex flex-wrap items-center gap-2">
               <Chip tone="eu">Latest</Chip>

@@ -1,11 +1,14 @@
 import { Check } from "lucide-react";
-import { engagementTiers, pricingNote } from "@/content/company";
+import { engagementTiers } from "@/content/company";
 import BookCall from "@/components/site/BookCall";
+import { CurrencySwitch, PricePoint, PriceTag, PricingNote } from "@/components/site/Pricing";
 import { Section, SectionHead, cx } from "@/components/site/ui";
 
 /**
- * The four offers with their starting prices. The first, the paid audit or
- * pilot, is set in European blue: it is the small first step we lead with.
+ * The four offers with their starting prices, in the visitor's currency. The
+ * first, the paid audit or pilot, is set in European blue: it is the small
+ * first step we lead with. Every card keeps the same rhythm (tag, name,
+ * price over unit, description, list, button) so the rows line up.
  */
 export default function Engagement({ tone = "paper" }) {
   return (
@@ -15,7 +18,7 @@ export default function Engagement({ tone = "paper" }) {
         lead="Clear prices,"
         tail="a small first step."
         intro="Start with a paid audit or pilot. If you continue, its fee is credited to the project."
-        action={<BookCall variant="outline">Book a call</BookCall>}
+        action={<CurrencySwitch />}
       />
 
       <div className="mt-14 grid gap-px border border-line bg-line md:grid-cols-2 xl:grid-cols-4">
@@ -25,7 +28,7 @@ export default function Engagement({ tone = "paper" }) {
             <article
               key={t.name}
               data-anim="rise"
-              className={cx("relative flex min-h-[460px] flex-col p-7", lead ? "bg-eu text-eu-ink" : "bg-paper")}
+              className={cx("flex flex-col p-7", lead ? "bg-eu text-eu-ink" : "bg-paper")}
             >
               <div className="flex items-center justify-between gap-3">
                 <span
@@ -41,20 +44,22 @@ export default function Engagement({ tone = "paper" }) {
                 </span>
               </div>
               <h3 className="mt-10 font-display text-[24px] leading-tight tracking-[-0.015em]">{t.name}</h3>
-              <p className="mt-5 flex flex-wrap items-baseline gap-x-2">
-                <span className="font-display text-[clamp(2.2rem,3vw,2.75rem)] leading-none tracking-[-0.03em]">
-                  {t.price}
-                </span>
-                <span className={cx("text-[13px]", lead ? "text-eu-ink/65" : "text-muted")}>{t.unit}</span>
+              <div className="mt-5">
+                <PriceTag price={t.price} unit={t.unit} tone={lead ? "eu" : "default"} />
+              </div>
+              <p className={cx("mt-5 min-h-[4.5em] text-[14px] leading-relaxed", lead ? "text-eu-ink/75" : "text-muted")}>
+                {t.desc}
               </p>
-              <p className={cx("mt-4 text-[14px] leading-relaxed", lead ? "text-eu-ink/75" : "text-muted")}>{t.desc}</p>
               <ul className={cx("mt-6 border-t", lead ? "border-eu-ink/15" : "border-line")}>
                 {t.points.map((p) => (
                   <li
-                    key={p}
+                    key={typeof p === "string" ? p : p.text}
                     className={cx("flex items-start gap-2.5 border-b py-2.5 text-[13.5px]", lead ? "border-eu-ink/15" : "border-line")}
                   >
-                    <Check size={14} strokeWidth={2.2} className="mt-0.5 shrink-0" /> {p}
+                    <Check size={14} strokeWidth={2.2} className="mt-0.5 shrink-0" />
+                    <span>
+                      <PricePoint point={p} />
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -65,9 +70,7 @@ export default function Engagement({ tone = "paper" }) {
           );
         })}
       </div>
-      <p data-anim="fade" className="mt-5 text-[12.5px] text-muted">
-        {pricingNote}
-      </p>
+      <PricingNote className="mt-5 text-[12.5px] text-muted" />
     </Section>
   );
 }

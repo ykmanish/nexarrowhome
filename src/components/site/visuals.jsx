@@ -355,6 +355,18 @@ export function ServiceVisual({ name, className = "" }) {
   return <Cmp className={className} />;
 }
 
+/* ─────────────────────────── photo covers ─────────────────────────── */
+
+/** A cover: the item's stock photograph when it has one, otherwise generated cover art. */
+export function Cover({ photo, art, surface, className = "", imgClassName = "", sizes = "100vw", priority = false }) {
+  if (!photo) return <CoverArt type={art} surface={surface} className={className} />;
+  return (
+    <div className={cx("relative overflow-hidden bg-mist", className)}>
+      <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} className={cx("object-cover", imgClassName)} />
+    </div>
+  );
+}
+
 /* ─────────────────────────── geometric covers ─────────────────────────── */
 
 /**

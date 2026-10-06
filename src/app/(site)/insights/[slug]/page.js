@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import PageHero from "@/components/sections/PageHero";
 import InsightCard from "@/components/sections/InsightCard";
-import { CoverArt } from "@/components/site/visuals";
+import { Cover } from "@/components/site/visuals";
 import { Chip, Section, SectionHead } from "@/components/site/ui";
 import { company } from "@/content/company";
 import { getInsight, insights } from "@/content/insights";
@@ -45,7 +45,7 @@ export default async function ArticlePage({ params }) {
       />
 
       <Section>
-        <CoverArt type={article.hero} className="aspect-[16/9] md:aspect-[21/8]" />
+        <Cover photo={article.photo} art={article.hero} priority className="aspect-[16/9] md:aspect-[21/8]" />
 
         <div className="mt-16 grid gap-14 lg:grid-cols-[1fr_300px] lg:gap-20">
           <article className="max-w-[68ch] space-y-14">

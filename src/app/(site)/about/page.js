@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Building2 } from "lucide-react";
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import Expertise from "@/components/sections/Expertise";
-import Founder from "@/components/sections/Founder";
 import { CodeVisual, FlowVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Frame, Label, Section, SectionHead, Statement, cx } from "@/components/site/ui";
 import { capabilities, company, companyFacts, principles } from "@/content/company";
@@ -78,8 +77,6 @@ export default function AboutPage() {
         </Frame>
       </Section>
 
-      <Founder />
-
       {/* Principles */}
       <Section tone="mist" id="principles">
         <SectionHead
@@ -104,6 +101,8 @@ export default function AboutPage() {
           ))}
         </div>
       </Section>
+
+      <Expertise />
 
       {/* Capabilities */}
       <Section id="capabilities">
@@ -173,7 +172,6 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Expertise />
     </>
   );
 }

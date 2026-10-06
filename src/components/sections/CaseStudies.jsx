@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { caseStudies, conceptNote } from "@/content/work";
+import { caseStudies } from "@/content/work";
 import { paths } from "@/lib/routes";
 import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Button, Section, SectionHead } from "@/components/site/ui";
@@ -15,7 +15,7 @@ export function ConceptTag({ concept, className = "" }) {
   );
 }
 
-/** Three case-study cards for the home page, each with its headline figure. */
+/** The first three case studies as cards for the home page, each with its headline figure. */
 export default function CaseStudies() {
   return (
     <Section id="work">
@@ -23,16 +23,16 @@ export default function CaseStudies() {
         label="Case studies"
         lead="Proof,"
         tail="not promises."
-        intro={conceptNote}
+        intro="Common problems, followed from the first conversation to life after launch: what we found, what we built and how it shipped."
         action={
           <Button href={paths.work} variant="outline">
-            See our work
+            All {caseStudies.length} case studies
           </Button>
         }
       />
 
       <div className="mt-14 grid gap-px border border-line bg-line lg:grid-cols-3">
-        {caseStudies.map((cs) => (
+        {caseStudies.slice(0, 3).map((cs) => (
           <Link
             key={cs.slug}
             href={paths.caseStudy(cs.slug)}

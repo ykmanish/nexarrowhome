@@ -5,7 +5,6 @@ import DeliveryTrail from "@/components/sections/DeliveryTrail";
 import Engagement from "@/components/sections/Engagement";
 import Expertise from "@/components/sections/Expertise";
 import FAQ from "@/components/sections/FAQ";
-import Founder from "@/components/sections/Founder";
 import Safeguards from "@/components/sections/Safeguards";
 import TrustStrip from "@/components/sections/TrustStrip";
 import { company, founder } from "@/content/company";
@@ -35,9 +34,9 @@ const organization = {
 };
 
 /**
- * Ordered to build trust fastest, as the client plan lays out: one clear
- * message, checkable facts, proof, services with prices, the person behind
- * it, the process, the safeguards, then questions and a way to start.
+ * Ordered to build trust fast: one clear message, checkable facts, the core
+ * claim (four disciplines, one team), proof, prices, the process, the
+ * safeguards, then questions and a way to start.
  */
 export default function HomePage() {
   return (
@@ -45,10 +44,9 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
       <Hero />
       <TrustStrip />
-      <CaseStudies />
       <Expertise />
+      <CaseStudies />
       <Engagement />
-      <Founder />
       <DeliveryTrail />
       <Safeguards />
       <FAQ />

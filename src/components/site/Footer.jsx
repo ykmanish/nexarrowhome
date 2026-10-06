@@ -41,6 +41,32 @@ const VERIFY = [
   { href: company.github, label: "GitHub" },
 ].filter((v) => v.href);
 
+function GroupTitle({ children }) {
+  return (
+    <h2 className="flex items-center gap-2.5 text-[12px] uppercase tracking-[0.18em] text-white/45">
+      <span aria-hidden="true" className="size-1.5 bg-[#8aa4ff]" />
+      {children}
+    </h2>
+  );
+}
+
+function LinkGroup({ title, links }) {
+  return (
+    <div>
+      <GroupTitle>{title}</GroupTitle>
+      <ul className="mt-5 space-y-3">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className="text-[14.5px] text-white/75 transition-colors hover:text-white">
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /** Grid row on the frame; cells padded 24px from 1280px up. */
 const ROW = "grid xl:grid-cols-[var(--frame-cols)] xl:*:px-6";
 
@@ -70,8 +96,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={cx(ROW, NIGHT_ROW_LINE, "gap-12 py-14 xl:gap-0 xl:py-0")}>
-          <div className="xl:py-14">
+        {/* Company under the logo column; Services and Company share the wide
+            column so it never sits half empty; Resources and the ways to
+            verify us take the last two. */}
+        <div className={cx(ROW, NIGHT_ROW_LINE, "gap-12 py-14 sm:grid-cols-2 xl:gap-0 xl:py-0")}>
+          <div className="sm:col-span-2 xl:col-span-1 xl:py-14">
             <Logo onDark />
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-white/55">
               Custom software and AI automation for growing teams. Registered in {company.city} (EU); engineering
@@ -81,45 +110,41 @@ export default function Footer() {
               <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[2px]" />
               <span>Registered in the {company.region}</span>
             </div>
-            <div className="mt-6">
-              <p className="text-[11.5px] uppercase tracking-[0.18em] text-white/40">Verify us</p>
-              <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-                {VERIFY.map((v) => (
-                  <li key={v.label}>
-                    <a
-                      href={v.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-1 text-[13.5px] text-white/75 transition-colors hover:text-white"
-                    >
-                      {v.label}
-                      <ArrowUpRight size={13} strokeWidth={1.8} className="transition-transform duration-300 group-hover:rotate-45" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
-          {/* Link groups sit side by side on phones rather than stacking into a scroll. */}
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 xl:contents">
-            {COLUMNS.map((col) => (
-              <div key={col.title} className="xl:px-6 xl:py-14">
-                <h2 className="flex items-center gap-2.5 text-[12px] uppercase tracking-[0.18em] text-white/45">
-                  <span aria-hidden="true" className="size-1.5 bg-[#8aa4ff]" />
-                  {col.title}
-                </h2>
-                <ul className="mt-5 space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className="text-[14.5px] text-white/75 transition-colors hover:text-white">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:col-span-2 xl:col-span-1 xl:py-14">
+            <LinkGroup {...COLUMNS[0]} />
+            <LinkGroup {...COLUMNS[1]} />
+          </div>
+
+          <div className="xl:py-14">
+            <LinkGroup {...COLUMNS[2]} />
+          </div>
+
+          <div className="xl:py-14">
+            <GroupTitle>Verify us</GroupTitle>
+            <ul className="mt-5 space-y-3">
+              {VERIFY.map((v) => (
+                <li key={v.label}>
+                  <a
+                    href={v.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-[14.5px] text-white/75 transition-colors hover:text-white"
+                  >
+                    {v.label}
+                    <ArrowUpRight size={13} strokeWidth={1.8} className="transition-transform duration-300 group-hover:rotate-45" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-[13px] leading-relaxed text-white/45">
+              Reg. {company.registry}
+              <br />
+              VAT {company.vat}
+              <br />
+              We reply {company.reply}
+            </p>
           </div>
         </div>
 

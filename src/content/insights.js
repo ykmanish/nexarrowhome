@@ -1,10 +1,18 @@
 /**
- * Insight articles. `hero` picks the generated cover art for the article.
+ * Insight articles. `photo` is the cover photograph (free-licence stock, credited
+ * on the page); `hero` picks the generated cover art used if a photo is absent.
  */
 
 export const insights = [
   {
     slug: "custom-software-vs-forced-tools",
+    photo: {
+      src: "https://images.unsplash.com/photo-1783115259399-3a5a3e0e4592?auto=format&fit=crop&w=2000&q=80",
+      alt: "Hands typing on a laptop showing an inventory spreadsheet at an office desk",
+      credit: "Gorilla ROI Data Connector",
+      source: "Unsplash",
+      href: "https://unsplash.com/photos/hands-typing-on-a-laptop-displaying-a-data-spreadsheet-9fZuqBYlV1w",
+    },
     tag: "Insight",
     date: "May 2026",
     read: "6 min",
@@ -42,6 +50,13 @@ export const insights = [
   },
   {
     slug: "ai-features-connected-to-operations",
+    photo: {
+      src: "https://images.pexels.com/photos/4483942/pexels-photo-4483942.jpeg?auto=compress&cs=tinysrgb&w=2000",
+      alt: "Warehouse worker scanning stock with a handheld barcode scanner",
+      credit: "Tiger Lily",
+      source: "Pexels",
+      href: "https://www.pexels.com/photo/photo-of-a-man-scanning-products-in-a-warehouse-4483942/",
+    },
     tag: "AI",
     date: "Apr 2026",
     read: "5 min",
@@ -79,6 +94,13 @@ export const insights = [
   },
   {
     slug: "infrastructure-decisions-reduce-friction",
+    photo: {
+      src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2000&q=80",
+      alt: "Data centre server rack with neatly bundled network cables",
+      credit: "Taylor Vick",
+      source: "Unsplash",
+      href: "https://unsplash.com/photos/cable-network-M5tzZtFCOfs",
+    },
     tag: "Cloud",
     date: "Mar 2026",
     read: "7 min",
@@ -116,6 +138,13 @@ export const insights = [
   },
   {
     slug: "building-saas-for-maintainability",
+    photo: {
+      src: "https://images.unsplash.com/photo-1623479322729-28b25c16b011?auto=format&fit=crop&w=2000&q=80",
+      alt: "Developer at a desk writing code, the editor visible on the monitor",
+      credit: "Mohammad Rahmani",
+      source: "Unsplash",
+      href: "https://unsplash.com/photos/man-in-black-long-sleeve-shirt-using-computer-_Fx34KeqIEw",
+    },
     tag: "SaaS",
     date: "Feb 2026",
     read: "5 min",
@@ -153,6 +182,13 @@ export const insights = [
   },
   {
     slug: "internal-tools-deserve-better-engineering",
+    photo: {
+      src: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=2000&q=80",
+      alt: "Office team at their desks working on computers",
+      credit: "Tim van der Kuip",
+      source: "Unsplash",
+      href: "https://unsplash.com/photos/man-sitting-on-chair-wearing-gray-crew-neck-long-sleeved-shirt-using-apple-magic-keyboard-CPs2X8JYmS8",
+    },
     tag: "Product",
     date: "Jan 2026",
     read: "4 min",
@@ -190,6 +226,13 @@ export const insights = [
   },
   {
     slug: "shipping-features-vs-improving-process",
+    photo: {
+      src: "https://images.unsplash.com/photo-1677506050775-18ac86b9c2c0?auto=format&fit=crop&w=2000&q=80",
+      alt: "Two colleagues mapping a plan with sticky notes on a whiteboard",
+      credit: "Paymo",
+      source: "Unsplash",
+      href: "https://unsplash.com/photos/two-women-standing-in-front-of-a-white-board-cD6KxGylYo4",
+    },
     tag: "Engineering",
     date: "Dec 2025",
     read: "8 min",

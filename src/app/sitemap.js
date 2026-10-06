@@ -1,6 +1,7 @@
 import { company } from "@/content/company";
 import { insights } from "@/content/insights";
 import { services } from "@/content/services";
+import { caseStudies } from "@/content/work";
 import { paths } from "@/lib/routes";
 
 export default function sitemap() {
@@ -17,6 +18,7 @@ export default function sitemap() {
     [paths.terms, 0.2],
     ...services.map((s) => [paths.service(s.slug), 0.8]),
     ...insights.map((a) => [paths.article(a.slug), 0.5]),
+    ...caseStudies.map((c) => [paths.caseStudy(c.slug), 0.7]),
   ];
 
   return pages.map(([path, priority]) => ({ url: `${company.url}${path}`, priority }));

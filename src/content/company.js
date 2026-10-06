@@ -37,22 +37,14 @@ export const company = {
 export const bookingHref = company.booking || "/contact#book";
 
 /**
- * The person behind the company. Buyers hire people, not logos, so this shows
- * on the home and About pages. Until `name` is set the section only renders in
- * development, as a placeholder, and is left off the live site.
+ * The founder, if named: added to the hero's last line ("engineering led
+ * from India by …") and to the structured data search engines read. Empty
+ * values are left off.
  */
 export const founder = {
   name: "",
-  role: "Founder & lead engineer",
-  /** A square-ish photo in /public, e.g. "/founder.jpg". */
-  photo: "",
   /** e.g. "https://www.linkedin.com/in/your-name". */
   linkedin: "",
-  story: [
-    "I started Nexarrow to build software that small and growing teams can rely on, without agency overhead.",
-    "Every project is founder-led: I scope it, review the code and stay your point of contact from first call to handover.",
-    "Nexarrow OÜ is registered in Tallinn, Estonia, so you contract and invoice with an EU company. Engineering is led from India.",
-  ],
 };
 
 /** The trust strip under the home hero: facts a buyer can check or hold us to. */
@@ -163,15 +155,17 @@ export const deliveryPath = [
 ];
 
 /**
- * The four offers, each with its starting price. The first is the small paid
- * first step that makes saying yes easy; its fee is credited to a full project.
+ * The four offers. `price.key` points into content/pricing.js, which holds the
+ * amount in each currency; list lines with a `price` show a range the same
+ * way. The first offer is the small paid first step that makes saying yes
+ * easy; its fee is credited to a full project.
  */
 export const engagementTiers = [
   {
     name: "Technical Audit or Pilot",
     tag: "Start here",
-    price: "€190–290",
-    unit: "fixed",
+    price: { key: "audit" },
+    unit: "fixed price",
     desc: "3–5 days. A code, speed or AI-readiness review with a written plan, or one small feature built end to end.",
     points: ["Written plan you keep", "Delivered in 3–5 days", "Fully credited if you continue"],
     cta: "Book an audit",
@@ -179,16 +173,20 @@ export const engagementTiers = [
   {
     name: "Project Build",
     tag: "Main build",
-    price: "from €1,500",
+    price: { key: "build", from: true },
     unit: "fixed scope",
     desc: "Fixed scope, milestone payments and a demo every week, from discovery to launch.",
-    points: ["Websites & automations €1,500–2,500", "MVPs & SaaS €2,500–6,000", "Milestone payments"],
+    points: [
+      { text: "Websites & automations", price: "buildWeb" },
+      { text: "MVPs & SaaS", price: "buildMvp" },
+      "Milestone payments",
+    ],
     cta: "Discuss a build",
   },
   {
     name: "Dedicated Support",
     tag: "Ongoing",
-    price: "from €400",
+    price: { key: "support", from: true },
     unit: "per month",
     desc: "Maintenance, monitoring and a set number of engineering hours each month. Offered at every handover.",
     points: ["Set hours every month", "Monitoring and fixes", "Paid monthly in advance"],
@@ -197,17 +195,13 @@ export const engagementTiers = [
   {
     name: "White-label Development",
     tag: "For agencies",
-    price: "from €20",
+    price: { key: "whiteLabel", from: true },
     unit: "per hour",
     desc: "We build under your agency's brand, for your client, invoiced from our EU company.",
     points: ["Your brand, your client", "NDA by default", "A small first task to test us"],
     cta: "Talk partnership",
   },
 ];
-
-/** Shown under the prices. */
-export const pricingNote =
-  "Prices in euros, before VAT where it applies. 50% upfront on small projects, 40/40/20 milestones on larger ones.";
 
 export const principles = [
   ["Clarity", "Clear requirements, transparent communication and practical execution."],
@@ -249,10 +243,10 @@ export const companyFacts = [
 
 export const faqs = [
   ["What does Nexarrow do?", "Nexarrow builds custom software, SaaS platforms, AI-powered products, cloud infrastructure, APIs, admin dashboards and workflow-driven business systems tailored to real operational needs."],
-  ["How much does a project cost?", "Most work starts with a Technical Audit or Pilot at €190–290, credited in full if you continue. Project builds start from €1,500: websites and automations usually land at €1,500–2,500, MVPs and SaaS at €2,500–6,000. Dedicated support starts from €400 a month."],
+  ["How much does a project cost?", "Most work starts with a small paid Technical Audit or Pilot, credited in full if you continue. Starting prices for every offer are listed under Offers & prices, in euros, dollars, pounds or rupees."],
   ["Where is Nexarrow based?", `${company.name} is registered in ${company.city}, in the EU, and you contract and invoice with that company. Engineering is led from ${company.engineering}, and we work remotely with clients worldwide.`],
   ["Who owns the code?", "You do. Work lives in your own repository from day one, and you own 100% of the code once it is paid for."],
-  ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones. Support is paid monthly in advance. Prices are quoted in euros."],
+  ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones. Support is paid monthly in advance. We quote in euros, US dollars, pounds, or rupees for businesses in India."],
   ["Who do you work with?", "Startups, SMEs, agencies, product teams and growing businesses that need dependable software execution or technical delivery support."],
   ["Can you work with our existing team?", "Yes. We can work as an extension of your in-house team, support founders directly, or take ownership of a specific product stream or feature set."],
   ["Do you handle deployment and infrastructure?", "Yes. CI/CD pipelines, cloud setup, environment management, observability and post-launch support, depending on the engagement."],

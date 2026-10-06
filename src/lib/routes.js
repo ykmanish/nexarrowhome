@@ -12,7 +12,7 @@ export const paths = {
   insights: "/insights",
   article: (slug) => `/insights/${slug}`,
   work: "/work",
-  caseStudy: (slug) => `/work#${slug}`,
+  caseStudy: (slug) => `/work/${slug}`,
   partners: "/partners",
   contact: "/contact",
   privacy: "/privacy-policy",

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { company, deliveryPath, founder } from "@/content/company";
@@ -5,7 +6,7 @@ import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
 import BookCall from "@/components/site/BookCall";
 import { FrameLines, ROW_LINE, SkyBackdrop } from "@/components/site/frame";
-import { DashboardVisual, DeployCard, FlowVisual } from "@/components/site/visuals";
+import { FlowVisual } from "@/components/site/visuals";
 import { TextLink, cx } from "@/components/site/ui";
 
 function MaskLine({ children, delay = 0 }) {
@@ -42,11 +43,17 @@ const DISCS = [
 
 const pad = (n) => String(n).padStart(2, "0");
 
+/** The team photograph in the two right-hand cells (Annie Spratt, Unsplash). */
+const TEAM_PHOTO = {
+  src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=80",
+  alt: "A small team working together around a shared table with laptops",
+};
+
 /**
  * The sky photograph runs under the header, and from 1280px up a hairline
  * frame divides both into the same four columns (--frame-cols, shared with
  * the header and every section head): logo over the figures, nav over the
- * headline and the product, actions over the proof. The frame
+ * headline, the team photograph in the right-hand cells. The frame
  * sits 24px outside the page gutter and every cell is padded 24px, so content
  * still lines up with every other page. Below 1280px it is a plain stack.
  */
@@ -92,17 +99,32 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* The product, over the open sky of the two right-hand columns. */}
-            <div
-              data-anim="scale"
+            {/* The team, filling the two right-hand cells edge to edge, with an
+                ink block set into its corner like the "06" block below. */}
+            <figure
+              data-anim="fade"
               data-anim-delay="0.15"
-              className="relative mx-auto w-full max-w-[460px] xl:col-span-2 xl:col-start-3 xl:row-start-1 xl:flex xl:max-w-none xl:items-center xl:justify-center xl:px-12"
+              className="relative aspect-[4/3] overflow-hidden xl:col-span-2 xl:col-start-3 xl:row-start-1 xl:aspect-auto"
             >
-              <div className="relative w-full max-w-[440px]">
-                <DashboardVisual className="shadow-[0_40px_90px_-35px_rgba(0,40,110,.5)]" />
-                <DeployCard className="float absolute -left-12 -top-10 hidden sm:block" />
-              </div>
-            </div>
+              <Image
+                src={TEAM_PHOTO.src}
+                alt={TEAM_PHOTO.alt}
+                fill
+                priority
+                sizes="(min-width: 1280px) 40vw, 100vw"
+                className="object-cover"
+              />
+              <figcaption className="absolute bottom-0 left-0 flex w-[min(60%,240px)] flex-col justify-between gap-8 bg-[#0d0d0d] p-6 text-white xl:h-[44%] xl:w-1/2">
+                <span className="self-end font-display text-[clamp(2.5rem,3.6vw,3.5rem)] leading-none tracking-[-0.03em] text-lime">
+                  100%
+                </span>
+                <span className="text-[12.5px] uppercase leading-snug tracking-[0.08em] text-white/80">
+                  Of the code is yours,
+                  <br />
+                  from day one
+                </span>
+              </figcaption>
+            </figure>
 
             <div className="xl:col-start-1 xl:row-start-1 xl:flex xl:flex-col xl:justify-center xl:px-6 xl:pb-10">
               <p className="font-display text-[56px] leading-none tracking-[-0.03em]">{pad(services.length)}</p>

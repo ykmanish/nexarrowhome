@@ -1,14 +1,21 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { paths } from "@/lib/routes";
-import { CoverArt } from "@/components/site/visuals";
+import { Cover } from "@/components/site/visuals";
 import { Chip, cx } from "@/components/site/ui";
 
 export default function InsightCard({ article, surface = "mist", className = "" }) {
   return (
     <Link href={paths.article(article.slug)} data-anim="rise" className={cx("group block", className)}>
       <div className="relative overflow-hidden">
-        <CoverArt type={article.hero} surface={surface} className="aspect-[4/3]" />
+        <Cover
+          photo={article.photo}
+          art={article.hero}
+          surface={surface}
+          className="aspect-[4/3]"
+          imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+        />
         <span className="absolute right-0 top-0 grid size-11 place-items-center bg-eu text-eu-ink opacity-0 transition-all duration-300 group-hover:opacity-100">
           <ArrowUpRight size={16} strokeWidth={1.8} className="transition-transform duration-300 group-hover:rotate-45" />
         </span>
