@@ -1,6 +1,6 @@
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import DeliveryTrail from "@/components/sections/DeliveryTrail";
-import Engagement from "@/components/sections/Engagement";
+import Audiences from "@/components/sections/Audiences";
 import FAQ from "@/components/sections/FAQ";
 import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Section, cx } from "@/components/site/ui";
@@ -73,7 +73,7 @@ export default function ServicesPage() {
       </Section>
 
       <DeliveryTrail />
-      <Engagement />
+      <Audiences />
       <FAQ />
     </>
   );

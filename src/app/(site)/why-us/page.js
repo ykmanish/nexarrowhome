@@ -1,6 +1,5 @@
 import PageHero, { HeroFigure } from "@/components/sections/PageHero";
 import DeliveryTrail from "@/components/sections/DeliveryTrail";
-import Engagement from "@/components/sections/Engagement";
 import FAQ from "@/components/sections/FAQ";
 import Safeguards from "@/components/sections/Safeguards";
 import { Section, SectionHead } from "@/components/site/ui";
@@ -68,7 +67,6 @@ export default function ApproachPage() {
 
       <DeliveryTrail />
       <Safeguards />
-      <Engagement />
       <FAQ limit={faqs.length} />
     </>
   );

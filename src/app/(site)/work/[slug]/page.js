@@ -253,7 +253,7 @@ export default async function CaseStudyPage({ params }) {
           </div>
           <div data-anim="rise" className="flex flex-col gap-4 xl:justify-end">
             {service && <TextLink href={paths.service(service.slug)}>About {service.name}</TextLink>}
-            <TextLink href={`${paths.services}#pricing`}>Offers &amp; prices</TextLink>
+            <TextLink href={paths.approach}>How we work</TextLink>
           </div>
         </Frame>
       </Section>

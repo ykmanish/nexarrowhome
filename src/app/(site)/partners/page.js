@@ -1,9 +1,8 @@
 import { Check } from "lucide-react";
 import PageHero from "@/components/sections/PageHero";
 import BookCall from "@/components/site/BookCall";
-import { PriceTag } from "@/components/site/Pricing";
 import { Button, Chip, Section, SectionHead, cx } from "@/components/site/ui";
-import { company, engagementTiers } from "@/content/company";
+import { company } from "@/content/company";
 import { pageMeta } from "@/lib/meta";
 import { paths } from "@/lib/routes";
 
@@ -31,7 +30,13 @@ const LOOK_FOR = [
   "Clear written English and reliable async communication",
 ];
 
-const whiteLabel = engagementTiers.find((t) => t.tag === "For agencies");
+const WHITE_LABEL = [
+  "Your brand, your client",
+  "NDA by default",
+  "Invoiced from our EU company",
+  "A small first task to test us",
+  "Weekly demos and code in the repository you choose",
+];
 
 /**
  * Freelancers and agencies. There are no employee roles open, so this page
@@ -106,24 +111,25 @@ export default function PartnersPage() {
           intro="When your development capacity is full, we build for your client under your name, with an NDA by default, invoiced from our EU company."
           action={<BookCall variant="lime">Talk partnership</BookCall>}
         />
-        {whiteLabel && (
-          <div className="mt-14 grid gap-px border border-white/10 bg-white/10 md:grid-cols-[0.8fr_1.2fr]">
-            <div data-anim="rise" className="bg-eu p-7 text-eu-ink md:p-9">
-              <Chip className="bg-lime text-lime-ink">{whiteLabel.tag}</Chip>
-              <div className="mt-10">
-                <PriceTag price={whiteLabel.price} unit={whiteLabel.unit} tone="eu" />
-              </div>
-            </div>
-            <ul data-anim="rise" className="bg-night p-7 md:p-9">
-              {[...whiteLabel.points, "Weekly demos and code in the repository you choose"].map((p) => (
-                <li key={p} className="flex items-center gap-3 border-b border-white/10 py-3.5 text-[15px] text-white/80 first:pt-0">
-                  <Check size={15} strokeWidth={2.2} className="shrink-0 text-lime" />
-                  {p}
-                </li>
-              ))}
-            </ul>
+        <div className="mt-14 grid gap-px border border-white/10 bg-white/10 md:grid-cols-[0.8fr_1.2fr]">
+          <div data-anim="rise" className="flex flex-col bg-eu p-7 text-eu-ink md:p-9">
+            <Chip className="w-fit bg-lime text-lime-ink">For agencies</Chip>
+            <p className="mt-10 font-display text-[clamp(2rem,3.4vw,2.8rem)] leading-[1.02] tracking-[-0.02em]">
+              White-label development
+            </p>
+            <p className="mt-4 max-w-sm text-[14.5px] leading-relaxed text-eu-ink/75">
+              Quoted per project or as monthly capacity, after a short call about your pipeline.
+            </p>
           </div>
-        )}
+          <ul data-anim="rise" className="bg-night p-7 md:p-9">
+            {WHITE_LABEL.map((p) => (
+              <li key={p} className="flex items-center gap-3 border-b border-white/10 py-3.5 text-[15px] text-white/80 first:pt-0">
+                <Check size={15} strokeWidth={2.2} className="shrink-0 text-lime" />
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
     </>
   );

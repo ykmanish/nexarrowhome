@@ -155,51 +155,40 @@ export const deliveryPath = [
 ];
 
 /**
- * The four offers. `price.key` points into content/pricing.js, which holds the
- * amount in each currency; list lines with a `price` show a range the same
- * way. The first offer is the small paid first step that makes saying yes
- * easy; its fee is credited to a full project.
+ * The three kinds of teams most work comes from, each in its own words, with
+ * what we do for it and where to read more. Photos are free-licence stock
+ * (Unsplash).
  */
-export const engagementTiers = [
+export const audiences = [
   {
-    name: "Technical Audit or Pilot",
-    tag: "Start here",
-    price: { key: "audit" },
-    unit: "fixed price",
-    desc: "3–5 days. A code, speed or AI-readiness review with a written plan, or one small feature built end to end.",
-    points: ["Written plan you keep", "Delivered in 3–5 days", "Fully credited if you continue"],
-    cta: "Book an audit",
+    label: "Founders & startups",
+    situation: "We have a validated idea and need a product people can sign up to and pay for.",
+    help: "A lean MVP with accounts, billing and the one workflow that matters, demoed every week, with every line of code in your own repository.",
+    link: { href: "/work/saas-mvp", label: "Read the SaaS MVP story" },
+    photo: {
+      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80",
+      alt: "A small startup team working together around laptops at a shared table",
+    },
   },
   {
-    name: "Project Build",
-    tag: "Main build",
-    price: { key: "build", from: true },
-    unit: "fixed scope",
-    desc: "Fixed scope, milestone payments and a demo every week, from discovery to launch.",
-    points: [
-      { text: "Websites & automations", price: "buildWeb" },
-      { text: "MVPs & SaaS", price: "buildMvp" },
-      "Milestone payments",
-    ],
-    cta: "Discuss a build",
+    label: "Growing businesses",
+    situation: "Our team runs on spreadsheets, email and tools that no longer fit the way we work.",
+    help: "Internal tools and AI automation built around how your people actually work, connected to the systems you already use.",
+    link: { href: "/work/approval-workflow", label: "Read the approvals story" },
+    photo: {
+      src: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80",
+      alt: "An office team at their desks working on computers",
+    },
   },
   {
-    name: "Dedicated Support",
-    tag: "Ongoing",
-    price: { key: "support", from: true },
-    unit: "per month",
-    desc: "Maintenance, monitoring and a set number of engineering hours each month. Offered at every handover.",
-    points: ["Set hours every month", "Monitoring and fixes", "Paid monthly in advance"],
-    cta: "Ask about support",
-  },
-  {
-    name: "White-label Development",
-    tag: "For agencies",
-    price: { key: "whiteLabel", from: true },
-    unit: "per hour",
-    desc: "We build under your agency's brand, for your client, invoiced from our EU company.",
-    points: ["Your brand, your client", "NDA by default", "A small first task to test us"],
-    cta: "Talk partnership",
+    label: "Agencies",
+    situation: "Our clients want more development than our team has time for.",
+    help: "White-label development under your brand, with an NDA by default and invoices from our EU company. Your client never needs to know.",
+    link: { href: "/partners#agencies", label: "Partner with us" },
+    photo: {
+      src: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?auto=format&fit=crop&w=1400&q=80",
+      alt: "Two developers working on code at monitors in a bright office",
+    },
   },
 ];
 
@@ -243,10 +232,10 @@ export const companyFacts = [
 
 export const faqs = [
   ["What does Nexarrow do?", "Nexarrow builds custom software, SaaS platforms, AI-powered products, cloud infrastructure, APIs, admin dashboards and workflow-driven business systems tailored to real operational needs."],
-  ["How much does a project cost?", "Most work starts with a small paid Technical Audit or Pilot, credited in full if you continue. Starting prices for every offer are listed under Offers & prices, in euros, dollars, pounds or rupees."],
+  ["How much does a project cost?", "Every project is quoted after a short call, as a fixed price for an agreed scope. Most start with a small paid audit or pilot, credited in full if you continue."],
   ["Where is Nexarrow based?", `${company.name} is registered in ${company.city}, in the EU, and you contract and invoice with that company. Engineering is led from ${company.engineering}, and we work remotely with clients worldwide.`],
   ["Who owns the code?", "You do. Work lives in your own repository from day one, and you own 100% of the code once it is paid for."],
-  ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones. Support is paid monthly in advance. We quote in euros, US dollars, pounds, or rupees for businesses in India."],
+  ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones. Support is paid monthly in advance."],
   ["Who do you work with?", "Startups, SMEs, agencies, product teams and growing businesses that need dependable software execution or technical delivery support."],
   ["Can you work with our existing team?", "Yes. We can work as an extension of your in-house team, support founders directly, or take ownership of a specific product stream or feature set."],
   ["Do you handle deployment and infrastructure?", "Yes. CI/CD pipelines, cloud setup, environment management, observability and post-launch support, depending on the engagement."],

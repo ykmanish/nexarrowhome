@@ -27,7 +27,7 @@ const COLUMNS = [
     title: "Resources",
     links: [
       { href: paths.insights, label: "Insights" },
-      { href: `${paths.services}#pricing`, label: "Offers & prices" },
+      { href: `${paths.home}#faq`, label: "FAQ" },
       { href: paths.privacy, label: "Privacy Policy" },
       { href: paths.terms, label: "Terms & Conditions" },
     ],
