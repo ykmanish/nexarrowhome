@@ -22,8 +22,8 @@ export const company = {
   reply: "within 24 hours",
 
   /* ── Fill these in. Empty values are simply left off the site. ── */
-  /** A 15-minute call link, e.g. "https://cal.com/your-name/15min". */
-  booking: "",
+  /** The intro-call booking page; "Book a call" opens it as a Calendly popup. */
+  booking: "https://calendly.com/manish-nexarrow/intro-call-with-nexarrow",
   /** Company page, e.g. "https://www.linkedin.com/company/nexarrow". */
   linkedin: "",
   /** e.g. "https://github.com/nexarrow". */

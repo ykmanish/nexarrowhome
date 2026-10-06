@@ -18,7 +18,7 @@ export default function ContactSection({ id = "book", head = true }) {
       {head && (
         <SectionHead
           label="Book a call"
-          lead="Fifteen minutes,"
+          lead="A short call,"
           tail="no obligation."
           intro={`Pick a time for a short call, or send a brief and we reply ${company.reply}.`}
         />
@@ -30,7 +30,7 @@ export default function ContactSection({ id = "book", head = true }) {
             <CalendarDays size={18} strokeWidth={1.7} />
           </span>
           <h3 className="mt-10 font-display text-[clamp(1.8rem,2.8vw,2.4rem)] leading-[1.02] tracking-[-0.02em]">
-            Book a 15-minute call
+            Book an intro call
           </h3>
           <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-eu-ink/75">
             A short video call to understand the problem, and to tell you honestly whether we are a fit and roughly
@@ -45,10 +45,10 @@ export default function ContactSection({ id = "book", head = true }) {
           </ul>
           <div className="mt-auto pt-10">
             {company.booking ? (
-              <BookCall variant="lime">Pick a time</BookCall>
+              <BookCall variant="lime">Pick a time on Calendly</BookCall>
             ) : (
               <Button
-                href={`mailto:${company.email}?subject=${encodeURIComponent("15-minute call")}&body=${encodeURIComponent("Hi Nexarrow,\n\nI'd like to book a 15-minute call. Times that suit me:\n\n")}`}
+                href={`mailto:${company.email}?subject=${encodeURIComponent("Intro call")}&body=${encodeURIComponent("Hi Nexarrow,\n\nI'd like to book an intro call. Times that suit me:\n\n")}`}
                 external
                 variant="lime"
               >

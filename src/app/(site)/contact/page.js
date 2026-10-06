@@ -10,7 +10,7 @@ import { paths } from "@/lib/routes";
 
 export const metadata = pageMeta({
   title: "Contact",
-  description: `Book a 15-minute call or send a brief. ${company.short} replies ${company.reply} with a practical direction, scope and price.`,
+  description: `Book an intro call or send a brief. ${company.short} replies ${company.reply} with a practical direction, scope and price.`,
   path: paths.contact,
 });
 
