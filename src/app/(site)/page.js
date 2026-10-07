@@ -6,6 +6,7 @@ import CrossBorder from "@/components/sections/CrossBorder";
 import DeliveryTrail from "@/components/sections/DeliveryTrail";
 import Expertise from "@/components/sections/Expertise";
 import FAQ from "@/components/sections/FAQ";
+import OneSystem from "@/components/sections/OneSystem";
 import Safeguards from "@/components/sections/Safeguards";
 import Testimonials from "@/components/sections/Testimonials";
 import TrustStrip from "@/components/sections/TrustStrip";
@@ -36,8 +37,9 @@ const organization = {
 };
 
 /**
- * Ordered to build trust fast: one clear message, checkable facts, the core
- * claim (four disciplines, one team), proof, who it is for, the process,
+ * Ordered to build trust fast: one clear message, checkable facts, the
+ * change we make (scattered work to one system), the core claim (four
+ * disciplines, one team), proof, who it is for, the process,
  * the safeguards, how working across borders works, then questions and a
  * way to start.
  */
@@ -47,6 +49,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
       <Hero />
       <TrustStrip />
+      <OneSystem />
       <Expertise />
       <CaseStudies />
       <Audiences />

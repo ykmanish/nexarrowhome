@@ -208,6 +208,27 @@ html.lenis body {
   }
 }
 
+/* The "one system" flow: rings pulse out of the mark, and packets travel the
+   paths. Without motion the rings stay still and the packets are left off. */
+@keyframes na-ring {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+.motion .flow-ring {
+  animation: na-ring 2.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+html:not(.motion) .flow-packets {
+  display: none;
+}
+
 .marquee-track {
   animation: na-marquee var(--marquee-duration, 40s) linear infinite;
 }

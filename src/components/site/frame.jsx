@@ -31,10 +31,11 @@ export function SkyBackdrop({ priority = true, position = "object-center" }) {
  * The frame's vertical hairlines, from 1280px up. Place inside the element
  * that spans the frame (the gutter box widened by 24px each side). Under the
  * header (`underNav`), the break between the two middle columns starts below
- * the nav row, so the centred nav sits in one merged cell.
+ * the nav row, so the centred nav sits in one merged cell. `lines` draws only
+ * some of them, by their % position.
  */
-export function FrameLines({ className = SKY_LINE, underNav = false }) {
-  return FRAME_LINES.map((x) => (
+export function FrameLines({ className = SKY_LINE, underNav = false, lines = FRAME_LINES }) {
+  return lines.map((x) => (
     <span
       key={x}
       aria-hidden="true"

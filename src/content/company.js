@@ -131,7 +131,7 @@ export const safeguards = [
   },
 ];
 
-/** The tools we ship with most — shown in the strip under the home hero. */
+/** The tools we ship with most — running along the bottom of the home hero. */
 export const toolbelt = [
   "React",
   "Next.js",
@@ -147,6 +147,31 @@ export const toolbelt = [
   "Docker",
   "GitHub Actions",
 ];
+
+/**
+ * "From scattered work to one system" on the home page: where the work lives
+ * before, the three things we do with it, and what it runs on after.
+ * Illustrative labels, not client results. `before` comes in pairs, one pair
+ * per stage.
+ */
+export const oneSystem = {
+  before: [
+    "orders_final_v7.xlsx",
+    "invoice_0423.pdf",
+    "Re: Fwd: who approved this?",
+    "Chasing sign-off on chat",
+    "Copy-paste between tools",
+    "Re-typing into the CRM",
+  ],
+  stages: ["Capture", "Route", "Automate"],
+  after: [
+    "Approvals that route themselves",
+    "Live numbers, one dashboard",
+    "AI clearing the busywork",
+    "A self-serve customer portal",
+    "Synced with the tools you keep",
+  ],
+};
 
 export const problems = [
   {
