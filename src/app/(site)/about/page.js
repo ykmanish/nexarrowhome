@@ -9,25 +9,24 @@ import { capabilities, company, companyFacts, principles } from "@/content/compa
 import BookCall from "@/components/site/BookCall";
 import { paths } from "@/lib/routes";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { webPage } from "@/lib/schema";
 
-export const metadata = pageMeta({
-  title: "About",
-  description:
-    `${company.name} is a software company registered in ${company.city} (EU), building custom software and AI automation for growing teams worldwide.`,
-  path: paths.about,
-});
+export const metadata = pageMeta({ ...pageSeo.about, path: paths.about });
 
 export default function AboutPage() {
   const [entity, ...facts] = companyFacts;
 
   return (
     <>
+      <JsonLd data={webPage({ type: "AboutPage", path: paths.about, name: pageSeo.about.title, description: pageSeo.about.description })} />
       <PageHero
         crumbs={[{ label: "About" }]}
         label="About"
         lead="A software company"
         tail="built for real execution."
-        intro={`${company.name} is registered in ${company.city} (EU) and works remotely with clients worldwide. We help growing teams turn workflows and operational problems into dependable software.`}
+        intro={`${company.name} is registered in ${company.city} (EU) and works remotely with clients in the UK, Europe, the US and India. We help growing teams turn workflows and operational problems into dependable software.`}
         actions={<BookCall>Book a call</BookCall>}
         aside={<HeroFigure value="EU" caption={`Registered in ${company.city}, working worldwide`} />}
       />

@@ -4,14 +4,12 @@ import BookCall from "@/components/site/BookCall";
 import { Button, Chip, Section, SectionHead, cx } from "@/components/site/ui";
 import { company } from "@/content/company";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { webPage } from "@/lib/schema";
 import { paths } from "@/lib/routes";
 
-export const metadata = pageMeta({
-  title: "Partner network",
-  description:
-    "Freelance engineers and designers, and agencies that need a white-label development team: how to partner with Nexarrow.",
-  path: paths.partners,
-});
+export const metadata = pageMeta({ ...pageSeo.partners, path: paths.partners });
 
 const profileMail = `mailto:${company.email}?subject=${encodeURIComponent("Partner network")}&body=${encodeURIComponent(
   "Hi Nexarrow,\n\nLinks (portfolio, GitHub, LinkedIn):\nWhat I do best:\nRate and availability:\n\n",
@@ -46,6 +44,7 @@ const WHITE_LABEL = [
 export default function PartnersPage() {
   return (
     <>
+      <JsonLd data={webPage({ path: paths.partners, name: pageSeo.partners.title, description: pageSeo.partners.description })} />
       <PageHero
         crumbs={[{ label: "Partner network" }]}
         label="Partner network"

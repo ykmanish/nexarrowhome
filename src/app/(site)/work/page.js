@@ -9,19 +9,23 @@ import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Chip, Section } from "@/components/site/ui";
 import { caseStudies } from "@/content/work";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { itemList, webPage } from "@/lib/schema";
 import { paths } from "@/lib/routes";
 
-export const metadata = pageMeta({
-  title: "Playbooks",
-  description:
-    "Approval workflows, an AI front-desk assistant, a SaaS MVP, a logistics portal and agency cloud releases: how Nexarrow approaches each, chapter by chapter.",
-  path: paths.work,
-});
+export const metadata = pageMeta({ ...pageSeo.work, path: paths.work });
 
 /** The playbook index: one row per story, figure and picture beside it. */
 export default function WorkPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          webPage({ type: "CollectionPage", path: paths.work, name: pageSeo.work.title, description: pageSeo.work.description }),
+          itemList({ name: "Playbooks", items: caseStudies.map((c) => ({ name: c.seo.title, path: paths.caseStudy(c.slug) })) }),
+        ]}
+      />
       <PageHero
         crumbs={[{ label: "Playbooks" }]}
         label="Playbooks"

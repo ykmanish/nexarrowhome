@@ -6,6 +6,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
+  // No "X-Powered-By: Next.js" header: it tells visitors nothing and crawlers less.
+  poweredByHeader: false,
   // Cover photos for insights and case studies are hotlinked from the free
   // stock libraries they come from, and credited where they appear.
   images: {

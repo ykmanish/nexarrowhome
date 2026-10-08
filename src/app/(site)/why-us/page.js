@@ -6,18 +6,17 @@ import { Section, SectionHead } from "@/components/site/ui";
 import { faqs, manifesto, problems } from "@/content/company";
 import { paths } from "@/lib/routes";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { webPage } from "@/lib/schema";
 import BookCall from "@/components/site/BookCall";
 
-export const metadata = pageMeta({
-  title: "Approach",
-  description:
-    "How Nexarrow works: ten principles behind every build, a six-stage delivery path, and engagement models that fit your stage.",
-  path: paths.approach,
-});
+export const metadata = pageMeta({ ...pageSeo.approach, path: paths.approach });
 
 export default function ApproachPage() {
   return (
     <>
+      <JsonLd data={webPage({ path: paths.approach, name: pageSeo.approach.title, description: pageSeo.approach.description })} />
       <PageHero
         crumbs={[{ label: "Approach" }]}
         label="Approach"

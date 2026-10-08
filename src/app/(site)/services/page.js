@@ -7,18 +7,22 @@ import { Button, Chip, Section, cx } from "@/components/site/ui";
 import { services } from "@/content/services";
 import { paths } from "@/lib/routes";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { itemList, webPage } from "@/lib/schema";
 import BookCall from "@/components/site/BookCall";
 
-export const metadata = pageMeta({
-  title: "Services",
-  description:
-    "Software development, SaaS platforms, cloud infrastructure and AI solutions: four service lines delivered end to end by one team.",
-  path: paths.services,
-});
+export const metadata = pageMeta({ ...pageSeo.services, path: paths.services });
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          webPage({ type: "CollectionPage", path: paths.services, name: pageSeo.services.title, description: pageSeo.services.description }),
+          itemList({ name: "Services", items: services.map((s) => ({ name: s.seo.serviceType, path: paths.service(s.slug) })) }),
+        ]}
+      />
       <PageHero
         crumbs={[{ label: "Services" }]}
         label="Services"

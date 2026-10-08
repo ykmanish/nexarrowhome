@@ -7,13 +7,11 @@ import { Chip, Section, TextLink } from "@/components/site/ui";
 import { insights } from "@/content/insights";
 import { paths } from "@/lib/routes";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { itemList, webPage } from "@/lib/schema";
 
-export const metadata = pageMeta({
-  title: "Insights",
-  description:
-    "Notes on product, engineering, AI and infrastructure decisions, written from delivery experience rather than theory.",
-  path: paths.insights,
-});
+export const metadata = pageMeta({ ...pageSeo.insights, path: paths.insights });
 
 export default function InsightsPage() {
   const [lead, ...rest] = insights;
@@ -21,6 +19,12 @@ export default function InsightsPage() {
 
   return (
     <>
+      <JsonLd
+        data={[
+          webPage({ type: "CollectionPage", path: paths.insights, name: pageSeo.insights.title, description: pageSeo.insights.description }),
+          itemList({ name: "Insights", items: insights.map((a) => ({ name: a.title, path: paths.article(a.slug) })) }),
+        ]}
+      />
       <PageHero
         crumbs={[{ label: "Insights" }]}
         label="Insights"

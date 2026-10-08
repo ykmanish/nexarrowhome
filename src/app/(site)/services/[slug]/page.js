@@ -6,6 +6,8 @@ import { ServiceVisual, Sky } from "@/components/site/visuals";
 import { Button, Chip, Frame, Label, Section, SectionHead, cx } from "@/components/site/ui";
 import { getService, services } from "@/content/services";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { service } from "@/lib/schema";
 import { paths } from "@/lib/routes";
 import BookCall from "@/components/site/BookCall";
 
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const s = getService(slug);
   if (!s) return {};
-  return pageMeta({ title: s.name, description: s.subtitle, path: paths.service(s.slug) });
+  return pageMeta({ ...s.seo, path: paths.service(s.slug) });
 }
 
 export default async function ServiceDetailPage({ params }) {
@@ -29,6 +31,7 @@ export default async function ServiceDetailPage({ params }) {
 
   return (
     <>
+      <JsonLd data={service(s)} />
       <PageHero
         crumbs={[{ label: "Services", href: paths.services }, { label: s.name }]}
         label={s.code}

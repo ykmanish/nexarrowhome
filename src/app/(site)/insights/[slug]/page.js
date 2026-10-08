@@ -6,6 +6,8 @@ import { Chip, Section, SectionHead } from "@/components/site/ui";
 import { company } from "@/content/company";
 import { getInsight, insights } from "@/content/insights";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { blogPosting, isoMonth } from "@/lib/schema";
 import { paths } from "@/lib/routes";
 import BookCall from "@/components/site/BookCall";
 
@@ -17,7 +19,16 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const a = getInsight(slug);
   if (!a) return {};
-  return pageMeta({ title: a.title, description: a.excerpt, path: paths.article(a.slug), type: "article" });
+  return pageMeta({
+    title: a.seoTitle,
+    description: a.excerpt,
+    keywords: a.keywords,
+    path: paths.article(a.slug),
+    type: "article",
+    published: isoMonth(a.date),
+    section: a.tag,
+    tags: a.keywords,
+  });
 }
 
 export default async function ArticlePage({ params }) {
@@ -29,8 +40,9 @@ export default async function ArticlePage({ params }) {
 
   return (
     <>
+      <JsonLd data={blogPosting(article)} />
       <PageHero
-        crumbs={[{ label: "Insights", href: paths.insights }, { label: article.tag }]}
+        crumbs={[{ label: "Insights", href: paths.insights }, { label: article.tag, name: article.title }]}
         label={article.tag}
         lead={article.title}
         size="section"

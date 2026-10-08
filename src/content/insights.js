@@ -1,11 +1,15 @@
 /**
  * Insight articles. `photo` is the cover photograph (free-licence stock, credited
  * on the page); `hero` picks the generated cover art used if a photo is absent.
+ * `seoTitle` is the shorter, search-worded title for results and share cards;
+ * `keywords` the searches the article answers.
  */
 
 export const insights = [
   {
     slug: "custom-software-vs-forced-tools",
+    seoTitle: "Custom Software vs Off-the-Shelf: When to Build",
+    keywords: ["custom software vs off-the-shelf", "when to build custom software", "replacing spreadsheets with software", "custom software ROI"],
     photo: {
       src: "https://images.unsplash.com/photo-1783115259399-3a5a3e0e4592?auto=format&fit=crop&w=2000&q=80",
       alt: "Hands typing on a laptop showing an inventory spreadsheet at an office desk",
@@ -50,6 +54,8 @@ export const insights = [
   },
   {
     slug: "ai-features-connected-to-operations",
+    seoTitle: "Why AI Features Only Pay Off in Real Operations",
+    keywords: ["AI in business operations", "practical AI automation", "AI workflow integration", "LLM features in products"],
     photo: {
       src: "https://images.pexels.com/photos/4483942/pexels-photo-4483942.jpeg?auto=compress&cs=tinysrgb&w=2000",
       alt: "Warehouse worker scanning stock with a handheld barcode scanner",
@@ -94,6 +100,8 @@ export const insights = [
   },
   {
     slug: "infrastructure-decisions-reduce-friction",
+    seoTitle: "Cloud Infrastructure Decisions That Save You Later",
+    keywords: ["cloud infrastructure decisions", "DevOps best practices", "CI/CD for startups", "infrastructure for SaaS"],
     photo: {
       src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2000&q=80",
       alt: "Data centre server rack with neatly bundled network cables",
@@ -138,6 +146,8 @@ export const insights = [
   },
   {
     slug: "building-saas-for-maintainability",
+    seoTitle: "Building Maintainable SaaS as Features Grow",
+    keywords: ["maintainable SaaS architecture", "SaaS codebase scalability", "multi-tenant SaaS design", "technical debt in SaaS"],
     photo: {
       src: "https://images.unsplash.com/photo-1623479322729-28b25c16b011?auto=format&fit=crop&w=2000&q=80",
       alt: "Developer at a desk writing code, the editor visible on the monitor",
@@ -182,6 +192,8 @@ export const insights = [
   },
   {
     slug: "internal-tools-deserve-better-engineering",
+    seoTitle: "Why Internal Tools Deserve Better Engineering",
+    keywords: ["internal tools development", "admin panel engineering", "back-office software", "internal software quality"],
     photo: {
       src: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=2000&q=80",
       alt: "Office team at their desks working on computers",
@@ -226,6 +238,8 @@ export const insights = [
   },
   {
     slug: "shipping-features-vs-improving-process",
+    seoTitle: "Shipping Features vs Improving Business Processes",
+    keywords: ["business process improvement software", "product development strategy", "workflow automation", "feature delivery vs outcomes"],
     photo: {
       src: "https://images.unsplash.com/photo-1677506050775-18ac86b9c2c0?auto=format&fit=crop&w=2000&q=80",
       alt: "Two colleagues mapping a plan with sticky notes on a whiteboard",

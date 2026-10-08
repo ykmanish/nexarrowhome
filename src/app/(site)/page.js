@@ -10,31 +10,13 @@ import OneSystem from "@/components/sections/OneSystem";
 import Safeguards from "@/components/sections/Safeguards";
 import Testimonials from "@/components/sections/Testimonials";
 import TrustStrip from "@/components/sections/TrustStrip";
-import { company, founder } from "@/content/company";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { pageMeta } from "@/lib/meta";
+import { paths } from "@/lib/routes";
+import { webPage } from "@/lib/schema";
 
-export const metadata = {
-  alternates: { canonical: "/" },
-};
-
-const organization = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: company.name,
-  alternateName: company.short,
-  url: company.url,
-  email: company.email,
-  vatID: company.vat,
-  identifier: company.registry,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Tornimäe tn 5",
-    postalCode: "10145",
-    addressLocality: "Tallinn",
-    addressCountry: "EE",
-  },
-  sameAs: [company.registerUrl, company.linkedin, company.github].filter(Boolean),
-  ...(founder.name && { founder: { "@type": "Person", name: founder.name, ...(founder.linkedin && { sameAs: founder.linkedin }) } }),
-};
+export const metadata = pageMeta({ ...pageSeo.home, path: paths.home, absolute: true });
 
 /**
  * Ordered to build trust fast: one clear message, checkable facts, the
@@ -46,7 +28,7 @@ const organization = {
 export default function HomePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
+      <JsonLd data={webPage({ path: paths.home, name: pageSeo.home.title, description: pageSeo.home.description })} />
       <Hero />
       <TrustStrip />
       <OneSystem />

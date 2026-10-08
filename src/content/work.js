@@ -17,6 +17,18 @@
 export const caseStudies = [
   {
     slug: "approval-workflow",
+    seo: {
+      title: "Purchase Approval Workflow Software: A Playbook",
+      description:
+        "How we replace email approvals and spreadsheets with one purchase approval system: rules finance can change, a full audit trail and ERP sync, shipped in seven weeks.",
+      keywords: [
+        "purchase approval workflow software",
+        "approval workflow automation",
+        "ERP integration",
+        "procurement software development",
+        "custom workflow software",
+      ],
+    },
     photo: {
       src: "https://images.unsplash.com/photo-1762427354051-a9bdb181ae3b?auto=format&fit=crop&w=2000&q=80",
       alt: "Office desk with finance paperwork, printed charts, binders and a calculator",
@@ -95,6 +107,18 @@ export const caseStudies = [
   },
   {
     slug: "clinic-assistant",
+    seo: {
+      title: "AI Front-Desk Assistant for Clinics: A Playbook",
+      description:
+        "How we build an AI assistant that answers routine patient questions from a clinic's own documents, hands everything else to staff, and starts as a paid two-week pilot.",
+      keywords: [
+        "AI assistant for clinics",
+        "healthcare chatbot development",
+        "RAG chatbot",
+        "AI receptionist",
+        "patient enquiry automation",
+      ],
+    },
     photo: {
       src: "https://images.pexels.com/photos/4269274/pexels-photo-4269274.jpeg?auto=compress&cs=tinysrgb&w=2000",
       alt: "Two staff members in scrubs talking at the front desk of a modern clinic",
@@ -172,6 +196,18 @@ export const caseStudies = [
   },
   {
     slug: "saas-mvp",
+    seo: {
+      title: "SaaS MVP Development, Idea to First Users: A Playbook",
+      description:
+        "How we take a subscription product from idea to paying users: one core workflow, accounts, bookings and billing, multi-tenant from day one.",
+      keywords: [
+        "SaaS MVP development",
+        "subscription app development",
+        "booking platform development",
+        "startup MVP development",
+        "multi-tenant SaaS",
+      ],
+    },
     photo: {
       src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80",
       alt: "Small startup team working together around laptops at a shared table",
@@ -250,6 +286,18 @@ export const caseStudies = [
   },
   {
     slug: "logistics-portal",
+    seo: {
+      title: "Shipment Tracking Customer Portal: A Playbook",
+      description:
+        "How we build a customer portal with live shipment status, documents and delay alerts from several carrier systems, so customers stop asking where their shipment is.",
+      keywords: [
+        "shipment tracking portal",
+        "logistics software development",
+        "customer portal development",
+        "carrier API integration",
+        "freight tracking software",
+      ],
+    },
     photo: {
       src: "https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=2000&q=80",
       alt: "Aerial view of rows of shipping containers in a logistics yard",
@@ -328,6 +376,18 @@ export const caseStudies = [
   },
   {
     slug: "agency-cloud",
+    seo: {
+      title: "White-Label Cloud Releases for Agencies: A Playbook",
+      description:
+        "How we give an agency one release pipeline, staging and monitoring for dozens of client sites, delivered white-label under the agency's own name.",
+      keywords: [
+        "white label DevOps",
+        "agency hosting and deployment",
+        "CI/CD for agencies",
+        "website monitoring",
+        "white label development partner",
+      ],
+    },
     photo: {
       src: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?auto=format&fit=crop&w=2000&q=80",
       alt: "Two developers working on code at monitors in a bright office",

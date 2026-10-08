@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import { Instrument_Serif } from "next/font/google";
 import { company } from "@/content/company";
+import { ogAlternateLocales, ogLocale, pageSeo, siteKeywords, verification } from "@/content/seo";
 import "./globals.css";
 
 /** Body copy — Manrope Regular, shipped as satre.ttf. */
@@ -36,25 +37,57 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
+/**
+ * Site-wide defaults. Every page overrides the title, description, keywords,
+ * canonical and share card through pageMeta (lib/meta.js); what stays from
+ * here is who publishes the site, how search engines may show it, and the
+ * search console verification. Icons come from the icon, apple-icon and
+ * manifest files beside this one.
+ */
 export const metadata = {
   metadataBase: new URL(company.url),
   title: {
-    default: "Nexarrow | Custom software and AI automation for growing teams",
-    template: "%s | Nexarrow",
+    default: pageSeo.home.title,
+    template: `%s | ${company.short}`,
   },
-  description:
-    "Nexarrow OÜ is an EU-registered software company building custom software and AI automation for growing teams. Fixed prices, weekly demos, and you own the code.",
+  description: pageSeo.home.description,
+  keywords: [...pageSeo.home.keywords, ...siteKeywords],
+  applicationName: company.short,
+  authors: [{ name: company.name, url: company.url }],
+  creator: company.name,
+  publisher: company.name,
+  category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  formatDetection: { telephone: false, address: false, email: false },
   openGraph: {
     type: "website",
-    siteName: "Nexarrow",
-    locale: "en_GB",
+    siteName: company.short,
+    locale: ogLocale,
+    alternateLocale: ogAlternateLocales,
     url: company.url,
-    title: "Nexarrow | Custom software and AI automation for growing teams",
-    description:
-      "EU-registered software company. Fixed prices, weekly demos, and you own the code.",
+    title: pageSeo.home.title,
+    description: pageSeo.home.description,
   },
-  twitter: { card: "summary_large_image" },
-  icons: { icon: "/favicon.ico" },
+  twitter: {
+    card: "summary_large_image",
+    title: pageSeo.home.title,
+    description: pageSeo.home.description,
+  },
+  verification: {
+    google: verification.google || undefined,
+    yandex: verification.yandex || undefined,
+    other: verification.bing ? { "msvalidate.01": verification.bing } : undefined,
+  },
 };
 
 export const viewport = {

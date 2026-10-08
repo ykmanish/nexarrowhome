@@ -109,7 +109,7 @@ export default function Footer() {
             <Logo onDark />
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-white/55">
               Custom software and AI automation for growing teams. Registered in {company.city} (EU), working with
-              clients worldwide.
+              clients in the UK, Europe, the US and India.
             </p>
             <div className="mt-6 flex items-center gap-3 text-[12.5px] text-white/45">
               <Image src="/eu.jpg" alt="European Union flag" width={36} height={24} className="h-6 w-auto rounded-[2px]" />

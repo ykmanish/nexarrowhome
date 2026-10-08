@@ -7,13 +7,12 @@ import FAQ from "@/components/sections/FAQ";
 import { Section, SectionHead } from "@/components/site/ui";
 import { company } from "@/content/company";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { pageSeo } from "@/content/seo";
+import { webPage } from "@/lib/schema";
 import { paths } from "@/lib/routes";
 
-export const metadata = pageMeta({
-  title: "Contact",
-  description: `Book an intro call or send a brief. ${company.short} replies ${company.reply} with a practical direction, scope and price.`,
-  path: paths.contact,
-});
+export const metadata = pageMeta({ ...pageSeo.contact, path: paths.contact });
 
 const NEXT_STEPS = [
   ["Share the problem", "A call or a brief: what you are building or fixing, who it affects, and why now."],
@@ -24,6 +23,7 @@ const NEXT_STEPS = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={webPage({ type: "ContactPage", path: paths.contact, name: pageSeo.contact.title, description: pageSeo.contact.description })} />
       <PageHero
         crumbs={[{ label: "Contact" }]}
         label="Contact"

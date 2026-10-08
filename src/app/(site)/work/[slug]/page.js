@@ -10,6 +10,8 @@ import { Chip, Frame, Section, SectionHead, TextLink, cx } from "@/components/si
 import { services } from "@/content/services";
 import { caseStudies, getCaseStudy } from "@/content/work";
 import { pageMeta } from "@/lib/meta";
+import JsonLd from "@/components/site/JsonLd";
+import { playbook } from "@/lib/schema";
 import { paths } from "@/lib/routes";
 
 export function generateStaticParams() {
@@ -20,7 +22,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const cs = getCaseStudy(slug);
   if (!cs) return {};
-  return pageMeta({ title: cs.title, description: cs.summary, path: paths.caseStudy(cs.slug), type: "article" });
+  return pageMeta({ ...cs.seo, path: paths.caseStudy(cs.slug), type: "article", section: "Playbooks", tags: cs.seo.keywords });
 }
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -48,6 +50,7 @@ export default async function CaseStudyPage({ params }) {
 
   return (
     <>
+      <JsonLd data={playbook(cs, service)} />
       <PageHero
         crumbs={[{ label: "Playbooks", href: paths.work }, { label: cs.title }]}
         label={cs.sector}

@@ -1,13 +1,17 @@
 import Link from "next/link";
+import JsonLd from "@/components/site/JsonLd";
 import { FrameLines, ROW_LINE, SkyBackdrop } from "@/components/site/frame";
 import { Heading, Label, cx } from "@/components/site/ui";
+import { breadcrumbs } from "@/lib/schema";
 
 /**
  * Opening band for every inner page, built like the home hero: the sky runs
  * under the header and the frame divides both into the same columns. The
  * breadcrumb sits under the logo, the label, headline, intro and actions
  * under the nav, and `aside` (a figure or fact, optional) in the last column.
- * `meta` chips get a row of their own along the bottom.
+ * `meta` chips get a row of their own along the bottom. The breadcrumb is
+ * also given to search engines; a crumb's `name` (when set) replaces its
+ * short on-page label there.
  */
 export default function PageHero({
   crumbs = [],
@@ -30,6 +34,7 @@ export default function PageHero({
 
           <div className="grid gap-8 pb-14 pt-12 lg:pb-20 lg:pt-16 xl:grid-cols-[var(--frame-cols)] xl:gap-0 xl:py-0">
             <div className="xl:px-6 xl:py-14">
+              {crumbs.length > 0 && <JsonLd data={breadcrumbs(crumbs)} />}
               {crumbs.length > 0 && (
                 <nav aria-label="Breadcrumb" data-anim="fade">
                   <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-ink-soft xl:flex-col xl:items-start xl:gap-1.5">

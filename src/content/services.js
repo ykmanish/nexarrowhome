@@ -9,6 +9,23 @@
 export const services = [
   {
     slug: "software-development",
+    seo: {
+      title: "Custom Software Development Services",
+      description:
+        "Custom and bespoke software development: web apps, internal tools, admin panels, APIs and integrations built around how your business works. Fixed price, weekly demos.",
+      serviceType: "Custom software development",
+      keywords: [
+        "custom software development services",
+        "bespoke software development",
+        "web application development",
+        "internal tools development",
+        "API development and integration",
+        "admin dashboard development",
+        "business software development",
+        "workflow automation software",
+        "React and Node.js development",
+      ],
+    },
     code: "SWD-01",
     name: "Software Development",
     short: "Custom platforms and internal tools",
@@ -19,7 +36,7 @@ export const services = [
     subtitle:
       "We build software systems, platforms, dashboards and internal tools tailored to how your business actually works.",
     body: [
-      "This service is for companies that need software built around their own workflows instead of being forced into generic tools that create friction.",
+      "This service is for companies that need bespoke software built around their own workflows instead of being forced into generic tools that create friction.",
       "We handle product planning, frontend interfaces, backend systems, APIs, integrations and deployment, with a focus on maintainability and real-world usage.",
       "Whether the goal is streamlining operations, centralising data, improving reporting or enabling new digital services, the software is built for long-term business utility.",
     ],
@@ -52,6 +69,22 @@ export const services = [
   },
   {
     slug: "saas-platforms",
+    seo: {
+      title: "SaaS Development Services: MVP to Scale",
+      description:
+        "SaaS product development: multi-tenant architecture, subscription billing, dashboards, roles and onboarding, from a lean MVP to a platform that scales.",
+      serviceType: "SaaS product development",
+      keywords: [
+        "SaaS development company",
+        "SaaS product development",
+        "SaaS MVP development",
+        "multi-tenant SaaS architecture",
+        "subscription billing integration",
+        "B2B SaaS development",
+        "SaaS dashboard development",
+        "MVP development services",
+      ],
+    },
     code: "SAS-02",
     name: "SaaS Platforms",
     short: "Multi-tenant products that scale",
@@ -95,6 +128,22 @@ export const services = [
   },
   {
     slug: "cloud-infrastructure",
+    seo: {
+      title: "Cloud Infrastructure & DevOps Services",
+      description:
+        "Cloud infrastructure and DevOps: CI/CD pipelines, AWS and Cloudflare setup, environments, monitoring and scaling, with UK or EU hosting when your data must stay there.",
+      serviceType: "Cloud infrastructure and DevOps",
+      keywords: [
+        "DevOps services",
+        "cloud infrastructure services",
+        "AWS consulting",
+        "CI/CD pipeline setup",
+        "cloud deployment services",
+        "monitoring and observability",
+        "Docker deployment",
+        "GDPR-compliant cloud hosting",
+      ],
+    },
     code: "CLD-03",
     name: "Cloud Infrastructure",
     short: "Deployment, CI/CD and observability",
@@ -138,6 +187,23 @@ export const services = [
   },
   {
     slug: "ai-solutions",
+    seo: {
+      title: "AI Development & Automation Services",
+      description:
+        "AI development and automation: AI assistants, RAG chatbots on your own documents, LLM integration and workflow automation, with guardrails and human review built in.",
+      serviceType: "AI development and automation",
+      keywords: [
+        "AI development company",
+        "AI automation services",
+        "AI automation agency",
+        "AI chatbot development",
+        "RAG development",
+        "LLM integration services",
+        "generative AI development",
+        "business process automation with AI",
+        "AI consulting",
+      ],
+    },
     code: "AIS-04",
     name: "AI Solutions",
     short: "Assistants, retrieval and automation",

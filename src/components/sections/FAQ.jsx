@@ -1,12 +1,17 @@
 import { company, faqs } from "@/content/company";
 import Accordion from "@/components/site/Accordion";
+import JsonLd from "@/components/site/JsonLd";
 import { Frame, Section, SectionHead, TextLink } from "@/components/site/ui";
+import { faqPage } from "@/lib/schema";
 
+/** The questions, with the same ones (and only those) marked up as an FAQ page for search. */
 export default function FAQ({ limit = 6, tone = "paper" }) {
-  const items = faqs.slice(0, limit).map(([q, a]) => ({ title: q, body: a }));
+  const shown = faqs.slice(0, limit);
+  const items = shown.map(([q, a]) => ({ title: q, body: a }));
 
   return (
     <Section id="faq" tone={tone}>
+      <JsonLd data={faqPage(shown)} />
       <SectionHead
         label="FAQ"
         lead="Questions,"

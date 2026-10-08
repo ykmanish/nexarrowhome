@@ -297,15 +297,15 @@ export const companyFacts = [
   { label: "Legal entity", value: company.name, detail: `Registry code ${company.registry}` },
   { label: "Tax", value: "EU VAT registered", detail: `VAT no. ${company.vat}` },
   { label: "Registered office", value: company.city, detail: company.address },
-  { label: "Delivery", value: "Remote-first", detail: "Working with clients worldwide" },
+  { label: "Delivery", value: "Remote-first", detail: "Clients in the UK, EU, US and India" },
   { label: "Activity", value: "Computer programming", detail: `EMTAK ${company.activity}` },
 ];
 
 export const faqs = [
   ["What does Nexarrow do?", "Nexarrow builds custom software, SaaS platforms, AI-powered products, cloud infrastructure, APIs, admin dashboards and workflow-driven business systems tailored to real operational needs."],
   ["How much does a project cost?", "Every project is quoted after a short call, as a fixed price for an agreed scope. Most start with a small paid audit or pilot, credited in full if you continue."],
-  ["Where is Nexarrow based?", `${company.name} is registered in ${company.city}, in the EU, and you contract and invoice with that company. We work remotely with clients worldwide.`],
-  ["How do time zones work?", "We work remotely and book calls and demos in your business hours, whether you are in the UK, the EU or the US. Requests raised in your morning are usually picked up the same day."],
+  ["Where is Nexarrow based?", `${company.name} is registered in ${company.city}, in the EU, and you contract and invoice with that company. We work remotely with clients in the UK, the European Union, the United States and India.`],
+  ["How do time zones work?", "We work remotely and book calls and demos in your business hours, whether you are in the UK, the EU, the US or India. Requests raised in your morning are usually picked up the same day."],
   ["Do you work under UK GDPR?", "Yes. For UK clients we work under UK GDPR, and under EU GDPR for EU clients. We sign a data processing agreement before handling personal data, and any transfer outside the UK or EU is covered by the UK Addendum or EU Standard Contractual Clauses. Data can be hosted in London or the EU when it must stay there."],
   ["Who owns the code?", "You do. Work lives in your own repository from day one, and you own 100% of the code once it is paid for."],
   ["How do payments work?", "50% upfront on small projects and 40/40/20 milestones on larger ones, by bank transfer, in GBP, EUR or USD. Support is paid monthly in advance."],
