@@ -9,6 +9,12 @@ import { isoMonth } from "@/lib/schema";
 const absolute = (path) => `${company.url}${path}`;
 
 /**
+ * Next writes image URLs into the XML as they are, and the stock photo URLs
+ * carry query strings, so a bare "&" would break the whole sitemap.
+ */
+const xmlUrl = (url) => url.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/**
  * Every public page, with its hreflang variants (one English site for the UK,
  * Europe, the US and India), its cover photo where it has one, and a
  * last-modified date: the article's month for insights, the deploy for the
@@ -51,6 +57,6 @@ export default function sitemap() {
     alternates: {
       languages: Object.fromEntries(Object.entries(languageAlternates(path)).map(([lang, p]) => [lang, absolute(p)])),
     },
-    ...(images && { images }),
+    ...(images && { images: images.map(xmlUrl) }),
   }));
 }
